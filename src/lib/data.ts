@@ -9,6 +9,7 @@ interface SupabaseRow {
   title: string | null;
   description: string | null;
   screenshot_url: string | null;
+  logo_url: string | null;
   category_slug: string | null;
   category_name: string | null;
   parent_category_slug: string | null;
@@ -40,6 +41,7 @@ function transformRow(row: SupabaseRow): Company {
     title: row.title || row.domain,
     description: row.description || "",
     screenshotUrl: row.screenshot_url || "",
+    logoUrl: row.logo_url || "",
     categorySlug: row.category_slug || "other",
     categoryName: row.category_name || humanizeSlug(row.category_slug || "other"),
     parentCategorySlug: row.parent_category_slug || row.category_slug || "other",

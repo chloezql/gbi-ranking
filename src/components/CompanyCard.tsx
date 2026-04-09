@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Company, SortKey } from "@/lib/types";
 import { formatNumber, formatGrowth, cn } from "@/lib/utils";
+import { LogoImage } from "./LogoImage";
 
 function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey }) {
   let value: string;
@@ -61,19 +62,17 @@ export function CompanyCard({
         {rank}
       </span>
 
-      <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 shrink-0 border border-border">
-        {company.screenshotUrl ? (
-          <img
-            src={company.screenshotUrl}
+      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shrink-0 border border-border flex items-center justify-center p-1">
+        {(company.logoUrl || company.screenshotUrl) ? (
+          <LogoImage
+            src={company.logoUrl || company.screenshotUrl}
             alt={company.domain}
-            className="w-full h-full object-cover animate-[fadeIn_0.3s_ease-in]"
-            loading={eager ? "eager" : "lazy"}
-            decoding="async"
+            eager={eager}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-muted text-xs font-bold">
+          <span className="text-muted text-xs font-bold">
             {company.domain.charAt(0).toUpperCase()}
-          </div>
+          </span>
         )}
       </div>
 
