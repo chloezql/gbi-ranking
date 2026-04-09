@@ -1,9 +1,124 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import type { Company, SortKey, CategoryInfo } from "@/lib/types";
 import { CompanyCard } from "./CompanyCard";
 import { cn } from "@/lib/utils";
+
+function CategoryBar({
+  categories,
+  totalCount,
+  activeCategory,
+  onSelect,
+}: {
+  categories: CategoryInfo[];
+  totalCount: number;
+  activeCategory: string;
+  onSelect: (slug: string) => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 2);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 2);
+  }, []);
+
+  useEffect(() => {
+    checkScroll();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", checkScroll, { passive: true });
+    const ro = new ResizeObserver(checkScroll);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      ro.disconnect();
+    };
+  }, [checkScroll]);
+
+  const scroll = (dir: number) => {
+    scrollRef.current?.scrollBy({ left: dir * 200, behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative group">
+      {/* Left fade + arrow */}
+      <div
+        className={cn(
+          "absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none transition-opacity duration-200",
+          canScrollLeft ? "opacity-100" : "opacity-0"
+        )}
+      />
+      {canScrollLeft && (
+        <button
+          onClick={() => scroll(-1)}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-card border border-border shadow-sm flex items-center justify-center text-muted hover:text-foreground transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+      )}
+
+      {/* Scrollable area */}
+      <div
+        ref={scrollRef}
+        className="flex items-center gap-2 overflow-x-auto py-1 px-1"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
+      >
+        <button
+          onClick={() => onSelect("all")}
+          className={cn(
+            "px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200",
+            activeCategory === "all"
+              ? "bg-accent text-white shadow-sm"
+              : "bg-card border border-border text-muted hover:text-foreground hover:border-accent/30"
+          )}
+        >
+          All
+          <span className="ml-1 text-xs opacity-70">{totalCount}</span>
+        </button>
+        {categories.map((cat) => (
+          <button
+            key={cat.slug}
+            onClick={() => onSelect(cat.slug)}
+            className={cn(
+              "px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200",
+              activeCategory === cat.slug
+                ? "bg-accent text-white shadow-sm"
+                : "bg-card border border-border text-muted hover:text-foreground hover:border-accent/30"
+            )}
+          >
+            {cat.name}
+            <span className="ml-1 text-xs opacity-70">{cat.count}</span>
+          </button>
+        ))}
+      </div>
+
+      {/* Right fade + arrow */}
+      <div
+        className={cn(
+          "absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none transition-opacity duration-200",
+          canScrollRight ? "opacity-100" : "opacity-0"
+        )}
+      />
+      {canScrollRight && (
+        <button
+          onClick={() => scroll(1)}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-7 h-7 rounded-full bg-card border border-border shadow-sm flex items-center justify-center text-muted hover:text-foreground transition-colors"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      )}
+    </div>
+  );
+}
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "score", label: "Score" },
@@ -56,35 +171,12 @@ export function RankingList({
   return (
     <div>
       {/* Category tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
-        <button
-          onClick={() => setActiveCategory("all")}
-          className={cn(
-            "px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
-            activeCategory === "all"
-              ? "bg-accent text-white"
-              : "bg-card border border-border text-muted hover:text-foreground hover:border-accent/30"
-          )}
-        >
-          All
-          <span className="ml-1 text-xs opacity-70">{companies.length}</span>
-        </button>
-        {categories.map((cat) => (
-          <button
-            key={cat.slug}
-            onClick={() => setActiveCategory(cat.slug)}
-            className={cn(
-              "px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
-              activeCategory === cat.slug
-                ? "bg-accent text-white"
-                : "bg-card border border-border text-muted hover:text-foreground hover:border-accent/30"
-            )}
-          >
-            {cat.name}
-            <span className="ml-1 text-xs opacity-70">{cat.count}</span>
-          </button>
-        ))}
-      </div>
+      <CategoryBar
+        categories={categories}
+        totalCount={companies.length}
+        activeCategory={activeCategory}
+        onSelect={setActiveCategory}
+      />
 
       {/* Controls */}
       <div className="flex items-center justify-between mt-4 mb-4 gap-4">
