@@ -31,6 +31,13 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})()`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col pb-[env(safe-area-inset-bottom)]">
         <Navbar />
         <main className="flex-1">{children}</main>

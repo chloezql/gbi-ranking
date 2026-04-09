@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 :root {
   --background: #fafafa;
   --foreground: #1a1a2e;
@@ -10,6 +12,16 @@
   --accent-light: #fff1f0;
   --success: #10b981;
   --danger: #ef4444;
+}
+
+.dark {
+  --background: #0f0f1a;
+  --foreground: #e5e7eb;
+  --card: #1a1a2e;
+  --border: #2d2d44;
+  --muted: #9ca3af;
+  --accent: #ff6154;
+  --accent-light: #2a1a1a;
 }
 
 @theme inline {
@@ -39,16 +51,4 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0f0f1a;
-    --foreground: #e5e7eb;
-    --card: #1a1a2e;
-    --border: #2d2d44;
-    --muted: #9ca3af;
-    --accent: #ff6154;
-    --accent-light: #2a1a1a;
-  }
 }
