@@ -140,7 +140,7 @@ export function RankingList({
       {/* Company list */}
       <div className="flex flex-col gap-2">
         {filtered.map((company, i) => (
-          <CompanyCard key={company.domain} company={company} rank={i + 1} sortKey={sortKey} />
+          <CompanyCard key={company.domain} company={company} rank={i + 1} sortKey={sortKey} eager={i < 10} />
         ))}
         {filtered.length === 0 && (
           <div className="text-center py-16 text-muted">

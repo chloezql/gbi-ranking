@@ -1,67 +1,68 @@
-import fs from "fs";
-import path from "path";
-import type { RawCompanyData, Company, CategoryInfo } from "./types";
+import type { Company, CategoryInfo } from "./types";
 import { computeScores, computeGrowthRate } from "./scoring";
 import { humanizeSlug } from "./utils";
+import { supabase } from "./supabase";
 
-function parseCategory(raw: string): {
-  slug: string;
-  name: string;
-  parentSlug: string;
-  parentName: string;
-} {
-  if (!raw) {
-    return { slug: "other", name: "Other", parentSlug: "other", parentName: "Other" };
-  }
-  const parts = raw.split("/");
-  if (parts.length === 1) {
-    const name = humanizeSlug(parts[0]);
-    return { slug: parts[0], name, parentSlug: parts[0], parentName: name };
-  }
-  return {
-    slug: raw,
-    name: humanizeSlug(parts[parts.length - 1]),
-    parentSlug: parts[0],
-    parentName: humanizeSlug(parts[0]),
-  };
+interface SupabaseRow {
+  company_id: string;
+  domain: string;
+  title: string | null;
+  description: string | null;
+  screenshot_url: string | null;
+  category_slug: string | null;
+  category_name: string | null;
+  parent_category_slug: string | null;
+  parent_category_name: string | null;
+  snapshot_date: string | null;
+  global_rank: number | null;
+  country_code: string | null;
+  country_rank: number | null;
+  category_rank: number | null;
+  visits: number | null;
+  bounce_rate: number | null;
+  pages_per_visit: number | null;
+  time_on_site: number | null;
+  monthly_visits: Record<string, number> | null;
+  top_country_shares: { Country: number; CountryCode: string; Value: number }[] | null;
+  traffic_sources: Record<string, number> | null;
+  top_keywords: { name: string; esitmatedValue: number; cpc: number | null }[] | null;
 }
 
-function transformRawCompany(raw: RawCompanyData): Company {
-  const cat = parseCategory(raw.category);
-  const monthlyVisits = Object.entries(raw.estimatedMonthlyVisits || {})
+function transformRow(row: SupabaseRow): Company {
+  const monthlyVisits = Object.entries(row.monthly_visits || {})
     .map(([month, visits]) => ({ month, visits }))
     .sort((a, b) => a.month.localeCompare(b.month));
 
   const growthRate = computeGrowthRate(monthlyVisits);
 
   return {
-    domain: raw.domain,
-    title: raw.title || raw.domain,
-    description: raw.description || "",
-    screenshotUrl: raw.screenshot || "",
-    categorySlug: cat.slug,
-    categoryName: cat.name,
-    parentCategorySlug: cat.parentSlug,
-    parentCategoryName: cat.parentName,
-    snapshotDate: raw.snapshotDate,
-    globalRank: raw.globalRank || 0,
-    countryCode: raw.countryRank?.CountryCode || raw["countryRank.countryCode"] || "US",
-    countryRank: raw.countryRank?.Rank || raw["countryRank.rank"] || 0,
-    categoryRank: parseInt(raw.categoryRank) || 0,
-    visits: parseInt(raw.visits) || 0,
-    bounceRate: parseFloat(raw.bounceRate) || 0,
-    pagesPerVisit: parseFloat(raw.pagesPerVisit) || 0,
-    timeOnSite: parseFloat(raw.timeOnSite) || 0,
+    domain: row.domain,
+    title: row.title || row.domain,
+    description: row.description || "",
+    screenshotUrl: row.screenshot_url || "",
+    categorySlug: row.category_slug || "other",
+    categoryName: row.category_name || humanizeSlug(row.category_slug || "other"),
+    parentCategorySlug: row.parent_category_slug || row.category_slug || "other",
+    parentCategoryName: row.parent_category_name || row.category_name || "Other",
+    snapshotDate: row.snapshot_date || "",
+    globalRank: row.global_rank || 0,
+    countryCode: row.country_code || "US",
+    countryRank: row.country_rank || 0,
+    categoryRank: row.category_rank || 0,
+    visits: Number(row.visits) || 0,
+    bounceRate: Number(row.bounce_rate) || 0,
+    pagesPerVisit: Number(row.pages_per_visit) || 0,
+    timeOnSite: Number(row.time_on_site) || 0,
     monthlyVisits,
-    topCountryShares: (raw.topCountryShares || []).map((s) => ({
+    topCountryShares: (row.top_country_shares || []).map((s) => ({
       countryCode: s.CountryCode,
       value: s.Value,
     })),
-    trafficSources: Object.entries(raw.trafficSources || {}).map(([source, share]) => ({
+    trafficSources: Object.entries(row.traffic_sources || {}).map(([source, share]) => ({
       source,
       share,
     })),
-    topKeywords: (raw.topKeywords || []).map((k) => ({
+    topKeywords: (row.top_keywords || []).map((k) => ({
       name: k.name,
       estimatedValue: k.esitmatedValue,
       cpc: k.cpc,
@@ -73,25 +74,30 @@ function transformRawCompany(raw: RawCompanyData): Company {
 
 let cachedCompanies: Company[] | null = null;
 
-export function getAllCompanies(): Company[] {
+export async function getAllCompanies(): Promise<Company[]> {
   if (cachedCompanies) return cachedCompanies;
 
-  const filePath = path.join(
-    process.cwd(),
-    "dataset_similarweb-scraper_2026-04-09_21-35-37-232.json"
-  );
-  const rawData: RawCompanyData[] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
-  const companies = rawData.map(transformRawCompany);
+  const { data, error } = await supabase
+    .from("company_latest")
+    .select("*");
+
+  if (error) {
+    console.error("Supabase error:", error);
+    return [];
+  }
+
+  const companies = (data as SupabaseRow[]).map(transformRow);
   cachedCompanies = computeScores(companies).sort((a, b) => b.score - a.score);
   return cachedCompanies;
 }
 
-export function getCompanyByDomain(domain: string): Company | undefined {
-  return getAllCompanies().find((c) => c.domain === domain);
+export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {
+  const companies = await getAllCompanies();
+  return companies.find((c) => c.domain === domain);
 }
 
-export function getCategories(): CategoryInfo[] {
-  const companies = getAllCompanies();
+export async function getCategories(): Promise<CategoryInfo[]> {
+  const companies = await getAllCompanies();
   const map = new Map<string, { name: string; count: number }>();
 
   for (const c of companies) {

@@ -10,8 +10,9 @@ import {
 } from "@/lib/utils";
 import { ScoreBadge } from "@/components/ScoreBadge";
 
-export function generateStaticParams() {
-  return getAllCompanies().map((c) => ({ domain: c.domain }));
+export async function generateStaticParams() {
+  const companies = await getAllCompanies();
+  return companies.map((c) => ({ domain: c.domain }));
 }
 
 function MetricCard({
@@ -66,7 +67,7 @@ export default async function CompanyPage({
   params: Promise<{ domain: string }>;
 }) {
   const { domain } = await params;
-  const company = getCompanyByDomain(decodeURIComponent(domain));
+  const company = await getCompanyByDomain(decodeURIComponent(domain));
   if (!company) notFound();
 
   const maxTraffic = Math.max(...company.trafficSources.map((s) => s.share));

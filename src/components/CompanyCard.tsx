@@ -43,10 +43,12 @@ export function CompanyCard({
   company,
   rank,
   sortKey,
+  eager = false,
 }: {
   company: Company;
   rank: number;
   sortKey: SortKey;
+  eager?: boolean;
 }) {
   const isGrowing = company.growthRate >= 0;
 
@@ -64,8 +66,9 @@ export function CompanyCard({
           <img
             src={company.screenshotUrl}
             alt={company.domain}
-            className="w-full h-full object-cover"
-            loading="lazy"
+            className="w-full h-full object-cover animate-[fadeIn_0.3s_ease-in]"
+            loading={eager ? "eager" : "lazy"}
+            decoding="async"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-muted text-xs font-bold">

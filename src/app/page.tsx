@@ -1,9 +1,9 @@
 import { getAllCompanies, getCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
 
-export default function HomePage() {
-  const companies = getAllCompanies();
-  const categories = getCategories();
+export default async function HomePage() {
+  const companies = await getAllCompanies();
+  const categories = await getCategories();
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
