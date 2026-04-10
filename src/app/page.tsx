@@ -10,7 +10,7 @@ export default async function HomePage() {
       {/* Banner */}
       <div className="relative rounded-xl overflow-hidden mb-6 h-28 sm:h-36">
         <img
-          src="/banner.png"
+          src="/banner.webp"
           alt="Global Brand Innovation Forum"
           className="w-full h-full object-cover"
         />
