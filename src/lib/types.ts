@@ -29,6 +29,7 @@ export interface Company {
   description: string;
   screenshotUrl: string;
   logoUrl: string;
+  originCountry: string;
 
   categorySlug: string;
   categoryName: string;

@@ -7,6 +7,7 @@ import {
   formatGrowth,
   formatDuration,
   cn,
+  countryName,
 } from "@/lib/utils";
 import { ScoreBadge } from "@/components/ScoreBadge";
 
@@ -104,7 +105,17 @@ export default async function CompanyPage({
         <div className="flex-1">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">{company.domain}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-bold">{company.domain}</h1>
+                {company.originCountry && (
+                  <img
+                    src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}
+                    alt={countryName(company.originCountry)}
+                    title={countryName(company.originCountry)}
+                    className="w-6 h-4 object-cover rounded-[2px] border border-border/50"
+                  />
+                )}
+              </div>
               <p className="text-muted text-sm mt-1">
                 {company.title !== company.domain ? company.title : ""}
               </p>

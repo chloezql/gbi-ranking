@@ -27,7 +27,7 @@ export default async function HomePage() {
 
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight">
-          GBI 100
+          GBI Index
         </h1>
         <p className="text-muted mt-2 text-sm">
         GBI 100 is the flagship ranking within GBI (Global Brand Infrastructure), designed to identify and showcase the leading brands and service providers driving global expansion across markets and categories. · Updated{" "}

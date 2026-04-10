@@ -33,3 +33,23 @@ export function humanizeSlug(slug: string): string {
 export function cn(...classes: (string | false | undefined | null)[]): string {
   return classes.filter(Boolean).join(" ");
 }
+
+export function countryCodeToFlag(code: string): string {
+  if (!code || code.length !== 2) return "";
+  const upper = code.toUpperCase();
+  return String.fromCodePoint(
+    ...Array.from(upper).map((c) => 0x1f1e6 + c.charCodeAt(0) - 65)
+  );
+}
+
+const COUNTRY_NAMES: Record<string, string> = {
+  CN: "China", KR: "South Korea", JP: "Japan", US: "United States",
+  TW: "Taiwan", DE: "Germany", GB: "United Kingdom", FR: "France",
+  SE: "Sweden", NL: "Netherlands", SG: "Singapore", HK: "Hong Kong",
+  CA: "Canada", AU: "Australia", IL: "Israel", IN: "India",
+  IT: "Italy", ES: "Spain", BR: "Brazil", MX: "Mexico",
+};
+
+export function countryName(code: string): string {
+  return COUNTRY_NAMES[code?.toUpperCase()] || code?.toUpperCase() || "";
+}

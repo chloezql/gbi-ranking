@@ -10,13 +10,14 @@ interface SupabaseRow {
   description: string | null;
   screenshot_url: string | null;
   logo_url: string | null;
+  country_code: string | null;
   category_slug: string | null;
   category_name: string | null;
   parent_category_slug: string | null;
   parent_category_name: string | null;
   snapshot_date: string | null;
   global_rank: number | null;
-  country_code: string | null;
+  traffic_country_code: string | null;
   country_rank: number | null;
   category_rank: number | null;
   visits: number | null;
@@ -42,13 +43,14 @@ function transformRow(row: SupabaseRow): Company {
     description: row.description || "",
     screenshotUrl: row.screenshot_url || "",
     logoUrl: row.logo_url || "",
+    originCountry: row.country_code || "",
     categorySlug: row.category_slug || "other",
     categoryName: row.category_name || humanizeSlug(row.category_slug || "other"),
     parentCategorySlug: row.parent_category_slug || row.category_slug || "other",
     parentCategoryName: row.parent_category_name || row.category_name || "Other",
     snapshotDate: row.snapshot_date || "",
     globalRank: row.global_rank || 0,
-    countryCode: row.country_code || "US",
+    countryCode: row.traffic_country_code || "US",
     countryRank: row.country_rank || 0,
     categoryRank: row.category_rank || 0,
     visits: Number(row.visits) || 0,

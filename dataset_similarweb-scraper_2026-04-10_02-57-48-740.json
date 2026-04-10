@@ -1,0 +1,7097 @@
+[{
+  "domain": "addd.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=addd.kr&t=1&s=1&h=781b4ccfebda64a62f412bf86a39ccd1f513d31ee2f68d5ea1f8779469460d88",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "aj2.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=aj2.kr&t=1&s=1&h=db2708123c3821941e6d93a0eaa23d4b64f675a6cea6e06216940b3cff72c80f",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "alrobot.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=alrobot.co.kr&t=1&s=1&h=e92b0aad0f28887b01c63f2d31524e352d70e03e4fe65a7d74bb47a3f5c1eda8",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "samsung.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Mobile | TV | Home Electronics | Home Appliances | Samsung US | Samsung US",
+  "description": "Discover the latest in electronic & smart appliance technology with Samsung. Find the next big thing from smartphones & tablets to laptops & tvs & more.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=samsung.com&t=1&s=1&h=acbcd0840863d87073a9c8b029e1f766fd1432cf4d709b92c86a0490904c5c0d",
+  "globalRank": 49,
+  "countryRank": {
+    "Country": 356,
+    "CountryCode": "IN",
+    "Rank": 18
+  },
+  "categoryRank": "1",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 722223005,
+    "2026-02-01": 724270600,
+    "2026-03-01": 838714487
+  },
+  "bounceRate": "0.3807665372561298",
+  "pagesPerVisit": "2.55106811418728",
+  "visits": "838714487",
+  "timeOnSite": "102.81867209798148",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.17532403764769722
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.09555913841030025
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.08002820458812894
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.06146401707023199
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.050852276678537894
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.009514687368891113,
+    "Paid Referrals": 0.022124503594743467,
+    "Mail": 0.0008943006989247799,
+    "Referrals": 0.05591233457921446,
+    "Search": 0.5930845902711812,
+    "Direct": 0.3184695834870448
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "samsung",
+      "esitmatedValue": 6292520,
+      "cpc": 0.94
+    },
+    {
+      "name": "s26 ultra",
+      "esitmatedValue": 1433280,
+      "cpc": 0.6
+    },
+    {
+      "name": "samsung s26 ultra",
+      "esitmatedValue": 1273310,
+      "cpc": 0.48
+    },
+    {
+      "name": "samsung s26",
+      "esitmatedValue": 901950,
+      "cpc": 0.59
+    },
+    {
+      "name": "s26",
+      "esitmatedValue": 629360,
+      "cpc": 0.62
+    }
+  ],
+  "countryRank.country": 356,
+  "countryRank.countryCode": "IN",
+  "countryRank.rank": 18
+},
+{
+  "domain": "amcg.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "403 Forbidden",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=amcg.co.kr&t=1&s=1&h=5a36e097eb572fd5336332a383d692acbda4f2bb2da5589153b4cd81e75e2ac3",
+  "globalRank": 1153690,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 35189
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 5286,
+    "2026-02-01": 9868,
+    "2026-03-01": 10450
+  },
+  "bounceRate": "0.34534616121769257",
+  "pagesPerVisit": "9.332596506147969",
+  "visits": "10450",
+  "timeOnSite": "168.16745103726691",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.05411549167993658,
+    "Paid Referrals": 0.01666659698971671,
+    "Mail": 0.00020983648569163535,
+    "Referrals": 0.1210596073064514,
+    "Search": 0.48851903354575105,
+    "Direct": 0.31942943399245255
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "에이플드라마(apple drama) 공식 홈페이지",
+      "esitmatedValue": 80,
+      "cpc": null
+    },
+    {
+      "name": "아시아엔",
+      "esitmatedValue": 30,
+      "cpc": null
+    },
+    {
+      "name": "에이플드라마",
+      "esitmatedValue": 30,
+      "cpc": null
+    },
+    {
+      "name": "asian",
+      "esitmatedValue": 20,
+      "cpc": 1.79
+    },
+    {
+      "name": "편성표",
+      "esitmatedValue": 0,
+      "cpc": 0.69
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 35189
+},
+{
+  "domain": "dabonda.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "dabonda",
+  "description": "branding, marketing and media buying.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=dabonda.com&t=1&s=1&h=bacb8eb73afaebb82d27ff48ddb692a2293b694fcf74c55472fbf8e550b839b7",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "analogueplus.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=analogueplus.co.kr&t=1&s=1&h=f235d6134c746bbdb891f7521ccd30a187db4ba03038da256f6d9df7e797358d",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "doctorsbiotech.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=doctorsbiotech.com&t=1&s=1&h=25d59f195b5707659b0cc52b3e8b81c2179de9d87c807982e007ba88da7ef243",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "lg.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "SAR",
+  "description": "Life's Good with LG. Shop online at LG.com US to find exclusive deals on the latest home entertainment and appliances. Add smart technology and modern design to your home today.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=lg.com&t=1&s=1&h=b3c545ef78cee7c2cb0b331e3cd3b957a5ba9be3f24e288e813c2bb01666d68c",
+  "globalRank": 1995,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 2213
+  },
+  "categoryRank": "17",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 29408324,
+    "2026-02-01": 22865683,
+    "2026-03-01": 25576513
+  },
+  "bounceRate": "0.5059944340570689",
+  "pagesPerVisit": "3.311594921408466",
+  "visits": "25576513",
+  "timeOnSite": "144.56981664217324",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.2528222150489976
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.0801823312713209
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.07796210847172994
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.041643947626074145
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.040423606350977095
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.013465680587790468,
+    "Paid Referrals": 0.018354088338397634,
+    "Mail": 0.0007341043033135857,
+    "Referrals": 0.050024940682809674,
+    "Search": 0.599175511512619,
+    "Direct": 0.3182456745750696
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "lg",
+      "esitmatedValue": 576220,
+      "cpc": 0.78
+    },
+    {
+      "name": "lg tv",
+      "esitmatedValue": 56180,
+      "cpc": 0.46
+    },
+    {
+      "name": "geladeira",
+      "esitmatedValue": 37060,
+      "cpc": 0.19
+    },
+    {
+      "name": "lg customer care",
+      "esitmatedValue": 34230,
+      "cpc": 0.31
+    },
+    {
+      "name": "lava e seca",
+      "esitmatedValue": 29800,
+      "cpc": 0.21
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 2213
+},
+{
+  "domain": "ara.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "아라전자(주)",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=ara.co.kr&t=1&s=1&h=cd71b2df653bdd32a82eafa5784712c20179820236e0ac6b4ff4c41f3f3f401d",
+  "globalRank": 5622071,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 194028
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3321,
+    "2026-02-01": 3078,
+    "2026-03-01": 3234
+  },
+  "bounceRate": "0.3219179839731286",
+  "pagesPerVisit": "1.3589456249964802",
+  "visits": "3234",
+  "timeOnSite": "11.995309525700836",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.9999999999999999
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.04186885819731452,
+    "Paid Referrals": 0.01612023595834403,
+    "Mail": 0.001302637989730324,
+    "Referrals": 0.1701132635466356,
+    "Search": 0.42076789392769764,
+    "Direct": 0.34638114943276627
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "ara",
+      "esitmatedValue": 0,
+      "cpc": 0.64
+    },
+    {
+      "name": "rohde",
+      "esitmatedValue": 0,
+      "cpc": 0.47
+    },
+    {
+      "name": "engineer tools",
+      "esitmatedValue": 0,
+      "cpc": 1.05
+    },
+    {
+      "name": "(주)아라",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 194028
+},
+{
+  "domain": "nemesis.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "병무청 병역이야기 공모전",
+  "description": "병무청 병역이야기 공모전 홈페이지입니다.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=nemesis.kr&t=1&s=1&h=62740969e19ad239246dbb2c892e989a5ccd1361471000b36d04c1f6c76a7e77",
+  "globalRank": 12510168,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 979,
+    "2026-02-01": 1202,
+    "2026-03-01": 423
+  },
+  "bounceRate": "0.33549496876059254",
+  "pagesPerVisit": "1.4240848519255531",
+  "visits": "423",
+  "timeOnSite": "16.863099456502415",
+  "topCountryShares": [
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.9999999999999998
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.05354178898714438,
+    "Paid Referrals": 0.022193442002303207,
+    "Mail": 0.00241701224647278,
+    "Referrals": 0.14311656082107113,
+    "Search": 0.4129947167728709,
+    "Direct": 0.35349507858776547
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "nemesis",
+      "esitmatedValue": 0,
+      "cpc": 1.07
+    },
+    {
+      "name": "what iq does nemesis have",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "hisense.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "404",
+  "description": "Hisense USA",
+  "category": "home_and_garden/home_and_garden",
+  "screenshot": "https://site-images.similarcdn.com/image?url=hisense.com&t=1&s=1&h=b2df98c1d9f2ff5a97f8c94e7907ff00dfb1e1591a0e9f94dd6174aaac9c976c",
+  "globalRank": 23124,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 1490
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 2157327,
+    "2026-02-01": 1728992,
+    "2026-03-01": 2060652
+  },
+  "bounceRate": "0.362303174707762",
+  "pagesPerVisit": "5.363685372295239",
+  "visits": "2060652",
+  "timeOnSite": "353.97575990964",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.47385800147956497
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.10621272228893795
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.045876811214895105
+    },
+    {
+      "Country": 380,
+      "CountryCode": "IT",
+      "Value": 0.037516317999273935
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.033585178500284876
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0074742345618908695,
+    "Paid Referrals": 0.005922931706614669,
+    "Mail": 0.0004763658058212963,
+    "Referrals": 0.05990159879126749,
+    "Search": 0.330343160858899,
+    "Direct": 0.5958817082754923
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "hisense",
+      "esitmatedValue": 89200,
+      "cpc": 0.3
+    },
+    {
+      "name": "hi sense",
+      "esitmatedValue": 8140,
+      "cpc": 0.3
+    },
+    {
+      "name": "hisense tv",
+      "esitmatedValue": 3790,
+      "cpc": 0.39
+    },
+    {
+      "name": "海信",
+      "esitmatedValue": 2650,
+      "cpc": 0.94
+    },
+    {
+      "name": "海信官网",
+      "esitmatedValue": 2000,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 1490
+},
+{
+  "domain": "276holdings.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "기업금융 지원 스타트업 | 276홀딩스",
+  "description": "매출채권, 전자어음, 기업금융, 운전자금, 기업대출, 매출계약서, 276홀딩스, 276holdings, 플로우, FLOW",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=276holdings.com&t=1&s=1&h=69210120818ee268ad722a4365681074885e072c49ba3ddfecf83cccd27f8443",
+  "globalRank": 6604580,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 245487
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1527,
+    "2026-02-01": 2039,
+    "2026-03-01": 2984
+  },
+  "bounceRate": "0.33181083746815354",
+  "pagesPerVisit": "1.082166289365344",
+  "visits": "2984",
+  "timeOnSite": "0",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1.0000000000000002
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.04442640585482726,
+    "Paid Referrals": 0.012359250200881406,
+    "Mail": 0.00019255093940949338,
+    "Referrals": 0.08718567836072565,
+    "Search": 0.522232782329951,
+    "Direct": 0.3336033323142052
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "276",
+      "esitmatedValue": 40,
+      "cpc": 1.64
+    },
+    {
+      "name": "276홀딩스",
+      "esitmatedValue": 40,
+      "cpc": null
+    },
+    {
+      "name": "$ 276",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 245487
+},
+{
+  "domain": "lenovo.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Servicios de soporte | Lenovo Belize",
+  "description": "Explore Lenovo laptops, desktops, tablets, monitors, pc accessories & servers. Shop innovative tech designed for business, education, gaming & everyday use.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=lenovo.com&t=1&s=1&h=b4040f5e9a182029affb4a858a083c836615addff311ffadd2365f6066bf5353",
+  "globalRank": 887,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 1143
+  },
+  "categoryRank": "3",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 46872301,
+    "2026-02-01": 39866617,
+    "2026-03-01": 45877537
+  },
+  "bounceRate": "0.4182609882668231",
+  "pagesPerVisit": "4.5336984811083685",
+  "visits": "45877537",
+  "timeOnSite": "235.83442098427955",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.19603656514026144
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.10236736791367736
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.07658819696800358
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.07032089381767928
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.04122850751455258
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.01011534387218015,
+    "Paid Referrals": 0.01536774321876914,
+    "Mail": 0.0007383679824293546,
+    "Referrals": 0.05059999803547704,
+    "Search": 0.5200199463804032,
+    "Direct": 0.4031586005107412
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "lenovo",
+      "esitmatedValue": 1352150,
+      "cpc": 0.75
+    },
+    {
+      "name": "lenovo support",
+      "esitmatedValue": 153960,
+      "cpc": 1.69
+    },
+    {
+      "name": "lenovo thinkpad",
+      "esitmatedValue": 149640,
+      "cpc": 0.36
+    },
+    {
+      "name": "thinkpad",
+      "esitmatedValue": 148680,
+      "cpc": 0.26
+    },
+    {
+      "name": "twitter",
+      "esitmatedValue": 119630,
+      "cpc": 0.65
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 1143
+},
+{
+  "domain": "drivetech.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "drivetech",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=drivetech.co.kr&t=1&s=1&h=89a0cf4940bba484f8f3e6b819b88f59b213f4f019f3a566a3ae8dd080f0b52c",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "powercubesemi.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "파워큐브세미 - IPM",
+  "description": "Potential · Convergence · Smart",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=powercubesemi.com&t=1&s=1&h=ed8532330cd1221346a3e044cdd0b5d254104452a07698743aeea1f5616245e4",
+  "globalRank": 5548693,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 190195
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3009,
+    "2026-02-01": 3098,
+    "2026-03-01": 2766
+  },
+  "bounceRate": "0.31651739406847806",
+  "pagesPerVisit": "1.9311645736606229",
+  "visits": "2766",
+  "timeOnSite": "25.13925736881973",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.05427468179457326,
+    "Paid Referrals": 0.016738535860331943,
+    "Mail": 0.00021080800303998758,
+    "Referrals": 0.12159393210504865,
+    "Search": 0.4930425189337363,
+    "Direct": 0.31413952330326983
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "파워큐브세미",
+      "esitmatedValue": 100,
+      "cpc": null
+    },
+    {
+      "name": "파워큐브",
+      "esitmatedValue": 30,
+      "cpc": null
+    },
+    {
+      "name": "sheath",
+      "esitmatedValue": 0,
+      "cpc": 1.6
+    },
+    {
+      "name": "heater",
+      "esitmatedValue": 0,
+      "cpc": 0.48
+    },
+    {
+      "name": "sj-5060",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 190195
+},
+{
+  "domain": "aicu.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "AICU Inc.",
+  "description": "AICU is a startup company working for Creative and Collaborative Unit specialized in visual, anime, manga, game, vTuber, metaverse and AIDX.",
+  "category": "computers_electronics_and_technology/web_hosting_and_domain_names",
+  "screenshot": "https://site-images.similarcdn.com/image?url=aicu.ai&t=1&s=1&h=ad212abd6ad571de60a961985cdfb861ece56e0dfedf03ff0e84760aefb08194",
+  "globalRank": 2391921,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 197840
+  },
+  "categoryRank": "878",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 9333,
+    "2026-02-01": 9522,
+    "2026-03-01": 10175
+  },
+  "bounceRate": "0.4498700360667359",
+  "pagesPerVisit": "1.514371009133538",
+  "visits": "10175",
+  "timeOnSite": "76.99034804870578",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.9344594885090692
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.06554051149093097
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.008683418048615192,
+    "Paid Referrals": 0.011012031142914342,
+    "Mail": 0.0009615651146275223,
+    "Referrals": 0.02620909970061023,
+    "Search": 0.8079812097834096,
+    "Direct": 0.14449699841559085
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "ipadapter",
+      "esitmatedValue": 310,
+      "cpc": null
+    },
+    {
+      "name": "regional prompter",
+      "esitmatedValue": 260,
+      "cpc": 2.45
+    },
+    {
+      "name": "comfyui i2i",
+      "esitmatedValue": 220,
+      "cpc": null
+    },
+    {
+      "name": "comfyui xy plot",
+      "esitmatedValue": 210,
+      "cpc": null
+    },
+    {
+      "name": "comfyui アップスケール",
+      "esitmatedValue": 180,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 197840
+},
+{
+  "domain": "sony-honda-mobility.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "AFEELA - EV | Sony Honda Mobility",
+  "description": "AFEELA: A new generation of mobility pulsing with intelligence. Inviting you to be part of the future of mobility. Reserve yours now.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=sony-honda-mobility.com&t=1&s=1&h=f8016cab54b355ab2452225d0af1709a493ebee9b5277524613dbf07e6c7afc9",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "afeela",
+      "esitmatedValue": 0,
+      "cpc": 1.14
+    },
+    {
+      "name": "sony-honda-mobility.com",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "decloak.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=decloak.ai&t=1&s=1&h=6464e770a2fba211e26c655832a8c2b7a949a0b12c1acdcf1bed4c84c208e509",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "eg-korea.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=eg-korea.com&t=1&s=1&h=693ae886eb550a154a538733da714e3039f257498462a31a0f1438819d7d2395",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "mediatek.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "隱私權政策",
+  "description": "隱私權政策",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=mediatek.com&t=1&s=1&h=1cb20d6c9eb435753b2a0eeabc0a8af653ce7c2b43e3c4b9a7048c9d41c72285",
+  "globalRank": 38275,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 1166
+  },
+  "categoryRank": "75",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1409152,
+    "2026-02-01": 1076500,
+    "2026-03-01": 1434356
+  },
+  "bounceRate": "0.4560177261414008",
+  "pagesPerVisit": "3.1154995496179763",
+  "visits": "1434356",
+  "timeOnSite": "123.94558728352902",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.47198681593637837
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.19169000722901705
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.07228996076962975
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.05137499350195218
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.013897703139414675
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.009125454480363993,
+    "Paid Referrals": 0.013762432188728824,
+    "Mail": 0.0003200344981204028,
+    "Referrals": 0.05695090000896696,
+    "Search": 0.31407085914559707,
+    "Direct": 0.6056681044981922
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "mediatek",
+      "esitmatedValue": 28320,
+      "cpc": 0.56
+    },
+    {
+      "name": "聯發科",
+      "esitmatedValue": 6920,
+      "cpc": null
+    },
+    {
+      "name": "media tek",
+      "esitmatedValue": 2980,
+      "cpc": 0.57
+    },
+    {
+      "name": "dimensity 7300",
+      "esitmatedValue": 2290,
+      "cpc": 0.12
+    },
+    {
+      "name": "dimensity",
+      "esitmatedValue": 2290,
+      "cpc": 0.22
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 1166
+},
+{
+  "domain": "epictech.com.tw",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Epic Tech Taiwan | 史詩科技",
+  "description": "Epic Tech Taiwan (史詩科技) 以 SaaS 為核心，串聯起真實生活的每一個節點。從中保好生活、G.Talk 到 LaLa POS，我們致力於以智慧科技成就您的每一天。",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=epictech.com.tw&t=1&s=1&h=d4ddd471bd9770ac8f459ddab67bb33cf96227cb6791b65879f9eaae288c4db7",
+  "globalRank": 2297068,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 27150
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 857,
+    "2026-02-01": 3105,
+    "2026-03-01": 9885
+  },
+  "bounceRate": "0.31250058052389684",
+  "pagesPerVisit": "4.942064372836173",
+  "visits": "9885",
+  "timeOnSite": "847.8818522020583",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.9999999999999997
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.056481068100807975,
+    "Paid Referrals": 0.013486618952677037,
+    "Mail": 0.000544176337441275,
+    "Referrals": 0.08832272127617678,
+    "Search": 0.19662423356956568,
+    "Direct": 0.6445411817633312
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 27150
+},
+{
+  "domain": "enigma.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=enigma.kr&t=1&s=1&h=033fd98369265e3dcd29de0e09519f946bff2ee085e50fc024e7a7419d7b7177",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "aips.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=aips.ai&t=1&s=1&h=0353d759f9c8b7f52e7914edbbc6a52668816a9f3cccbdf08842c66030887f9b",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "airet.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=airet.co.kr&t=1&s=1&h=2ae4f7943f41386a82dfc06fd02bf4db78e6f8becb33584e4cab47ed5cd84f2d",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "eoneoms.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "(주)이원오엠에스",
+  "description": "(주)이원오엠에스",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=eoneoms.com&t=1&s=1&h=b9605edcfe5c59991308962022674049a87186ad570f2ca74f7bc67c4d54a195",
+  "globalRank": 14297904,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 511240
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3006,
+    "2026-02-01": 1463,
+    "2026-03-01": 1060
+  },
+  "bounceRate": "0.314961099404739",
+  "pagesPerVisit": "1.0695306288476227",
+  "visits": "1060",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "스마트미러",
+      "esitmatedValue": 120,
+      "cpc": null
+    },
+    {
+      "name": "이원오엠에스",
+      "esitmatedValue": 10,
+      "cpc": null
+    },
+    {
+      "name": "heymirror classic",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 511240
+},
+{
+  "domain": "memorence.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=memorence.ai&t=1&s=1&h=99610d1fba4d90a7ccbd868387f8a61b0bfdb2857c6f3aaa906a190475a5eb15",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "huatec.com.tw",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=huatec.com.tw&t=1&s=1&h=6785fa2d53c97a836629a7640f10c6658827514cf1b22f099125eeafb96429b9",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "allcom.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=allcom.co.kr&t=1&s=1&h=3e21f7bcc3f3fb9c535c0bdc5d4075ab0e7bfe661e1f10fbdb2941c60203971c",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "roborock.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Intelligent Robot Vacuum Cleaner and Mop",
+  "description": "Roborock's intelligent automatic robot vacuum cleaners turn time spent vacuuming and mopping into free time for you to spend on the better things in life.",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=roborock.com&t=1&s=1&h=782726e7ee5c539220e4182457d13d9b471213cc2ff0d044cec517721c38cef0",
+  "globalRank": 17668,
+  "countryRank": {
+    "Country": 276,
+    "CountryCode": "DE",
+    "Rank": 3436
+  },
+  "categoryRank": "109",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3795877,
+    "2026-02-01": 2575822,
+    "2026-03-01": 3309715
+  },
+  "bounceRate": "0.6049742847248626",
+  "pagesPerVisit": "2.9030671535383474",
+  "visits": "3309715",
+  "timeOnSite": "95.7840733840003",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.2697581632204149
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.14479134176705363
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.10506333678908132
+    },
+    {
+      "Country": 792,
+      "CountryCode": "TR",
+      "Value": 0.059279386365411454
+    },
+    {
+      "Country": 250,
+      "CountryCode": "FR",
+      "Value": 0.040272227229058065
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.01665836293446192,
+    "Paid Referrals": 0.01875737523994319,
+    "Mail": 0.0008266119357279597,
+    "Referrals": 0.05466742715751187,
+    "Search": 0.526919078932442,
+    "Direct": 0.3821711437998062
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "roborock",
+      "esitmatedValue": 300190,
+      "cpc": 0.5
+    },
+    {
+      "name": "로보락",
+      "esitmatedValue": 21910,
+      "cpc": null
+    },
+    {
+      "name": "robo rock",
+      "esitmatedValue": 20460,
+      "cpc": 0.5
+    },
+    {
+      "name": "roborock saros 10r",
+      "esitmatedValue": 14000,
+      "cpc": 0.83
+    },
+    {
+      "name": "roborock saros 20",
+      "esitmatedValue": 12150,
+      "cpc": 1.03
+    }
+  ],
+  "countryRank.country": 276,
+  "countryRank.countryCode": "DE",
+  "countryRank.rank": 3436
+},
+{
+  "domain": "amass.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "FAQ",
+  "description": "FAQ Do you offer wholesale? We do! We offer wholesale pricing on bulk orders on all our products. Please fill out the respective forms for corporate gifting or weddings and our team will get back to you! If you are a bar/restaurant/retailer interested in carrying our products - send us a message directly and our sales",
+  "category": "food_and_drink/beverages",
+  "screenshot": "https://site-images.similarcdn.com/image?url=amass.com&t=1&s=1&h=1e2295f0527cd193dc6f12971180fed781476891c8884b0d8cfd5ff13f791344",
+  "globalRank": 2381492,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 887096
+  },
+  "categoryRank": "3345",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 11060,
+    "2026-02-01": 12810,
+    "2026-03-01": 8118
+  },
+  "bounceRate": "0.34174116231381113",
+  "pagesPerVisit": "2.249063001462304",
+  "visits": "8118",
+  "timeOnSite": "22.145713316076943",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.8059556545921887
+    },
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.1374643221079457
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.05658002329986546
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.18872504414486396,
+    "Paid Referrals": 0.01615747991760143,
+    "Mail": 0.0010512231010659113,
+    "Referrals": 0.0660417253118009,
+    "Search": 0.2663979115127242,
+    "Direct": 0.4594773993492629
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "amass",
+      "esitmatedValue": 400,
+      "cpc": 0.41
+    },
+    {
+      "name": "genevieveafterhours",
+      "esitmatedValue": 240,
+      "cpc": null
+    },
+    {
+      "name": "amass dry gin",
+      "esitmatedValue": 50,
+      "cpc": null
+    },
+    {
+      "name": "prohibition era cocktails",
+      "esitmatedValue": 40,
+      "cpc": 1.21
+    },
+    {
+      "name": "prohibition era drinks",
+      "esitmatedValue": 40,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 887096
+},
+{
+  "domain": "greatwallmotor.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "greatwallmotor.com :: this domain is for sale",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=greatwallmotor.com&t=1&s=1&h=a5dde3a7038e37f253471b1d9522fdb324f23fb307885716c5be9ad09a5161d9",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "eyechip.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=eyechip.co.kr&t=1&s=1&h=f37d05894ed24390e542857817a5b1091718fdfb6a2fc5804330f1cebffe46bd",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "hhs.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=hhs.kr&t=1&s=1&h=24c9b9627c636ae971657a5dd2360da02d2e63896fccaae82c4705b07917b9c3",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "segway.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Welcome to Segway ,Your Premier Choice for Personal Transportation",
+  "description": "Discover the world of Segway, where innovative mobility solutions meet personal transportation need",
+  "category": "sports/cycling_and_biking",
+  "screenshot": "https://site-images.similarcdn.com/image?url=segway.com&t=1&s=1&h=d5f918c04e98bbc07247e1fdfa5565c4a88ae785b03237148d4ccb83faaa68f9",
+  "globalRank": 44963,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 19830
+  },
+  "categoryRank": "22",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 973277,
+    "2026-02-01": 815891,
+    "2026-03-01": 1126758
+  },
+  "bounceRate": "0.4378061840621428",
+  "pagesPerVisit": "3.2357392926617647",
+  "visits": "1126758",
+  "timeOnSite": "118.91757541730716",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.3530021715197323
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.13489501986147254
+    },
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.04027281717258917
+    },
+    {
+      "Country": 250,
+      "CountryCode": "FR",
+      "Value": 0.033096676058181715
+    },
+    {
+      "Country": 620,
+      "CountryCode": "PT",
+      "Value": 0.027766176584162486
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.03855390305931394,
+    "Paid Referrals": 0.015315331938743055,
+    "Mail": 0.0010849746340314925,
+    "Referrals": 0.05702522072001967,
+    "Search": 0.5058418913542148,
+    "Direct": 0.3821786782918065
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "segway",
+      "esitmatedValue": 84260,
+      "cpc": 0.31
+    },
+    {
+      "name": "ninebot",
+      "esitmatedValue": 20170,
+      "cpc": 0.29
+    },
+    {
+      "name": "segway ninebot",
+      "esitmatedValue": 14230,
+      "cpc": 0.46
+    },
+    {
+      "name": "ninebot scooter",
+      "esitmatedValue": 6770,
+      "cpc": 0.41
+    },
+    {
+      "name": "segway scooter",
+      "esitmatedValue": 6340,
+      "cpc": 0.56
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 19830
+},
+{
+  "domain": "narwal.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "云鲸智能-官方网站",
+  "description": "云鲸NARWAL,立足家用智能清洁电器领域,致力于研发革命性科技产品,同时也是一个倡导\"自由自在,有所热爱\"的生活方式品牌。我们希望用新科技将人解放出来,让用户过上更自由、有所热爱的生活。",
+  "category": "computers_electronics_and_technology/social_networks_and_online_communities",
+  "screenshot": "https://site-images.similarcdn.com/image?url=narwal.com&t=1&s=1&h=43cfbd104099bef9d96f8e89c5541b08995cd13556fb0da3c514af47ab99ab4c",
+  "globalRank": 133537,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 87560
+  },
+  "categoryRank": "417",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 586672,
+    "2026-02-01": 374161,
+    "2026-03-01": 354866
+  },
+  "bounceRate": "0.4442461778991702",
+  "pagesPerVisit": "2.75941420408217",
+  "visits": "354866",
+  "timeOnSite": "132.84785724855783",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.27492463621389035
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.16397841065767424
+    },
+    {
+      "Country": 380,
+      "CountryCode": "IT",
+      "Value": 0.07013291901356437
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.05551901276095629
+    },
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.05010433396823355
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.042957989490692024,
+    "Paid Referrals": 0.019922076796215493,
+    "Mail": 0.0009413932196379043,
+    "Referrals": 0.06620280537307459,
+    "Search": 0.42247786939808657,
+    "Direct": 0.44749786572207245
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "narwal",
+      "esitmatedValue": 25800,
+      "cpc": 1.09
+    },
+    {
+      "name": "云鲸",
+      "esitmatedValue": 6170,
+      "cpc": null
+    },
+    {
+      "name": "narwal flow",
+      "esitmatedValue": 3180,
+      "cpc": 1.11
+    },
+    {
+      "name": "narwal flow 2",
+      "esitmatedValue": 2280,
+      "cpc": null
+    },
+    {
+      "name": "narwal freo pro",
+      "esitmatedValue": 2050,
+      "cpc": 1.89
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 87560
+},
+{
+  "domain": "xpeng.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "XPENG - Official Website | XPENG Motors – XPENG (Sweden)-FAQ",
+  "description": "welcome to the official website of xpeng motors. discover our newest models, customize your smart e-vehicle and drive today the car of tomorrow.",
+  "category": "vehicles/vehicles",
+  "screenshot": "https://site-images.similarcdn.com/image?url=xpeng.com&t=1&s=1&h=fbf5ecef52401525ad4e0a4e75fe49154c06b90aa53ea076b83c3c59bcab2055",
+  "globalRank": 45198,
+  "countryRank": {
+    "Country": 276,
+    "CountryCode": "DE",
+    "Rank": 5334
+  },
+  "categoryRank": "55",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1074441,
+    "2026-02-01": 973605,
+    "2026-03-01": 1145967
+  },
+  "bounceRate": "0.3565910423607332",
+  "pagesPerVisit": "3.018406905443901",
+  "visits": "1145967",
+  "timeOnSite": "89.40049052756409",
+  "topCountryShares": [
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.25021983756656363
+    },
+    {
+      "Country": 250,
+      "CountryCode": "FR",
+      "Value": 0.13434182177526915
+    },
+    {
+      "Country": 208,
+      "CountryCode": "DK",
+      "Value": 0.07182121413731378
+    },
+    {
+      "Country": 578,
+      "CountryCode": "NO",
+      "Value": 0.06829515174171319
+    },
+    {
+      "Country": 528,
+      "CountryCode": "NL",
+      "Value": 0.051590608987656515
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.015523454531167668,
+    "Paid Referrals": 0.02252449839155129,
+    "Mail": 0.0006721221387842023,
+    "Referrals": 0.053692903676481364,
+    "Search": 0.6383512522867868,
+    "Direct": 0.26923576897509943
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "xpeng",
+      "esitmatedValue": 162880,
+      "cpc": 0.47
+    },
+    {
+      "name": "xpeng g6",
+      "esitmatedValue": 38580,
+      "cpc": 0.44
+    },
+    {
+      "name": "xpeng g9",
+      "esitmatedValue": 22890,
+      "cpc": 0.34
+    },
+    {
+      "name": "xpeng p7",
+      "esitmatedValue": 15960,
+      "cpc": 0.47
+    },
+    {
+      "name": "byd",
+      "esitmatedValue": 9730,
+      "cpc": 0.29
+    }
+  ],
+  "countryRank.country": 276,
+  "countryRank.countryCode": "DE",
+  "countryRank.rank": 5334
+},
+{
+  "domain": "bigflex.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=bigflex.co.kr&t=1&s=1&h=c8a59dfd8c2893ecdc9059309d484ad55be265d3a52f1a132600404a671544c2",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "jaha.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=jaha.co.kr&t=1&s=1&h=d31638ce9695cef738df7b5bf25ed974260f527a6aa9189d2893989952184df8",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "infofla.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "INFOFLA | From Thought to Act, Shaping Future of Automation",
+  "description": "INFOFLA empowers automation through Vision AI technologies and accelerates digital transformation with solutions like SELTO and ITOMS.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=infofla.com&t=1&s=1&h=a844d4cc506a0f680de65b466567fecb2179065199ed0f404be1894db0bd022c",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 417,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "huawei.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Privacy Policy - Huawei",
+  "description": "This Policy describes how Huawei processes your personal data.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=huawei.com&t=1&s=1&h=547e4dc28a35b16a232ce7cd722925bf874219d775cb4840293db3e00e128371",
+  "globalRank": 404,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 30
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 75744732,
+    "2026-02-01": 61792459,
+    "2026-03-01": 74227951
+  },
+  "bounceRate": "0.37013635773432135",
+  "pagesPerVisit": "9.133156505409355",
+  "visits": "74227951",
+  "timeOnSite": "684.0887729268823",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.677095868439879
+    },
+    {
+      "Country": 344,
+      "CountryCode": "HK",
+      "Value": 0.02864883087942576
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.02661155761262013
+    },
+    {
+      "Country": 360,
+      "CountryCode": "ID",
+      "Value": 0.018312713722057027
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.01781862866701623
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.003100244590376416,
+    "Paid Referrals": 0.0028536654198187943,
+    "Mail": 0.00019690376978017394,
+    "Referrals": 0.05949640673972556,
+    "Search": 0.2391016314070072,
+    "Direct": 0.6952511480732917
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "huawei",
+      "esitmatedValue": 1231320,
+      "cpc": 0.75
+    },
+    {
+      "name": "huawei health",
+      "esitmatedValue": 98310,
+      "cpc": 0.21
+    },
+    {
+      "name": "华为",
+      "esitmatedValue": 75700,
+      "cpc": 0.94
+    },
+    {
+      "name": "huawei watch",
+      "esitmatedValue": 73330,
+      "cpc": 0.28
+    },
+    {
+      "name": "huawei matepad 11.5",
+      "esitmatedValue": 63500,
+      "cpc": 0.2
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 30
+},
+{
+  "domain": "zte.com.cn",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "用户隐私",
+  "description": "用户隐私",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=zte.com.cn&t=1&s=1&h=2466a5263eb4103c312915896803b73f0cfefe2daadedbdc80e13cd67770239b",
+  "globalRank": 17611,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 727
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1954566,
+    "2026-02-01": 1607582,
+    "2026-03-01": 2140077
+  },
+  "bounceRate": "0.22239653287879338",
+  "pagesPerVisit": "12.648472446443952",
+  "visits": "2140077",
+  "timeOnSite": "1150.756243787967",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.6681224661125287
+    },
+    {
+      "Country": 344,
+      "CountryCode": "HK",
+      "Value": 0.0750433096135817
+    },
+    {
+      "Country": 360,
+      "CountryCode": "ID",
+      "Value": 0.057056743835771306
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.04938365061816871
+    },
+    {
+      "Country": 144,
+      "CountryCode": "LK",
+      "Value": 0.037911262311559064
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0038925976098243063,
+    "Paid Referrals": 0.002082269654833606,
+    "Mail": 0.0004673247145815002,
+    "Referrals": 0.035530438377424235,
+    "Search": 0.2791193339235421,
+    "Direct": 0.6788359039370003
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "zte",
+      "esitmatedValue": 26630,
+      "cpc": 0.2
+    },
+    {
+      "name": "中兴",
+      "esitmatedValue": 12370,
+      "cpc": null
+    },
+    {
+      "name": "zte corp",
+      "esitmatedValue": 3170,
+      "cpc": 0.16
+    },
+    {
+      "name": "zte corporation",
+      "esitmatedValue": 2220,
+      "cpc": 0.11
+    },
+    {
+      "name": "zte company",
+      "esitmatedValue": 1900,
+      "cpc": 0.17
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 727
+},
+{
+  "domain": "tcl.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "TCL USA | TVs, Sound Bars, Phones, Appliances",
+  "description": "TCL delivers meaningful experiences through thoughtful design and the latest technology, helping you enjoy more of the things you love.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=tcl.com&t=1&s=1&h=34b9dcb653a840fce9e0d2b899b2647067ce23a34dba17e188a0bb76dfd65241",
+  "globalRank": 7412,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 741
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 6037855,
+    "2026-02-01": 4813013,
+    "2026-03-01": 5214822
+  },
+  "bounceRate": "0.3716798643311151",
+  "pagesPerVisit": "7.742450245195237",
+  "visits": "5214822",
+  "timeOnSite": "318.66497173676186",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.34833338949941456
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.09117737885938035
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.05258710569406
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.032837381081103956
+    },
+    {
+      "Country": 586,
+      "CountryCode": "PK",
+      "Value": 0.029873301615422464
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.00846870344445937,
+    "Paid Referrals": 0.004286123313999037,
+    "Mail": 0.0003825159063575488,
+    "Referrals": 0.04132845645028268,
+    "Search": 0.4851229904648485,
+    "Direct": 0.46041121042003896
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "tcl",
+      "esitmatedValue": 336040,
+      "cpc": 0.28
+    },
+    {
+      "name": "tcl tv",
+      "esitmatedValue": 28020,
+      "cpc": 0.24
+    },
+    {
+      "name": "tcl c7k",
+      "esitmatedValue": 17700,
+      "cpc": 0.35
+    },
+    {
+      "name": "find my phone",
+      "esitmatedValue": 14140,
+      "cpc": 0.54
+    },
+    {
+      "name": "tcl テレビ",
+      "esitmatedValue": 13400,
+      "cpc": 0.13
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 741
+},
+{
+  "domain": "brainworks.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "404: This page could not be found",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=brainworks.co.kr&t=1&s=1&h=dfb7fcb57411f9e965c734b0d85e0ec0bc77ee447b3cea05468d10958c36d24d",
+  "globalRank": 13553601,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1184,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "ophir.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "�����ڷ���-�繫����ȭ��,�������ȭ��,�ϲ���ȭ��",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=ophir.co.kr&t=1&s=1&h=45277778a89d061927f1edbcdcadf8569903636ee5850d7c41eeb6da8ca872a7",
+  "globalRank": 6443538,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 317384
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 138,
+    "2026-03-01": 3073
+  },
+  "bounceRate": "0.34195617293061253",
+  "pagesPerVisit": "1.0789048439025246",
+  "visits": "3073",
+  "timeOnSite": "0",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.04213459890681638,
+    "Paid Referrals": 0.018355285145278035,
+    "Mail": 0.001240472711741473,
+    "Referrals": 0.16768903734411364,
+    "Search": 0.4197859133023312,
+    "Direct": 0.3474252708077917
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "도미솔시라시라",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "수지수양관",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "창원 97번 버스 시간표",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "구글 캘린더 시간표",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "거니버스 후마표창",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 317384
+},
+{
+  "domain": "careandco.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=careandco.co.kr&t=1&s=1&h=1558ae130ced7c6a19a33ba9a33ce5c94e746f50a384f3bbe5618bb52177764e",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "hyundai.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Hyundai USA: Cars, SUVs, & Electric Vehicles | Official Site",
+  "description": "The official Hyundai UK website. View the latest models, download a brochure, find your retailer and book a test drive.",
+  "category": "vehicles/automotive_industry",
+  "screenshot": "https://site-images.similarcdn.com/image?url=hyundai.com&t=1&s=1&h=7b1ee2e09bd1e18527ee060cc6f49fe91611100670c0678c441c5763f713d61c",
+  "globalRank": 2486,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 197
+  },
+  "categoryRank": "1",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 19330374,
+    "2026-02-01": 16745634,
+    "2026-03-01": 19757887
+  },
+  "bounceRate": "0.3742926521249414",
+  "pagesPerVisit": "3.855138710438954",
+  "visits": "19757887",
+  "timeOnSite": "105.12113608521636",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.38577512612351517
+    },
+    {
+      "Country": 792,
+      "CountryCode": "TR",
+      "Value": 0.07494804965762568
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.07198665098025964
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.058321479383206164
+    },
+    {
+      "Country": 36,
+      "CountryCode": "AU",
+      "Value": 0.046698023123936706
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.00619204216177843,
+    "Paid Referrals": 0.0166160862670365,
+    "Mail": 0.000396320596578673,
+    "Referrals": 0.06005808730609149,
+    "Search": 0.6186171144368471,
+    "Direct": 0.29812034923117114
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "hyundai",
+      "esitmatedValue": 656590,
+      "cpc": 0.79
+    },
+    {
+      "name": "현대자동차",
+      "esitmatedValue": 283190,
+      "cpc": null
+    },
+    {
+      "name": "hyundai tucson",
+      "esitmatedValue": 122320,
+      "cpc": 0.69
+    },
+    {
+      "name": "hyundai verna",
+      "esitmatedValue": 98590,
+      "cpc": 0.13
+    },
+    {
+      "name": "현대자동차 채용",
+      "esitmatedValue": 89510,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 197
+},
+{
+  "domain": "kia.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Data protection",
+  "description": "Sie haben allgemeine Fragen oder ein Anliegen an unseren Kundenservice? Setzen Sie sich mit Kia in Verbindung.",
+  "category": "vehicles/makes_and_models",
+  "screenshot": "https://site-images.similarcdn.com/image?url=kia.com&t=1&s=1&h=3f541754debf64c28ef7b7edbeca5e254c1ec2d403f9bcbea3c7ccacd19b1d68",
+  "globalRank": 1904,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 1756
+  },
+  "categoryRank": "11",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 25488905,
+    "2026-02-01": 22014670,
+    "2026-03-01": 23279831
+  },
+  "bounceRate": "0.45039952218604773",
+  "pagesPerVisit": "4.306409307662105",
+  "visits": "23279831",
+  "timeOnSite": "156.16861683970578",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.2327099938631371
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.18079675964406045
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.0575092593495496
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.04960562896669612
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.04718120322810676
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.007835306158764424,
+    "Paid Referrals": 0.01643164325820495,
+    "Mail": 0.00046128424311703297,
+    "Referrals": 0.04082514564555858,
+    "Search": 0.6557253149060153,
+    "Direct": 0.27872130578833293
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "kia",
+      "esitmatedValue": 1273780,
+      "cpc": 0.88
+    },
+    {
+      "name": "kia sportage",
+      "esitmatedValue": 246340,
+      "cpc": 0.63
+    },
+    {
+      "name": "kia seltos",
+      "esitmatedValue": 209120,
+      "cpc": 0.49
+    },
+    {
+      "name": "기아",
+      "esitmatedValue": 169900,
+      "cpc": 0.81
+    },
+    {
+      "name": "기아자동차",
+      "esitmatedValue": 156020,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 1756
+},
+{
+  "domain": "promlabs.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=promlabs.kr&t=1&s=1&h=f8da4b3328024c2e3a7812b680f4fa5e31e76702adb1ade311c771512bc2e156",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "nidec.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "NIDEC CORPORATION",
+  "description": "",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=nidec.com&t=1&s=1&h=4fa62f026882d8132321ab7163e9ef72586fb335af5d92d6a7c5b5b063c685d2",
+  "globalRank": 67495,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 5812
+  },
+  "categoryRank": "16",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 425945,
+    "2026-02-01": 414668,
+    "2026-03-01": 674143
+  },
+  "bounceRate": "0.38720311447823413",
+  "pagesPerVisit": "3.8218055480673905",
+  "visits": "674143",
+  "timeOnSite": "143.48286150177685",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.6990046089004648
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.07191263040760268
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.02173181098450391
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.020199411094223206
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.018863051197223868
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.005707716312344577,
+    "Paid Referrals": 0.007853098982785271,
+    "Mail": 0.0006836400059834361,
+    "Referrals": 0.049721072669703624,
+    "Search": 0.6161965230356401,
+    "Direct": 0.3198259257107473
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "ニデック",
+      "esitmatedValue": 211420,
+      "cpc": 1.53
+    },
+    {
+      "name": "nidec",
+      "esitmatedValue": 26220,
+      "cpc": 1.08
+    },
+    {
+      "name": "日本電産",
+      "esitmatedValue": 23560,
+      "cpc": null
+    },
+    {
+      "name": "二 デック",
+      "esitmatedValue": 13910,
+      "cpc": 1.51
+    },
+    {
+      "name": "ニデック 第三者委員会",
+      "esitmatedValue": 8410,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 5812
+},
+{
+  "domain": "reconlabs.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "RECON Labs: 리콘랩스",
+  "description": "AI 기반 창작 프로세스로 디지털 콘텐츠 산업을 혁신하는 리콘랩스입니다.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=reconlabs.ai&t=1&s=1&h=43aec612338f9930035b8995a67a52dc1fbf365a9a3dd3ec580f2e452141f56d",
+  "globalRank": 5100854,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 168224
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 4568,
+    "2026-02-01": 3822,
+    "2026-03-01": 3445
+  },
+  "bounceRate": "0.3230830265772736",
+  "pagesPerVisit": "1.556077987442742",
+  "visits": "3445",
+  "timeOnSite": "21.43018497121553",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1.0000000000000002
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.05430089382116694,
+    "Paid Referrals": 0.01672750084059684,
+    "Mail": 0.00021085172498461167,
+    "Referrals": 0.12162868896582686,
+    "Search": 0.49271222499596684,
+    "Direct": 0.31441983965145787
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "리콘랩스",
+      "esitmatedValue": 110,
+      "cpc": null
+    },
+    {
+      "name": "주식회사 추론",
+      "esitmatedValue": 80,
+      "cpc": null
+    },
+    {
+      "name": "recon",
+      "esitmatedValue": 0,
+      "cpc": 4.23
+    },
+    {
+      "name": "recon ai",
+      "esitmatedValue": 0,
+      "cpc": 0.29
+    },
+    {
+      "name": "(주)추론 사업자등록번호",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 168224
+},
+{
+  "domain": "rohm.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "contactus",
+  "description": "rohm designs and manufactures integrated circuits (ics), semiconductors, and other electronic components. these components find a home in the dynamic and ever-growing wireless, computer, automotive, and consumer electronics markets. some of the world's best equipment uses rohm products.",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=rohm.com&t=1&s=1&h=d0a1b6743e77ec4bd1dc5bc16174a5a2b04bf6440bd5291d5ff9f61f3b3ac9f6",
+  "globalRank": 99032,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 16099
+  },
+  "categoryRank": "550",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 535182,
+    "2026-02-01": 464369,
+    "2026-03-01": 469841
+  },
+  "bounceRate": "0.51025561603495",
+  "pagesPerVisit": "2.9633837163059673",
+  "visits": "469841",
+  "timeOnSite": "118.80342100876967",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.44881351671046954
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.1291621286600448
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.04941142428331138
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.041087778525958324
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.035958133176578144
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.00911867225294621,
+    "Paid Referrals": 0.007978108730776735,
+    "Mail": 0.0004662147889533048,
+    "Referrals": 0.20657936109945627,
+    "Search": 0.4635193714408526,
+    "Direct": 0.31233827168682493
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "ローム",
+      "esitmatedValue": 4250,
+      "cpc": 1.74
+    },
+    {
+      "name": "rohm",
+      "esitmatedValue": 3150,
+      "cpc": 1.98
+    },
+    {
+      "name": "ロームアポロ",
+      "esitmatedValue": 1390,
+      "cpc": null
+    },
+    {
+      "name": "rohm semiconductor",
+      "esitmatedValue": 860,
+      "cpc": 2.46
+    },
+    {
+      "name": "ローム・アポロ",
+      "esitmatedValue": 670,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 16099
+},
+{
+  "domain": "dasiwave.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Dasiwave | 다시물결",
+  "description": "스튜디오 다시물결",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=dasiwave.com&t=1&s=1&h=6bf11b73845c125aa547e23b0fe51108daf2eea113be8c351c4ce31afb00fd11",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "skhynix.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "SK hynix",
+  "description": "",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=skhynix.com&t=1&s=1&h=5eeab6f1ad3d87c887b1d6399aced1edf261ff2b50215669ad1b11dd881eee3b",
+  "globalRank": 33176,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 1081
+  },
+  "categoryRank": "1",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1310646,
+    "2026-02-01": 1033067,
+    "2026-03-01": 1358593
+  },
+  "bounceRate": "0.24480939608193622",
+  "pagesPerVisit": "6.858192012426908",
+  "visits": "1358593",
+  "timeOnSite": "521.5677205158959",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.8564340387563922
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.022797636374239563
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.0213917193849283
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.01989596751590315
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.00679460075237976
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.003567526395205521,
+    "Paid Referrals": 0.0036587925775369325,
+    "Mail": 0.00015046976608359792,
+    "Referrals": 0.038577174477465476,
+    "Search": 0.34644017472570565,
+    "Direct": 0.6075537149144093
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "sk hynix",
+      "esitmatedValue": 53120,
+      "cpc": 0.42
+    },
+    {
+      "name": "sk하이닉스",
+      "esitmatedValue": 14910,
+      "cpc": null
+    },
+    {
+      "name": "하이닉스 채용",
+      "esitmatedValue": 13010,
+      "cpc": 0.35
+    },
+    {
+      "name": "sk하이닉스 채용",
+      "esitmatedValue": 9760,
+      "cpc": null
+    },
+    {
+      "name": "하이닉스",
+      "esitmatedValue": 6760,
+      "cpc": 0.71
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 1081
+},
+{
+  "domain": "ekonology.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=ekonology.com&t=1&s=1&h=3e90ce05f19352f98326c54e5a8ce09325ed51a88f2517f077f7e1a8a5991bb0",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 726
+  },
+  "bounceRate": "0.37673990897780113",
+  "pagesPerVisit": "1.2691140977879245",
+  "visits": "726",
+  "timeOnSite": "11.776758794361394",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": null,
+    "Paid Referrals": null,
+    "Mail": null,
+    "Referrals": null,
+    "Search": 0,
+    "Direct": 1
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "에코테크놀로지",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "ekonology",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "rfmorecom.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "the #1 source for domain names | hugedomains",
+  "description": "hugedomains is the world leader in premium domains names. find the perfect domain today.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=rfmorecom.com&t=1&s=1&h=f6c93193e7cde685a60c89479b993d315c72088fb2e0556ced9fdc02019811f5",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "samsungdisplay.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "삼성디스플레이",
+  "description": "삼성디스플레이의 기업정보, 제품, 미디어센터, 인재, 채용, 고객지원, 블로그, 페이스북에 대해 소개합니다.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=samsungdisplay.com&t=1&s=1&h=fbd94b0285325d8f4ecea5275f4224688f11479a39f6f1b3523c2cb010b59099",
+  "globalRank": 214402,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 8544
+  },
+  "categoryRank": "18",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 199415,
+    "2026-02-01": 150969,
+    "2026-03-01": 181267
+  },
+  "bounceRate": "0.43872918656667004",
+  "pagesPerVisit": "3.0571218009628214",
+  "visits": "181267",
+  "timeOnSite": "96.38900625126546",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.7834125935207057
+    },
+    {
+      "Country": 704,
+      "CountryCode": "VN",
+      "Value": 0.03931832241103789
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.030029714154095954
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.018381298302961636
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.008768072271485329
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.01643039041664454,
+    "Paid Referrals": 0.005573761628865753,
+    "Mail": 0.0002263196544100459,
+    "Referrals": 0.04506740082005751,
+    "Search": 0.5831148525910794,
+    "Direct": 0.34930898048676445
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "삼성디스플레이",
+      "esitmatedValue": 3200,
+      "cpc": null
+    },
+    {
+      "name": "삼성디스플레이 내방신청",
+      "esitmatedValue": 1680,
+      "cpc": null
+    },
+    {
+      "name": "프라이버시 디스플레이",
+      "esitmatedValue": 840,
+      "cpc": null
+    },
+    {
+      "name": "samsung display",
+      "esitmatedValue": 810,
+      "cpc": 0.53
+    },
+    {
+      "name": "매직아이",
+      "esitmatedValue": 620,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 8544
+},
+{
+  "domain": "lginnotek.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "LG이노텍",
+  "description": "내일을 위한 혁신의 시작, LG이노텍은 글로벌 소재·부품기업으로 광학, 전장, 기판, 전자 분야에서 세계 시장을 리딩하고 있습니다.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=lginnotek.com&t=1&s=1&h=36aa764cfd929752dca8bc1f2d89fed609dba0efab21b3dd8775538a991a4762",
+  "globalRank": 424777,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 13741
+  },
+  "categoryRank": "93",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 42908,
+    "2026-02-01": 42780,
+    "2026-03-01": 65576
+  },
+  "bounceRate": "0.3573497221608081",
+  "pagesPerVisit": "3.9343990131845255",
+  "visits": "65576",
+  "timeOnSite": "271.12273376404784",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.8958278645306011
+    },
+    {
+      "Country": 704,
+      "CountryCode": "VN",
+      "Value": 0.053127358577226905
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.024405480105534498
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.0112643322045904
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.008591574562866395
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0059589262886313036,
+    "Paid Referrals": 0.003220849429969937,
+    "Mail": 0.00013955822536515825,
+    "Referrals": 0.10802535344273953,
+    "Search": 0.4820707077626709,
+    "Direct": 0.40039587022749673
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "lg이노텍",
+      "esitmatedValue": 2000,
+      "cpc": null
+    },
+    {
+      "name": "lg innotek",
+      "esitmatedValue": 730,
+      "cpc": 1
+    },
+    {
+      "name": "lg 이노텍",
+      "esitmatedValue": 620,
+      "cpc": 0.67
+    },
+    {
+      "name": "lg이노텍 광학카메라 500만화소",
+      "esitmatedValue": 300,
+      "cpc": null
+    },
+    {
+      "name": "lg 이노텍 cloud",
+      "esitmatedValue": 220,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 13741
+},
+{
+  "domain": "ricoh.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "FAQ | Global | Ricoh",
+  "description": "Ricoh Investor Relations.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=ricoh.com&t=1&s=1&h=27b3fc8fe2306338b8cff3523e3b6040015a10a0cca2e0cd29443d9a0c9d2c5d",
+  "globalRank": 3303,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 331
+  },
+  "categoryRank": "1",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 10442677,
+    "2026-02-01": 10031587,
+    "2026-03-01": 13667349
+  },
+  "bounceRate": "0.31804467772100103",
+  "pagesPerVisit": "7.449884085531107",
+  "visits": "13667349",
+  "timeOnSite": "577.2982725460436",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.8602010861298445
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.057281631280342214
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.018336545295110307
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.004131047252811505
+    },
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.003968213879676252
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0018615709864759978,
+    "Paid Referrals": 0.01373190672584397,
+    "Mail": 0.0005834774818794767,
+    "Referrals": 0.1429378675990569,
+    "Search": 0.29427841460772547,
+    "Direct": 0.5466067625990136
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "scansnap",
+      "esitmatedValue": 31910,
+      "cpc": 0.86
+    },
+    {
+      "name": "scansnap home",
+      "esitmatedValue": 22620,
+      "cpc": 1.03
+    },
+    {
+      "name": "リコージャパン",
+      "esitmatedValue": 20520,
+      "cpc": null
+    },
+    {
+      "name": "pfu",
+      "esitmatedValue": 15180,
+      "cpc": 0.46
+    },
+    {
+      "name": "スキャンスナップ",
+      "esitmatedValue": 11520,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 331
+},
+{
+  "domain": "yamaha.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Corporate Site - Yamaha Corporation",
+  "description": "Yamaha Corporation",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=yamaha.com&t=1&s=1&h=5dccfe19ecaa278e8f3aed5437c94726c9cd818a36b06769d5c7b34c83a012a2",
+  "globalRank": 7961,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 1112
+  },
+  "categoryRank": "15",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 7541551,
+    "2026-02-01": 6133952,
+    "2026-03-01": 6735644
+  },
+  "bounceRate": "0.4378929903555667",
+  "pagesPerVisit": "3.795245925210163",
+  "visits": "6735644",
+  "timeOnSite": "201.954845276589",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.4845087467564797
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.13468495030578254
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.02440102110466264
+    },
+    {
+      "Country": 250,
+      "CountryCode": "FR",
+      "Value": 0.020255538153082578
+    },
+    {
+      "Country": 36,
+      "CountryCode": "AU",
+      "Value": 0.01974649656203402
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.012897469213302279,
+    "Paid Referrals": 0.008478390596538312,
+    "Mail": 0.0006605934279206844,
+    "Referrals": 0.06307473754613602,
+    "Search": 0.5957056182500264,
+    "Direct": 0.3191831909654524
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "yamaha",
+      "esitmatedValue": 148200,
+      "cpc": 0.2
+    },
+    {
+      "name": "ヤマハ",
+      "esitmatedValue": 45820,
+      "cpc": 0.76
+    },
+    {
+      "name": "yamaha guitars",
+      "esitmatedValue": 14180,
+      "cpc": 0.23
+    },
+    {
+      "name": "パシフィカ",
+      "esitmatedValue": 13780,
+      "cpc": 0.08
+    },
+    {
+      "name": "chord gitar",
+      "esitmatedValue": 11630,
+      "cpc": 0.32
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 1112
+},
+{
+  "domain": "4inlab.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=4inlab.com&t=1&s=1&h=cf888824c1b0d2991473def94f2631c905d5b1755833b2f1262300028050b398",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "a4lab.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=a4lab.co.kr&t=1&s=1&h=e00000882ac5b8016d9fcb98533d5443cc4ad53fce19e76df79da1fcaacdd3cc",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "sierrabase.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Sierra BASE",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=sierrabase.co.kr&t=1&s=1&h=00ebb315eb7111baccbb1fba08df5bdc67735206e2b08f5ccc8f62b0a33f6306",
+  "globalRank": 3409255,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 102041
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 6347,
+    "2026-02-01": 5317,
+    "2026-03-01": 5491
+  },
+  "bounceRate": "0.3559796111315365",
+  "pagesPerVisit": "2.1295147049520797",
+  "visits": "5491",
+  "timeOnSite": "77.71484921097779",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.053343274515586,
+    "Paid Referrals": 0.016793689174728763,
+    "Mail": 0.00022601997816265595,
+    "Referrals": 0.11574995477851906,
+    "Search": 0.4925188149527184,
+    "Direct": 0.32136824660028507
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "시에라베이스",
+      "esitmatedValue": 420,
+      "cpc": null
+    },
+    {
+      "name": "sierra",
+      "esitmatedValue": 0,
+      "cpc": 0.47
+    },
+    {
+      "name": "시에라",
+      "esitmatedValue": 0,
+      "cpc": 0.41
+    },
+    {
+      "name": "시에라 스타트업",
+      "esitmatedValue": 0,
+      "cpc": null
+    },
+    {
+      "name": "시에라 스타트업 투자",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 102041
+},
+{
+  "domain": "panasonic.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Create Today, Enrich Tomorrow",
+  "description": "At Panasonic, we’re working to change the way we power our homes, our travel, our businesses - and our lives.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=panasonic.com&t=1&s=1&h=dfa3d6f6f55db08fc2ff9b8949fde046db9f164c57089fd5a55754526f82a5ab",
+  "globalRank": 4029,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 546
+  },
+  "categoryRank": "7",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 12749340,
+    "2026-02-01": 11045020,
+    "2026-03-01": 12316697
+  },
+  "bounceRate": "0.49350810467416045",
+  "pagesPerVisit": "4.243329963369987",
+  "visits": "12316697",
+  "timeOnSite": "213.71395871947453",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.5971106291361465
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.09351887372376046
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.04045350431508467
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.03885965115356697
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.022753104638249987
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.005912188497161036,
+    "Paid Referrals": 0.029990642235986333,
+    "Mail": 0.0009721225166943636,
+    "Referrals": 0.07392994608854407,
+    "Search": 0.4943217278660258,
+    "Direct": 0.3948733727953222
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "panasonic",
+      "esitmatedValue": 230890,
+      "cpc": 0.4
+    },
+    {
+      "name": "パナソニック",
+      "esitmatedValue": 75560,
+      "cpc": 0.32
+    },
+    {
+      "name": "パナソニック 電動自転車",
+      "esitmatedValue": 34180,
+      "cpc": null
+    },
+    {
+      "name": "panasonic ac",
+      "esitmatedValue": 31450,
+      "cpc": 0.24
+    },
+    {
+      "name": "パナソニックコネクト",
+      "esitmatedValue": 20710,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 546
+},
+{
+  "domain": "acer.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Acer Laptops, Desktops, Chromebooks, Monitors & Projectors | Acer United States",
+  "description": "Shop the latest Acer products, from Chromebooks, laptops, monitors, desktop PCs, and projectors for office, home, and entertainment use.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=acer.com&t=1&s=1&h=bd3318b650ade2933c7062c4deeb53d27ede9aef353789ee4473da5ffb5861d0",
+  "globalRank": 8167,
+  "countryRank": {
+    "Country": 356,
+    "CountryCode": "IN",
+    "Rank": 3347
+  },
+  "categoryRank": "8",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 6973228,
+    "2026-02-01": 5995328,
+    "2026-03-01": 6731777
+  },
+  "bounceRate": "0.44947128389446883",
+  "pagesPerVisit": "3.5091666317176893",
+  "visits": "6731777",
+  "timeOnSite": "184.7194014269532",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.13844596438470733
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.12236701256185185
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.06885948162510729
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.049217559366035724
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.04101526630546613
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.007634805358517566,
+    "Paid Referrals": 0.008873489187799934,
+    "Mail": 0.00027811992588399855,
+    "Referrals": 0.04004859977716409,
+    "Search": 0.6640795320859678,
+    "Direct": 0.2790854536646667
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "acer",
+      "esitmatedValue": 335920,
+      "cpc": 0.56
+    },
+    {
+      "name": "acer nitro v15",
+      "esitmatedValue": 26650,
+      "cpc": 0.15
+    },
+    {
+      "name": "acer drivers",
+      "esitmatedValue": 26320,
+      "cpc": 0.41
+    },
+    {
+      "name": "acer nitro 5",
+      "esitmatedValue": 23100,
+      "cpc": 0.21
+    },
+    {
+      "name": "acer support",
+      "esitmatedValue": 22110,
+      "cpc": 1.49
+    }
+  ],
+  "countryRank.country": 356,
+  "countryRank.countryCode": "IN",
+  "countryRank.rank": 3347
+},
+{
+  "domain": "nikon.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Nikon",
+  "description": "The website of Nikon Corporation. Based on our corporate philosophy of \"Trustworthiness and Creativity\", Nikon provides innovative products and services, contributing to an abundant future for humanity.",
+  "category": "hobbies_and_leisure/photography",
+  "screenshot": "https://site-images.similarcdn.com/image?url=nikon.com&t=1&s=1&h=6e38651f081278c9d369d5dd07f248dee2df55279453e701458e551055f74e96",
+  "globalRank": 25916,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 2507
+  },
+  "categoryRank": "7",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1906350,
+    "2026-02-01": 1646134,
+    "2026-03-01": 1869981
+  },
+  "bounceRate": "0.47333713649618553",
+  "pagesPerVisit": "4.084963890358497",
+  "visits": "1869981",
+  "timeOnSite": "166.36766628382384",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.6807604710971022
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.05806699896055418
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.05708134050212116
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.02290086790095369
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.009759427961188238
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.013462007556913503,
+    "Paid Referrals": 0.009432341224309566,
+    "Mail": 0.0011756745217424323,
+    "Referrals": 0.0694845588806972,
+    "Search": 0.5215755104668751,
+    "Direct": 0.38486990734923476
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "nikon",
+      "esitmatedValue": 69950,
+      "cpc": 0.35
+    },
+    {
+      "name": "ニコン",
+      "esitmatedValue": 61700,
+      "cpc": 0.47
+    },
+    {
+      "name": "니콘",
+      "esitmatedValue": 12480,
+      "cpc": 0.59
+    },
+    {
+      "name": "nikon zr",
+      "esitmatedValue": 9350,
+      "cpc": 0.4
+    },
+    {
+      "name": "z50ii",
+      "esitmatedValue": 6700,
+      "cpc": 0.28
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 2507
+},
+{
+  "domain": "auo.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "AUO Facts - AUO",
+  "description": "AUO is an enthusiastic, technology-driven company, delivering products and solution services that advance the frontier of innovation for display, system solutions, industrial intelligence, healthcare and energy.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=auo.com&t=1&s=1&h=27eaf74b196d9b3f60c8333886e2365c7a5d32fbfa62cf4602e7396319a2b69d",
+  "globalRank": 199702,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 3736
+  },
+  "categoryRank": "33",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 244414,
+    "2026-02-01": 226185,
+    "2026-03-01": 231257
+  },
+  "bounceRate": "0.2910136169468492",
+  "pagesPerVisit": "2.6500633440574113",
+  "visits": "231257",
+  "timeOnSite": "148.70659277051297",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.5087239866148545
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.37597131556220875
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.026105184848288977
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.012930868365215927
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.011157347375493995
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.008866377435864685,
+    "Paid Referrals": 0.005142994244813282,
+    "Mail": 0.00035438371486920436,
+    "Referrals": 0.03901995478746247,
+    "Search": 0.3967686134631658,
+    "Direct": 0.5492985551237444
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "auo",
+      "esitmatedValue": 5120,
+      "cpc": 2.24
+    },
+    {
+      "name": "友達",
+      "esitmatedValue": 3800,
+      "cpc": 1.38
+    },
+    {
+      "name": "友達esg",
+      "esitmatedValue": 800,
+      "cpc": null
+    },
+    {
+      "name": "友達光電",
+      "esitmatedValue": 740,
+      "cpc": null
+    },
+    {
+      "name": "auo rcs",
+      "esitmatedValue": 620,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 3736
+},
+{
+  "domain": "jvckenwood.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "JVCケンウッドの培ってきた強み | 株式会社JVCケンウッド",
+  "description": "株式会社JVCケンウッドのグローバルブランド戦略を掲載しています。",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=jvckenwood.com&t=1&s=1&h=404d39fc1679b73eea9ffb6cbf4992804fe4535489cc9d4ee0a35e629f68cd5f",
+  "globalRank": 71189,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 5677
+  },
+  "categoryRank": "86",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 594259,
+    "2026-02-01": 502000,
+    "2026-03-01": 662715
+  },
+  "bounceRate": "0.4499961359414211",
+  "pagesPerVisit": "3.3240311168216112",
+  "visits": "662715",
+  "timeOnSite": "159.08758721104837",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.7953831901974391
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.049859033237784955
+    },
+    {
+      "Country": 764,
+      "CountryCode": "TH",
+      "Value": 0.009568251628993038
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.008431103625775146
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.0077833153037051754
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.007023113524492457,
+    "Paid Referrals": 0.010677977378835716,
+    "Mail": 0.0009167255802662038,
+    "Referrals": 0.10815438634806024,
+    "Search": 0.6254105775878056,
+    "Direct": 0.2478172195785765
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "jvcケンウッド",
+      "esitmatedValue": 12730,
+      "cpc": null
+    },
+    {
+      "name": "自転車 イヤホン",
+      "esitmatedValue": 4320,
+      "cpc": 0.22
+    },
+    {
+      "name": "カーナビ",
+      "esitmatedValue": 2790,
+      "cpc": 0.14
+    },
+    {
+      "name": "イヤホン",
+      "esitmatedValue": 1890,
+      "cpc": 0.16
+    },
+    {
+      "name": "ケンウッド",
+      "esitmatedValue": 1640,
+      "cpc": 0.29
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 5677
+},
+{
+  "domain": "sonnet.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "소네트 SONNET | 국내 1위 웨딩 속옷 브랜드, 확실한 선택은 소네트 브라이드.",
+  "description": "소네트 SONNET 공식 쇼핑몰 | 신부를 위한 웨딩 란제리부터 고급스러운 프리미엄 속옷까지! 우아한 디자인과 완벽한 핏을 갖춘 브라이덜 란제리 컬렉션을 만나보세요. 맞춤 상담 & 신상품 할인 진행 중!",
+  "category": "e-commerce_and_shopping/e-commerce_and_shopping",
+  "screenshot": "https://site-images.similarcdn.com/image?url=sonnet.co.kr&t=1&s=1&h=14f2f6dbbe6d60acc620725a8a0c7fae5aad851070768527a479b52aa37058b7",
+  "globalRank": 3693764,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 115728
+  },
+  "categoryRank": "8368",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 14229,
+    "2026-02-01": 4715,
+    "2026-03-01": 4992
+  },
+  "bounceRate": "0.34757206538443697",
+  "pagesPerVisit": "1.745533538224038",
+  "visits": "4992",
+  "timeOnSite": "22.338872245555876",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0550783660829159,
+    "Paid Referrals": 0.016356641636366912,
+    "Mail": 0.0002224487666316309,
+    "Referrals": 0.12150542842235874,
+    "Search": 0.49243403179032513,
+    "Direct": 0.3144030833014016
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "소네트 누브라",
+      "esitmatedValue": 140,
+      "cpc": null
+    },
+    {
+      "name": "브라이드!",
+      "esitmatedValue": 40,
+      "cpc": null
+    },
+    {
+      "name": "sonnet",
+      "esitmatedValue": 30,
+      "cpc": 2.17
+    },
+    {
+      "name": "소네트",
+      "esitmatedValue": 30,
+      "cpc": 2.87
+    },
+    {
+      "name": "누브라",
+      "esitmatedValue": 10,
+      "cpc": 1.33
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 115728
+},
+{
+  "domain": "spaceliintech.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "SPACELIINTECH",
+  "description": "SpaceLiinTech-Contact",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=spaceliintech.com&t=1&s=1&h=5e754d1d976dea7b09508c283df51800e8e2a71460aaae0eed10d635b42fd6cd",
+  "globalRank": 6475026,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 238782
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 2561,
+    "2026-02-01": 1824,
+    "2026-03-01": 2891
+  },
+  "bounceRate": "0.3579509563014798",
+  "pagesPerVisit": "1.2210090785972616",
+  "visits": "2891",
+  "timeOnSite": "11.148129243398976",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.9999999999999999
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.04344606989995478,
+    "Paid Referrals": 0.0173943664619993,
+    "Mail": 0.001003051436435759,
+    "Referrals": 0.15214306528800445,
+    "Search": 0.4149618287153569,
+    "Direct": 0.3684487865902497
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "스페이스린텍",
+      "esitmatedValue": 20,
+      "cpc": null
+    },
+    {
+      "name": "스페이스린텍 로고",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 238782
+},
+{
+  "domain": "synclink.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=synclink.kr&t=1&s=1&h=45a24469ebd6f983a8835c5ef689341f2a1d676ee585d82bfe4f1788fed1137f",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "amplab.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=amplab.ai&t=1&s=1&h=42bb9a781a42b645400ae56fe36394313f1086c5fd7ae9e385a36d111fa80c53",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "deltaww.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Delta Industrial Automation",
+  "description": "Drive / Motion / Control / Field Devices / Robot / Software",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=deltaww.com&t=1&s=1&h=1aa8d6c966bde854894857a3816622f95f28d0ec07ee5829d32b4c2ab50264f4",
+  "globalRank": 30873,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 744
+  },
+  "categoryRank": "7",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1157156,
+    "2026-02-01": 848517,
+    "2026-03-01": 1173936
+  },
+  "bounceRate": "0.25827762057723486",
+  "pagesPerVisit": "10.716604204759468",
+  "visits": "1173936",
+  "timeOnSite": "639.4884067060378",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.45541922090646053
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.2813293625803699
+    },
+    {
+      "Country": 703,
+      "CountryCode": "SK",
+      "Value": 0.05096123041446728
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.034587679059273416
+    },
+    {
+      "Country": 528,
+      "CountryCode": "NL",
+      "Value": 0.019679586953653325
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0031957106226833706,
+    "Paid Referrals": 0.009098261345813163,
+    "Mail": 0.00038771686067402464,
+    "Referrals": 0.057195157541708425,
+    "Search": 0.39038341331691,
+    "Direct": 0.5397033474285339
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "delta",
+      "esitmatedValue": 7850,
+      "cpc": 0.35
+    },
+    {
+      "name": "delta electronics",
+      "esitmatedValue": 7670,
+      "cpc": 0.77
+    },
+    {
+      "name": "台達電",
+      "esitmatedValue": 7060,
+      "cpc": null
+    },
+    {
+      "name": "マイデルタソーラークラウド",
+      "esitmatedValue": 2040,
+      "cpc": null
+    },
+    {
+      "name": "delta download",
+      "esitmatedValue": 1310,
+      "cpc": 0.14
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 744
+},
+{
+  "domain": "anabolife.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "아나볼라이프 공식 온라인 스토어 | ANABOLIFE NUTRITION & HEALTHCARE",
+  "description": "More Than Just Nutrition, Designed For Your Wellness. 아나볼라이프는 단순한 영양을 넘어, 일상을 위한 지속가능한 웰니스를 제안합니다.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=anabolife.com&t=1&s=1&h=339341835c929480fd6a137693fde379e6aa0023aca1131a4729303054f4d8f1",
+  "globalRank": 6885268,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 265264
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3331,
+    "2026-02-01": 2757,
+    "2026-03-01": 2441
+  },
+  "bounceRate": "0.39533052728626467",
+  "pagesPerVisit": "1.5190347651633536",
+  "visits": "2441",
+  "timeOnSite": "23.432543957843016",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.9603998057237572
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.03960019427624286
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.14275472594217528,
+    "Paid Referrals": 0.014594501437477156,
+    "Mail": 0.00023292405268790395,
+    "Referrals": 0.10139149776597076,
+    "Search": 0.31205842814354257,
+    "Direct": 0.42856261423154157
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "anabolife korea",
+      "esitmatedValue": 40,
+      "cpc": null
+    },
+    {
+      "name": "인터벌 유산소 단백질 합성",
+      "esitmatedValue": 30,
+      "cpc": null
+    },
+    {
+      "name": "단백질 신장",
+      "esitmatedValue": 10,
+      "cpc": null
+    },
+    {
+      "name": "탄수화물 사이클링",
+      "esitmatedValue": 10,
+      "cpc": null
+    },
+    {
+      "name": "당 탄수화물 지방 비교 예금",
+      "esitmatedValue": 10,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 265264
+},
+{
+  "domain": "tnlhealthcare.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=tnlhealthcare.com&t=1&s=1&h=13824093df5545dea937637fccb32dfcdafa283048fffc4543eefe630ccd437f",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "omron.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Supply Chain Management",
+  "description": "At OMRON SINIC X, we will promptly grasp the signs of transitions in the world and social issues, and create essential research questions and attractive research issues that will be the bottleneck of the solution. We will proceed with research based on the belief that by sharing research issues rooted in social issues in the community consists of academia and industry, we can achieve a great impact on moving society and innovating people's lifestyles.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=omron.com&t=1&s=1&h=de7034d12968088a0958775ab86b7cc8c78b28bd4ae51099acb786a7efed1293",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 918932,
+    "2026-02-01": 859103,
+    "2026-03-01": 942465
+  },
+  "bounceRate": "0.4747959659514961",
+  "pagesPerVisit": "2.816827925605232",
+  "visits": "942465",
+  "timeOnSite": "158.73370407495005",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.5101074845001431
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.12254879707257042
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.0999334364083474
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.022251784670857873
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.020076793002146567
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.006697732026900322,
+    "Paid Referrals": 0.02253284840421219,
+    "Mail": 0.000646607599646387,
+    "Referrals": 0.06805220136791527,
+    "Search": 0.5792267353806466,
+    "Direct": 0.32284387522046665
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "オムロン",
+      "esitmatedValue": 82570,
+      "cpc": 0.37
+    },
+    {
+      "name": "omron",
+      "esitmatedValue": 22440,
+      "cpc": 0.35
+    },
+    {
+      "name": "オムロン 公式ホームページ",
+      "esitmatedValue": 9750,
+      "cpc": null
+    },
+    {
+      "name": "お むろん",
+      "esitmatedValue": 3960,
+      "cpc": 0.38
+    },
+    {
+      "name": "omron ups",
+      "esitmatedValue": 3040,
+      "cpc": 1.1
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "tab.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=tab.co.kr&t=1&s=1&h=681203a45918bf6d0383d3ca084ae9518b23554a33e0676bc0d463c067ea40e0",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "advantech.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Things You Need to Know About Cybersecurity – Why It Matters",
+  "description": "AMAX series combines real-time control with EtherCAT connectivity, offering various form factors with expandable I/O and CODESYS integration.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=advantech.com&t=1&s=1&h=f061c9e40bce311b8449fac170b66026fbeaca60d4c012dbb6c6f5f9b3e4fb48",
+  "globalRank": 83525,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 3051
+  },
+  "categoryRank": "29",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 594636,
+    "2026-02-01": 496362,
+    "2026-03-01": 543801
+  },
+  "bounceRate": "0.4621808031676502",
+  "pagesPerVisit": "3.6152236549177283",
+  "visits": "543801",
+  "timeOnSite": "154.19877285930917",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.25604791244655223
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.14625199719850265
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.12340969040658085
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.05234501089389752
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.05152148388299299
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.008698880088766637,
+    "Paid Referrals": 0.01094077107695667,
+    "Mail": 0.0004893081528110428,
+    "Referrals": 0.06253053224093291,
+    "Search": 0.5525243467411807,
+    "Direct": 0.36481616169928816
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "advantech",
+      "esitmatedValue": 11570,
+      "cpc": 1.63
+    },
+    {
+      "name": "研華",
+      "esitmatedValue": 7480,
+      "cpc": null
+    },
+    {
+      "name": "アドバンテック",
+      "esitmatedValue": 1010,
+      "cpc": 1.34
+    },
+    {
+      "name": "mic-3329",
+      "esitmatedValue": 960,
+      "cpc": null
+    },
+    {
+      "name": "afe-r360",
+      "esitmatedValue": 850,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 3051
+},
+{
+  "domain": "pegatroncorp.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "PEGATRON 和碩聯合科技",
+  "description": "PEGATRON 和碩聯合科技",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=pegatroncorp.com&t=1&s=1&h=30a50741c96c425b445b6c99ec6c7f44293d6a0e950604bf0f12fe8e272f5e38",
+  "globalRank": 370957,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 9197
+  },
+  "categoryRank": "89",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 352728,
+    "2026-02-01": 230679,
+    "2026-03-01": 66919
+  },
+  "bounceRate": "0.34868550684993355",
+  "pagesPerVisit": "5.520558638002429",
+  "visits": "66919",
+  "timeOnSite": "329.2055160220936",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.46171066322803545
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.1420931158764111
+    },
+    {
+      "Country": 360,
+      "CountryCode": "ID",
+      "Value": 0.12259708900586257
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.0587094508658521
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.0380311651171999
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.02598338544801312,
+    "Paid Referrals": 0.008210328940590173,
+    "Mail": 0.0006308365117703277,
+    "Referrals": 0.05603310405343546,
+    "Search": 0.47160420598538266,
+    "Direct": 0.43698061198884064
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "pegatron",
+      "esitmatedValue": 1590,
+      "cpc": 0.09
+    },
+    {
+      "name": "和碩",
+      "esitmatedValue": 520,
+      "cpc": null
+    },
+    {
+      "name": "pegatron corporation",
+      "esitmatedValue": 390,
+      "cpc": null
+    },
+    {
+      "name": "drive pegatron",
+      "esitmatedValue": 200,
+      "cpc": null
+    },
+    {
+      "name": "pegatron eugene team",
+      "esitmatedValue": 170,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 9197
+},
+{
+  "domain": "haechitech.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Haechitech",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=haechitech.com&t=1&s=1&h=189385fcf99a5ce12d732dec46efa0768d90133b6f1b88046f722d88426a41d0",
+  "globalRank": 9317402,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 2157,
+    "2026-02-01": 65,
+    "2026-03-01": 319
+  },
+  "bounceRate": "1",
+  "pagesPerVisit": "1",
+  "visits": "319",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "6, seolleung-ro 85-gil, gangnam-gu, south korea zip code",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "asentech.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=asentech.co.kr&t=1&s=1&h=71e4ddcb534861e2f93e5254fa7f2c84e1df18a99cdad2673091dce322cd2165",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "epson.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Epson Global Portal",
+  "description": "",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=epson.com&t=1&s=1&h=49ff1d2ad07865968b271ef1808a9e2577e3f9470599e6ab41aec66a0decfd02",
+  "globalRank": 7596,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 3440
+  },
+  "categoryRank": "115",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 7242287,
+    "2026-02-01": 7027310,
+    "2026-03-01": 7613784
+  },
+  "bounceRate": "0.3928882860260158",
+  "pagesPerVisit": "3.076854313467118",
+  "visits": "7613784",
+  "timeOnSite": "153.04288900752482",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.3184746239736084
+    },
+    {
+      "Country": 360,
+      "CountryCode": "ID",
+      "Value": 0.11912747494362047
+    },
+    {
+      "Country": 608,
+      "CountryCode": "PH",
+      "Value": 0.06927586058601291
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.06892553851123949
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.05944113075417061
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.004522935583725284,
+    "Paid Referrals": 0.00513375730351101,
+    "Mail": 0.0004680607738816121,
+    "Referrals": 0.04270771370028606,
+    "Search": 0.49558223283837355,
+    "Direct": 0.45158529980007467
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "epson",
+      "esitmatedValue": 44410,
+      "cpc": 0.52
+    },
+    {
+      "name": "epson scansmart",
+      "esitmatedValue": 25800,
+      "cpc": 1.33
+    },
+    {
+      "name": "epson printer drivers",
+      "esitmatedValue": 14090,
+      "cpc": 1.38
+    },
+    {
+      "name": "epson support",
+      "esitmatedValue": 12640,
+      "cpc": 3.13
+    },
+    {
+      "name": "epson l3210 driver",
+      "esitmatedValue": 11980,
+      "cpc": 0.17
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 3440
+},
+{
+  "domain": "ungtech.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=ungtech.com&t=1&s=1&h=4488f2e0ee7069d0a031748b939246a56b3fb94c11336b21b116ef2707fd32da",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "canon.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "(50th anniversary) Aspherical lens elements: Transcending challenges in ultra-high-precision processing - Canon Camera Museum",
+  "description": "This is the official website that introduces our activities. You can find information on our activities for a better future, activities leading the industry, and history.",
+  "category": "hobbies_and_leisure/photography",
+  "screenshot": "https://site-images.similarcdn.com/image?url=canon.com&t=1&s=1&h=9e932608ff08757caf0b19ccd189352475d8b65728af9de762bdec86805a2f36",
+  "globalRank": 11532,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 2931
+  },
+  "categoryRank": "19",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 4642433,
+    "2026-02-01": 4062760,
+    "2026-03-01": 4304760
+  },
+  "bounceRate": "0.345258985202388",
+  "pagesPerVisit": "4.1333467769887715",
+  "visits": "4304760",
+  "timeOnSite": "159.3657571722027",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.6923897488501237
+    },
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.04036537390961431
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.01944945570365289
+    },
+    {
+      "Country": 76,
+      "CountryCode": "BR",
+      "Value": 0.01768189907124085
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.017233097095786243
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.011891632406155813,
+    "Paid Referrals": 0.010367549648848425,
+    "Mail": 0.0007977084920009117,
+    "Referrals": 0.044584332958736025,
+    "Search": 0.5574173892565264,
+    "Direct": 0.3749413872368704
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "canon",
+      "esitmatedValue": 134090,
+      "cpc": 0.63
+    },
+    {
+      "name": "canon g7x",
+      "esitmatedValue": 15310,
+      "cpc": 0.36
+    },
+    {
+      "name": "canon usa",
+      "esitmatedValue": 14060,
+      "cpc": 1.84
+    },
+    {
+      "name": "canon printer drivers",
+      "esitmatedValue": 13040,
+      "cpc": 0.35
+    },
+    {
+      "name": "canon cameras",
+      "esitmatedValue": 12690,
+      "cpc": 0.31
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 2931
+},
+{
+  "domain": "yysoft.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=yysoft.kr&t=1&s=1&h=2915bf5282b8e3268aa4b3e1ced9e61f6d1f8345d957b1353c13b32d3f973122",
+  "globalRank": 6811876,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 3104,
+    "2026-02-01": 802,
+    "2026-03-01": 451
+  },
+  "bounceRate": "0.6488695328068674",
+  "pagesPerVisit": "1.0094445666015424",
+  "visits": "451",
+  "timeOnSite": "0",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 1.0000000000000002
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.04553385008669976,
+    "Paid Referrals": 0.01576794671038596,
+    "Mail": 0.0007179852325373341,
+    "Referrals": 0.136210836930855,
+    "Search": 0.36240636669640514,
+    "Direct": 0.43767401005235024
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "디엠피네트웍스 권태준",
+      "esitmatedValue": 120,
+      "cpc": null
+    },
+    {
+      "name": "이와이솔루션",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "wata.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=wata.co.kr&t=1&s=1&h=daeaab97f8cac26abbff8adf6999c56bdea0a2ae9214d98e3a475b94c40414ec",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "boe.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "event",
+  "description": "BOE Technology Group - Leading Semiconductor Display Innovator | IoT Solutions Provider of world",
+  "category": "jobs_and_career/jobs_and_career",
+  "screenshot": "https://site-images.similarcdn.com/image?url=boe.com&t=1&s=1&h=f996f5ecb5f9bd28b4e98779dfaa735b5398f6a0a1c584ae0ad16c32581ede8d",
+  "globalRank": 202507,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 11448
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 119340,
+    "2026-02-01": 118517,
+    "2026-03-01": 175554
+  },
+  "bounceRate": "0.4024140641222761",
+  "pagesPerVisit": "3.7389584346309883",
+  "visits": "175554",
+  "timeOnSite": "107.2744153766745",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.7089489579807343
+    },
+    {
+      "Country": 344,
+      "CountryCode": "HK",
+      "Value": 0.04951241593882097
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.03698276168083238
+    },
+    {
+      "Country": 702,
+      "CountryCode": "SG",
+      "Value": 0.021099255621768075
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.017224655136741516
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.014145999369898826,
+    "Paid Referrals": 0.004664664915366946,
+    "Mail": 0.000915123857242266,
+    "Referrals": 0.07297755518911406,
+    "Search": 0.40666951782643246,
+    "Direct": 0.49996534127289144
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "boe",
+      "esitmatedValue": 2150,
+      "cpc": 1.33
+    },
+    {
+      "name": "京东方",
+      "esitmatedValue": 1620,
+      "cpc": null
+    },
+    {
+      "name": "京东方招聘",
+      "esitmatedValue": 1150,
+      "cpc": null
+    },
+    {
+      "name": "boe led screen",
+      "esitmatedValue": 620,
+      "cpc": null
+    },
+    {
+      "name": "boe display",
+      "esitmatedValue": 530,
+      "cpc": 0.32
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 11448
+},
+{
+  "domain": "toshiba.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Power and Energy Solutions | Toshiba Business",
+  "description": "Toshiba International Corporation (TIC) is Toshiba's premiere manufacturing base in North America. Products include electric motors and motor controls, adjustable speed drives, power electronics, transmission and distribution systems, and more.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=toshiba.com&t=1&s=1&h=6a1a6eea834a33fc4da5ce9eec055e24a28b359c9c218251be31b6f502c42805",
+  "globalRank": 99714,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 44431
+  },
+  "categoryRank": "93",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 474102,
+    "2026-02-01": 414116,
+    "2026-03-01": 533196
+  },
+  "bounceRate": "0.4909229692434227",
+  "pagesPerVisit": "2.332786078092105",
+  "visits": "533196",
+  "timeOnSite": "69.87834723894467",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.49348762244917976
+    },
+    {
+      "Country": 170,
+      "CountryCode": "CO",
+      "Value": 0.04092412401891103
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.02842683152439297
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.02496546879440322
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.01900194399603541
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.012548176931011018,
+    "Paid Referrals": 0.007956963212018798,
+    "Mail": 0.0007590337695619945,
+    "Referrals": 0.05838425431092124,
+    "Search": 0.40858122125999397,
+    "Direct": 0.5115831683647875
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "toshiba",
+      "esitmatedValue": 9400,
+      "cpc": 0.31
+    },
+    {
+      "name": "toshiba drivers",
+      "esitmatedValue": 1510,
+      "cpc": 1.69
+    },
+    {
+      "name": "toshiba careers",
+      "esitmatedValue": 1500,
+      "cpc": 0.88
+    },
+    {
+      "name": "toshiba global commerce solutions",
+      "esitmatedValue": 730,
+      "cpc": 3.21
+    },
+    {
+      "name": "toshibas",
+      "esitmatedValue": 720,
+      "cpc": 0.87
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 44431
+},
+{
+  "domain": "fujitsu.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Service unavailable",
+  "description": "Our purpose: Make the world more sustainable by building trust in society through innovation.",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=fujitsu.com&t=1&s=1&h=8886287b929015810930152b9e9ccdd072173cc14c610b7904a3f92050f6cb41",
+  "globalRank": 9587,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 804
+  },
+  "categoryRank": "3",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 4526582,
+    "2026-02-01": 4413973,
+    "2026-03-01": 5438308
+  },
+  "bounceRate": "0.3439726060487883",
+  "pagesPerVisit": "5.605100538696918",
+  "visits": "5438308",
+  "timeOnSite": "434.3348038524741",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.8912989745113659
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.0301877067668463
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.014203370548280548
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.013546047022788733
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.008420394213806548
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0027217870375943073,
+    "Paid Referrals": 0.023120137808276105,
+    "Mail": 0.0006148291827148356,
+    "Referrals": 0.09925229857702746,
+    "Search": 0.3585926286466594,
+    "Direct": 0.5156983187474818
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "fom出版",
+      "esitmatedValue": 18410,
+      "cpc": null
+    },
+    {
+      "name": "富士通",
+      "esitmatedValue": 9650,
+      "cpc": 0.69
+    },
+    {
+      "name": "fujitsu",
+      "esitmatedValue": 5200,
+      "cpc": 1.39
+    },
+    {
+      "name": "fom",
+      "esitmatedValue": 2810,
+      "cpc": 1.95
+    },
+    {
+      "name": "富士通 採用",
+      "esitmatedValue": 2260,
+      "cpc": 1.48
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 804
+},
+{
+  "domain": "foxconn.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Políticas clave de ESG - Grupo de tecnología Hon Hai",
+  "description": "「 Código de conducta de Hon Hai 」「 Normas de responsabilidad de Hon Hai 」「 Capítulo sobre los derechos humanos de los empleados 」「 Compromiso de Biodiversidad y No Deforestación del Grupo Tecnológico Hon Hai 」「 Compromiso energético del grupo tecnológico Hon Hai 」「 Compromiso con el agua del grupo tecnológico Hon Hai 」「 Compromiso con los residuos del grupo tecnológico Hon Hai 」「 Compromiso de Hon Hai con la gestión de la calidad del aire 」「 Manual de Gestión Ambiental 」「 Especificación para la gestión de sustancias y materiales peligrosos 」「 Compromiso de Protección Ambiental y Responsabilidad Social del Proveedor 」「 Código de conducta de responsabilidad social y medioambiental de los proveedores 」「 Declaración de Foxconn sobre el abastecimiento responsable de minerales 」",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=foxconn.com&t=1&s=1&h=3a98823ef3b6e44be0580779d6ab578703966c75e5b4b512d7919c9a58f4a582",
+  "globalRank": 90307,
+  "countryRank": {
+    "Country": 158,
+    "CountryCode": "TW",
+    "Rank": 1765
+  },
+  "categoryRank": "14",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 385640,
+    "2026-02-01": 313281,
+    "2026-03-01": 465232
+  },
+  "bounceRate": "0.3764875667244464",
+  "pagesPerVisit": "4.88250107875501",
+  "visits": "465232",
+  "timeOnSite": "229.93828492593477",
+  "topCountryShares": [
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.611828819036808
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.10814024192464355
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.06134956481635971
+    },
+    {
+      "Country": 484,
+      "CountryCode": "MX",
+      "Value": 0.04260588428138651
+    },
+    {
+      "Country": 203,
+      "CountryCode": "CZ",
+      "Value": 0.038137295622343664
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.005599127136937441,
+    "Paid Referrals": 0.011541054591671396,
+    "Mail": 0.0007360554271798241,
+    "Referrals": 0.05223939822848921,
+    "Search": 0.43914971784473494,
+    "Direct": 0.4902197853672961
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "foxconn",
+      "esitmatedValue": 14210,
+      "cpc": 0.92
+    },
+    {
+      "name": "鴻海",
+      "esitmatedValue": 7850,
+      "cpc": 0.83
+    },
+    {
+      "name": "鴻海精密工業股份有限公司",
+      "esitmatedValue": 2360,
+      "cpc": null
+    },
+    {
+      "name": "富士康",
+      "esitmatedValue": 1400,
+      "cpc": null
+    },
+    {
+      "name": "foxconn careers",
+      "esitmatedValue": 1350,
+      "cpc": 0.75
+    }
+  ],
+  "countryRank.country": 158,
+  "countryRank.countryCode": "TW",
+  "countryRank.rank": 1765
+},
+{
+  "domain": "murata.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Power Products FAQ | FAQs | Murata Manufacturing Co., Ltd.",
+  "description": "Answers to frequently asked questions about Piezoelectric Sounders / Buzzers",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=murata.com&t=1&s=1&h=76aef5d3cab77dc32e50251e8a813bc03f67c8feb43f51f46abceb38a693b9dd",
+  "globalRank": 59697,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 6156
+  },
+  "categoryRank": "93",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 717726,
+    "2026-02-01": 694378,
+    "2026-03-01": 762261
+  },
+  "bounceRate": "0.46806525582028874",
+  "pagesPerVisit": "3.891922480888035",
+  "visits": "762261",
+  "timeOnSite": "196.97014536309567",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.565503367501996
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.11797069163711471
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.07596746640620083
+    },
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.025601101569310298
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.023732493579156407
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.007160992779087143,
+    "Paid Referrals": 0.011982910450072187,
+    "Mail": 0.00040096388888277435,
+    "Referrals": 0.0634042446416604,
+    "Search": 0.5790300869444522,
+    "Direct": 0.3380208012958305
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "村田製作所",
+      "esitmatedValue": 61340,
+      "cpc": null
+    },
+    {
+      "name": "murata",
+      "esitmatedValue": 10940,
+      "cpc": 0.75
+    },
+    {
+      "name": "村田",
+      "esitmatedValue": 3440,
+      "cpc": 0.65
+    },
+    {
+      "name": "株式会社村田製作所",
+      "esitmatedValue": 2600,
+      "cpc": null
+    },
+    {
+      "name": "村田財団",
+      "esitmatedValue": 2100,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 6156
+},
+{
+  "domain": "nec.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Tools for Tomorrow",
+  "description": "”Tools for Tomorrow” is a think-piece series from NEC to conceptualize how NEC’s current technologies could be used to enhance the future. What novel applications might exist tomorrow for the technological tools already available to us today? Keep reading to find out how the future’s innovations are already at our fingertips.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=nec.com&t=1&s=1&h=f3eaf0e2b4ca8bec3849fe7f37bf91b5ad669c81803fb365879a1c0ed258baa5",
+  "globalRank": 44271,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 3239
+  },
+  "categoryRank": "54",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 974295,
+    "2026-02-01": 1039472,
+    "2026-03-01": 1321081
+  },
+  "bounceRate": "0.4364539795011131",
+  "pagesPerVisit": "2.913616271903324",
+  "visits": "1321081",
+  "timeOnSite": "218.59809811611785",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.8752718325200785
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.04326829445851614
+    },
+    {
+      "Country": 36,
+      "CountryCode": "AU",
+      "Value": 0.00861230547162246
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.007889664060100485
+    },
+    {
+      "Country": 116,
+      "CountryCode": "KH",
+      "Value": 0.004513243429233455
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.005263844071962345,
+    "Paid Referrals": 0.02649560167894885,
+    "Mail": 0.0005648075638005739,
+    "Referrals": 0.0910545871783017,
+    "Search": 0.4902233248386458,
+    "Direct": 0.38639783466833627
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "nec",
+      "esitmatedValue": 57200,
+      "cpc": 1.11
+    },
+    {
+      "name": "dxとは",
+      "esitmatedValue": 5140,
+      "cpc": null
+    },
+    {
+      "name": "日本電気株式会社",
+      "esitmatedValue": 4410,
+      "cpc": null
+    },
+    {
+      "name": "日本電気",
+      "esitmatedValue": 3850,
+      "cpc": null
+    },
+    {
+      "name": "nec　ニュース",
+      "esitmatedValue": 3440,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 3239
+},
+{
+  "domain": "untracked.co.jp",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "The StA²BLE demonstration in Onomichi City is progressing! Phase Four | UNTRACKED株式会社公式サイト",
+  "description": "UNTRACKED Inc., in collaboration with Onomichi City, Prefectural University of Hiroshima, and Yokohama National Universi",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=untracked.co.jp&t=1&s=1&h=fd3638636916515a824c06772ec03337a74a2e58ce11c47af9b49226013718cc",
+  "globalRank": 5636736,
+  "countryRank": {
+    "Country": 392,
+    "CountryCode": "JP",
+    "Rank": 392919
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 4123,
+    "2026-02-01": 4585,
+    "2026-03-01": 2674
+  },
+  "bounceRate": "0.490368296005879",
+  "pagesPerVisit": "2.0720105093414753",
+  "visits": "2674",
+  "timeOnSite": "226.15521004881012",
+  "topCountryShares": [
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.9999999999999996
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.039140747024848266,
+    "Paid Referrals": 0.014669516953309883,
+    "Mail": 0.001378774424845048,
+    "Referrals": 0.09716580351276398,
+    "Search": 0.42710101708494225,
+    "Direct": 0.4205441409992906
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "stable 転倒防止",
+      "esitmatedValue": 90,
+      "cpc": null
+    },
+    {
+      "name": "sta²ble",
+      "esitmatedValue": 80,
+      "cpc": null
+    },
+    {
+      "name": "untracked株式会社",
+      "esitmatedValue": 80,
+      "cpc": null
+    },
+    {
+      "name": "東京電力パワーグリッド多摩総支社",
+      "esitmatedValue": 20,
+      "cpc": null
+    },
+    {
+      "name": "立位年齢とは",
+      "esitmatedValue": 20,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 392,
+  "countryRank.countryCode": "JP",
+  "countryRank.rank": 392919
+},
+{
+  "domain": "rokid.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Rokid AR Glasses - Redefining Reality",
+  "description": "Rokid leads the future of augmented reality glasses with cutting-edge spatial computing, sparking creativity in learning, work, entertainment, and engineering through immersive smart displays anytime, anywhere.",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=rokid.com&t=1&s=1&h=074e6b8f563f97436f2445ac11624edf99bb26cf69c3159a82b4937e65c01605",
+  "globalRank": 92473,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 71553
+  },
+  "categoryRank": "1506",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 550627,
+    "2026-02-01": 450973,
+    "2026-03-01": 490819
+  },
+  "bounceRate": "0.39256781285337544",
+  "pagesPerVisit": "3.2927271858147056",
+  "visits": "490819",
+  "timeOnSite": "109.57620209487129",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.2824559546789459
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.25324809105971835
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.04730236503867883
+    },
+    {
+      "Country": 702,
+      "CountryCode": "SG",
+      "Value": 0.03882472787741953
+    },
+    {
+      "Country": 360,
+      "CountryCode": "ID",
+      "Value": 0.024996616464687746
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0516054746302084,
+    "Paid Referrals": 0.006819626477914638,
+    "Mail": 0.0006420649701898894,
+    "Referrals": 0.06148506406785409,
+    "Search": 0.43618423648839655,
+    "Direct": 0.4432635333648382
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "rokid",
+      "esitmatedValue": 36620,
+      "cpc": 0.39
+    },
+    {
+      "name": "rokid glasses",
+      "esitmatedValue": 29760,
+      "cpc": 0.58
+    },
+    {
+      "name": "rokid スマートaiグラス",
+      "esitmatedValue": 22370,
+      "cpc": null
+    },
+    {
+      "name": "rokid ai glasses",
+      "esitmatedValue": 13450,
+      "cpc": 1.09
+    },
+    {
+      "name": "rokid ai glasses style",
+      "esitmatedValue": 2830,
+      "cpc": 1.22
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 71553
+},
+{
+  "domain": "dnsys.ai",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Dnsys Smart Battery Kit",
+  "description": "Dnsys X1 battery kit includes a smart battery, a charging dock, and a connecting cable, which will provide you with additional support during multi-day outdoor activities. A single smart battery can offer an extra 25 kilometers of range, giving you peace of mind while engaging in outdoor activities.",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=dnsys.ai&t=1&s=1&h=b7f0aa431d96e588e7f8bf350abf639fbbb78c683ab8ce17264cdd2c5a7702b6",
+  "globalRank": 400627,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 272455
+  },
+  "categoryRank": "4642",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 91750,
+    "2026-02-01": 89568,
+    "2026-03-01": 91667
+  },
+  "bounceRate": "0.473502440996035",
+  "pagesPerVisit": "2.252652472562304",
+  "visits": "91667",
+  "timeOnSite": "86.8046597723867",
+  "topCountryShares": [
+    {
+      "Country": 124,
+      "CountryCode": "CA",
+      "Value": 0.3739104816802675
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.19878809078012327
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.06977042813431704
+    },
+    {
+      "Country": 380,
+      "CountryCode": "IT",
+      "Value": 0.060943905741455834
+    },
+    {
+      "Country": 250,
+      "CountryCode": "FR",
+      "Value": 0.04392408071587058
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.12610598165012846,
+    "Paid Referrals": 0.012878948853810718,
+    "Mail": 0.0012088209313539256,
+    "Referrals": 0.08194035251667486,
+    "Search": 0.43372557034402737,
+    "Direct": 0.34414032558883056
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "dnsys",
+      "esitmatedValue": 1700,
+      "cpc": 1.02
+    },
+    {
+      "name": "dnsys x1",
+      "esitmatedValue": 980,
+      "cpc": 0.35
+    },
+    {
+      "name": "hypershell",
+      "esitmatedValue": 780,
+      "cpc": 0.58
+    },
+    {
+      "name": "dysns",
+      "esitmatedValue": 660,
+      "cpc": null
+    },
+    {
+      "name": "exoskeleton",
+      "esitmatedValue": 440,
+      "cpc": 0.7
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 272455
+},
+{
+  "domain": "shosabi.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "AI Onboarding System for gyms | Shosabi",
+  "description": "SHOSABI is an gym AI-onboarding system, we provide gyms the opportunity to enhance their members onboarding experience, increase member engagement & retention.",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=shosabi.com&t=1&s=1&h=6b316a5dec0ebc3714a9004b8818bbc6fae9ca440ddc72fb57c9633c9abbdd4d",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 443,
+    "2026-02-01": 167,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "biyard.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=biyard.co.kr&t=1&s=1&h=49f976385df88e390993ae83c3b3c565ac4093cef954ed1da02b986bca72b2c0",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "airer.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=airer.kr&t=1&s=1&h=4381eedef50abd22ccb83b71468bfe7c0b7517be49507041f2f260aed73f213c",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "gwm-global.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Investor Relations-GWM",
+  "description": "",
+  "category": "vehicles/vehicles",
+  "screenshot": "https://site-images.similarcdn.com/image?url=gwm-global.com&t=1&s=1&h=8632c26f04270219f6801b86d6d27d61c0bb701900613169a59539d529c0183a",
+  "globalRank": 392216,
+  "countryRank": {
+    "Country": 586,
+    "CountryCode": "PK",
+    "Rank": 29909
+  },
+  "categoryRank": "79",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 166044,
+    "2026-02-01": 120709,
+    "2026-03-01": 111043
+  },
+  "bounceRate": "0.41356012980769286",
+  "pagesPerVisit": "1.580609369535054",
+  "visits": "111043",
+  "timeOnSite": "23.945167926223462",
+  "topCountryShares": [
+    {
+      "Country": 686,
+      "CountryCode": "SN",
+      "Value": 0.12422589316801105
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.06451774024496308
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.056927822815020505
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.045070951131335336
+    },
+    {
+      "Country": 724,
+      "CountryCode": "ES",
+      "Value": 0.04020587391843875
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.02786319360281522,
+    "Paid Referrals": 0.011332036735789601,
+    "Mail": 0.0017246367574903878,
+    "Referrals": 0.07474387825442041,
+    "Search": 0.5512717840617264,
+    "Direct": 0.33120842764275893
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "gwm",
+      "esitmatedValue": 11800,
+      "cpc": 0.31
+    },
+    {
+      "name": "haval",
+      "esitmatedValue": 1480,
+      "cpc": 0.32
+    },
+    {
+      "name": "great wall motor",
+      "esitmatedValue": 660,
+      "cpc": 0.66
+    },
+    {
+      "name": "长城汽车",
+      "esitmatedValue": 360,
+      "cpc": null
+    },
+    {
+      "name": "gwm global",
+      "esitmatedValue": 360,
+      "cpc": 0.17
+    }
+  ],
+  "countryRank.country": 586,
+  "countryRank.countryCode": "PK",
+  "countryRank.rank": 29909
+},
+{
+  "domain": "amatalus.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=amatalus.com&t=1&s=1&h=3e113d5c1064fa0d2d0c45b40ebcbab93624b525c110f226e153832eab1647df",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "benilight.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Benilight",
+  "description": "Benilight",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=benilight.com&t=1&s=1&h=ee74e9869842c71b22cee1523b1acd6889c21f5827f4cf5106fffc2c2afb3e7e",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 699,
+    "2026-03-01": 150
+  },
+  "bounceRate": "0.39765345033517885",
+  "pagesPerVisit": "1.0619611196662568",
+  "visits": "150",
+  "timeOnSite": "0",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 1
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.10070963791158437,
+    "Paid Referrals": 0.0197830093484856,
+    "Mail": 0.002103900024332118,
+    "Referrals": 0.1263934648994553,
+    "Search": 0.31973858387535425,
+    "Direct": 0.4212989094763724
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "acelife.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "처브라이프생명 홈페이지",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=acelife.co.kr&t=1&s=1&h=5499539f9fe5128d53b72040ee56a0f58e1162ba21ceabc6886b2ebc5f3b8c60",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "aigement.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "AIgement",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=aigement.com&t=1&s=1&h=71ffad9f32811e760df8672d86837ca104678494c3efe6c5fcd1b9da2a49116c",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "mi.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Xiaomi United States | Xiaomi Official Website",
+  "description": "Xiaomi, a global company producing quality products at honest pricing.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=mi.com&t=1&s=1&h=e3f01ae3de6dff32228e2f812c1d14821a689b671c1af2324e3a24c9bf43839e",
+  "globalRank": 863,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 118
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 52639658,
+    "2026-02-01": 39263284,
+    "2026-03-01": 49993228
+  },
+  "bounceRate": "0.40459843558182945",
+  "pagesPerVisit": "3.8522818376611445",
+  "visits": "49993228",
+  "timeOnSite": "164.48234119596628",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.3087661454834677
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.08316320420576068
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.05017966842014055
+    },
+    {
+      "Country": 724,
+      "CountryCode": "ES",
+      "Value": 0.03540522891218899
+    },
+    {
+      "Country": 344,
+      "CountryCode": "HK",
+      "Value": 0.033233317773685336
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.006405044712824436,
+    "Paid Referrals": 0.008542882622770415,
+    "Mail": 0.00025187504073331276,
+    "Referrals": 0.04592248912074676,
+    "Search": 0.5009103296006354,
+    "Direct": 0.4379673789022898
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "xiaomi",
+      "esitmatedValue": 2824500,
+      "cpc": 0.16
+    },
+    {
+      "name": "xiaomi 17 ultra",
+      "esitmatedValue": 497320,
+      "cpc": 0.29
+    },
+    {
+      "name": "mi",
+      "esitmatedValue": 479410,
+      "cpc": 0.37
+    },
+    {
+      "name": "小米",
+      "esitmatedValue": 383800,
+      "cpc": 0.16
+    },
+    {
+      "name": "xiaomi 17",
+      "esitmatedValue": 331910,
+      "cpc": 0.2
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 118
+},
+{
+  "domain": "dji.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "Privacy - DJI",
+  "description": "SZ DJI Technology Co., Ltd. together with its affiliated companies (\"DJI\") respects the privacy of every individual who to use any of our services or purchases any goods from us. This Privacy Policy outlines the information DJI may collect and how it may use that information.",
+  "category": "computers_electronics_and_technology/consumer_electronics",
+  "screenshot": "https://site-images.similarcdn.com/image?url=dji.com&t=1&s=1&h=581a443dfbb172642a823329673208fd3e3cee366437574d563d3039265c7c7f",
+  "globalRank": 3686,
+  "countryRank": {
+    "Country": 156,
+    "CountryCode": "CN",
+    "Rank": 533
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 13571806,
+    "2026-02-01": 11245253,
+    "2026-03-01": 12843996
+  },
+  "bounceRate": "0.3577431338585573",
+  "pagesPerVisit": "4.498381514941977",
+  "visits": "12843996",
+  "timeOnSite": "167.78878679794983",
+  "topCountryShares": [
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.17106893611290036
+    },
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.13921560725645285
+    },
+    {
+      "Country": 392,
+      "CountryCode": "JP",
+      "Value": 0.05284286663087282
+    },
+    {
+      "Country": 826,
+      "CountryCode": "GB",
+      "Value": 0.04863003535575659
+    },
+    {
+      "Country": 276,
+      "CountryCode": "DE",
+      "Value": 0.04816799014293137
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.010149698322765851,
+    "Paid Referrals": 0.006241277527015457,
+    "Mail": 0.0006843225325394349,
+    "Referrals": 0.029880746187363534,
+    "Search": 0.5540429854736105,
+    "Direct": 0.39900096995670525
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "dji",
+      "esitmatedValue": 1120970,
+      "cpc": 0.29
+    },
+    {
+      "name": "dji osmo pocket 3",
+      "esitmatedValue": 218650,
+      "cpc": 0.31
+    },
+    {
+      "name": "osmo pocket 3",
+      "esitmatedValue": 99850,
+      "cpc": 0.25
+    },
+    {
+      "name": "dji drone",
+      "esitmatedValue": 94720,
+      "cpc": 0.29
+    },
+    {
+      "name": "dji mic mini",
+      "esitmatedValue": 72680,
+      "cpc": 0.29
+    }
+  ],
+  "countryRank.country": 156,
+  "countryRank.countryCode": "CN",
+  "countryRank.rank": 533
+},
+{
+  "domain": "constant.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "성기확대기",
+  "description": "성기확대기, satisfyer, 새티스파이어ng1, 성인샵, 성관계오일, 지스팟링, 세티스파이어지스팟래빗, 킨제이마사지젤",
+  "category": "computers_electronics_and_technology/computers_electronics_and_technology",
+  "screenshot": "https://site-images.similarcdn.com/image?url=constant.kr&t=1&s=1&h=4a8914323ba3e517bff2b24e812930e0bf184fb78e5b1dbf6b8ef003dfcb74d0",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "astrox.co.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "아스트로엑스",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=astrox.co.kr&t=1&s=1&h=24e8425a0583f2820e058e803c43fc6e9cc30c400222188a88029e54afb2ab97",
+  "globalRank": 13015172,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 1465,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+},
+{
+  "domain": "drt.kr",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "(주)금강알텍",
+  "description": "",
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=drt.kr&t=1&s=1&h=ccaf903b7c6e626ef71ff606ff3a3372f9afc5eee2400315c32c7dc62e37555e",
+  "globalRank": 5371825,
+  "countryRank": {
+    "Country": 410,
+    "CountryCode": "KR",
+    "Rank": 193763
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 3631
+  },
+  "bounceRate": "0.3360129572786636",
+  "pagesPerVisit": "1.1820576719599507",
+  "visits": "3631",
+  "timeOnSite": "0.29961968727505717",
+  "topCountryShares": [
+    {
+      "Country": 410,
+      "CountryCode": "KR",
+      "Value": 0.6913940329085685
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.3086059670914314
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.0381916060346952,
+    "Paid Referrals": 0.016473891134121992,
+    "Mail": 0.0029312910162289413,
+    "Referrals": 0.15773687992517268,
+    "Search": 0.4342524628476527,
+    "Direct": 0.34519488195413384
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "e'r kr",
+      "esitmatedValue": 0,
+      "cpc": null
+    }
+  ],
+  "countryRank.country": 410,
+  "countryRank.countryCode": "KR",
+  "countryRank.rank": 193763
+},
+{
+  "domain": "asus.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": "MyASUS - User Center | Official Support | ASUS Global",
+  "description": "ASUS Support Center helps you to downloads Drivers, Manuals, Firmware, Software; find FAQ and Troubleshooting",
+  "category": "computers_electronics_and_technology/computer_hardware",
+  "screenshot": "https://site-images.similarcdn.com/image?url=asus.com&t=1&s=1&h=0f5f74cf1a9702874aed7813c39e58f4e62cd1be7142b58c832adce4827fb8d6",
+  "globalRank": 1371,
+  "countryRank": {
+    "Country": 840,
+    "CountryCode": "US",
+    "Rank": 2197
+  },
+  "categoryRank": "7",
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 38076640,
+    "2026-02-01": 31079306,
+    "2026-03-01": 33951783
+  },
+  "bounceRate": "0.4793909443005098",
+  "pagesPerVisit": "3.7017419750324927",
+  "visits": "33951783",
+  "timeOnSite": "185.81991859313698",
+  "topCountryShares": [
+    {
+      "Country": 840,
+      "CountryCode": "US",
+      "Value": 0.16315019785908924
+    },
+    {
+      "Country": 356,
+      "CountryCode": "IN",
+      "Value": 0.0678265288421944
+    },
+    {
+      "Country": 158,
+      "CountryCode": "TW",
+      "Value": 0.06251380351732382
+    },
+    {
+      "Country": 156,
+      "CountryCode": "CN",
+      "Value": 0.051391133203807095
+    },
+    {
+      "Country": 643,
+      "CountryCode": "RU",
+      "Value": 0.049786332415699616
+    }
+  ],
+  "trafficSources": {
+    "Social": 0.011928370365951405,
+    "Paid Referrals": 0.006775829830165455,
+    "Mail": 0.0005134788639292013,
+    "Referrals": 0.04013688660153621,
+    "Search": 0.5626159015695436,
+    "Direct": 0.3780295327688742
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [
+    {
+      "name": "asus",
+      "esitmatedValue": 924780,
+      "cpc": 0.22
+    },
+    {
+      "name": "asus rog",
+      "esitmatedValue": 99470,
+      "cpc": 0.28
+    },
+    {
+      "name": "rog",
+      "esitmatedValue": 98100,
+      "cpc": 0.28
+    },
+    {
+      "name": "asus vivobook",
+      "esitmatedValue": 91600,
+      "cpc": 0.19
+    },
+    {
+      "name": "armoury crate",
+      "esitmatedValue": 80900,
+      "cpc": 0.4
+    }
+  ],
+  "countryRank.country": 840,
+  "countryRank.countryCode": "US",
+  "countryRank.rank": 2197
+},
+{
+  "domain": "sanggodae.com",
+  "snapshotDate": "2026-03-01T00:00:00+00:00",
+  "title": null,
+  "description": null,
+  "category": "",
+  "screenshot": "https://site-images.similarcdn.com/image?url=sanggodae.com&t=1&s=1&h=208a4d690ce867951c0342e1206257deae9a81ff9e1ad810f0a951d34b06ce78",
+  "globalRank": null,
+  "countryRank": {
+    "Country": null,
+    "CountryCode": null,
+    "Rank": null
+  },
+  "categoryRank": null,
+  "estimatedMonthlyVisits": {
+    "2026-01-01": 0,
+    "2026-02-01": 0,
+    "2026-03-01": 0
+  },
+  "bounceRate": "0",
+  "pagesPerVisit": "0",
+  "visits": "0",
+  "timeOnSite": "0",
+  "topCountryShares": [],
+  "trafficSources": {
+    "Social": 0,
+    "Paid Referrals": 0,
+    "Mail": 0,
+    "Referrals": 0,
+    "Search": 0,
+    "Direct": 0
+  },
+  "competitors": [],
+  "isDataFromGA": false,
+  "topKeywords": [],
+  "countryRank.country": null,
+  "countryRank.countryCode": null,
+  "countryRank.rank": null
+}]

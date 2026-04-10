@@ -3,7 +3,7 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import type { Company, SortKey, CategoryInfo } from "@/lib/types";
 import { CompanyCard } from "./CompanyCard";
-import { cn } from "@/lib/utils";
+import { cn, countryName } from "@/lib/utils";
 
 function CategoryBar({
   categories,
@@ -134,14 +134,30 @@ export function RankingList({
   categories: CategoryInfo[];
 }) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeCountry, setActiveCountry] = useState<string>("all");
   const [sortKey, setSortKey] = useState<SortKey>("score");
   const [search, setSearch] = useState("");
+
+  const countryOptions = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const c of companies) {
+      if (!c.originCountry) continue;
+      map.set(c.originCountry, (map.get(c.originCountry) || 0) + 1);
+    }
+    return Array.from(map.entries())
+      .map(([code, count]) => ({ code, name: countryName(code), count }))
+      .sort((a, b) => b.count - a.count);
+  }, [companies]);
 
   const filtered = useMemo(() => {
     let result = companies;
 
     if (activeCategory !== "all") {
       result = result.filter((c) => c.parentCategorySlug === activeCategory);
+    }
+
+    if (activeCountry !== "all") {
+      result = result.filter((c) => c.originCountry === activeCountry);
     }
 
     if (search.trim()) {
@@ -166,7 +182,7 @@ export function RankingList({
     });
 
     return result;
-  }, [companies, activeCategory, sortKey, search]);
+  }, [companies, activeCategory, activeCountry, sortKey, search]);
 
   return (
     <div>
@@ -203,8 +219,27 @@ export function RankingList({
           </svg>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-muted hidden sm:inline">Sort:</span>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Country filter */}
+          <div className="relative">
+            <select
+              value={activeCountry}
+              onChange={(e) => setActiveCountry(e.target.value)}
+              className="appearance-none pl-3 pr-7 py-1.5 bg-card border border-border rounded-lg text-xs font-medium text-foreground focus:outline-none focus:border-accent/50 cursor-pointer"
+            >
+              <option value="all">All Countries</option>
+              {countryOptions.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.name || c.code} ({c.count})
+                </option>
+              ))}
+            </select>
+            <svg className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-muted pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+
+          {/* Sort */}
           <div className="flex bg-card border border-border rounded-lg overflow-hidden">
             {SORT_OPTIONS.map((opt) => (
               <button

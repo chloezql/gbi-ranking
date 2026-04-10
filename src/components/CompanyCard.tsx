@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Company, SortKey } from "@/lib/types";
-import { formatNumber, formatGrowth, cn } from "@/lib/utils";
+import { formatNumber, formatGrowth, cn, countryName } from "@/lib/utils";
 import { LogoImage } from "./LogoImage";
 
 function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey }) {
@@ -77,9 +77,20 @@ export function CompanyCard({
       </div>
 
       <div className="flex-1 min-w-0">
-        <h3 className="font-semibold text-sm group-hover:text-accent transition-colors truncate">
-          {company.domain}
-        </h3>
+        <div className="flex items-center gap-1.5">
+          <h3 className="font-semibold text-sm group-hover:text-accent transition-colors truncate">
+            {company.domain}
+          </h3>
+          {company.originCountry && (
+            <img
+              src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}
+              alt={countryName(company.originCountry)}
+              title={countryName(company.originCountry)}
+              className="shrink-0 w-5 h-3.5 object-cover rounded-[2px] border border-border/50 cursor-default"
+              loading="lazy"
+            />
+          )}
+        </div>
         <div className="flex items-center gap-2 mt-0.5">
           <span className="text-[11px] px-2 py-0.5 rounded-full bg-accent-light text-accent font-medium truncate max-w-[120px] sm:max-w-none">
             {company.categoryName}
