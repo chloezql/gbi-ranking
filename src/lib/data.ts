@@ -76,11 +76,7 @@ function transformRow(row: SupabaseRow): Company {
   };
 }
 
-let cachedCompanies: Company[] | null = null;
-
 export async function getAllCompanies(): Promise<Company[]> {
-  if (cachedCompanies) return cachedCompanies;
-
   const { data, error } = await supabase
     .from("company_latest")
     .select("*");
@@ -91,8 +87,7 @@ export async function getAllCompanies(): Promise<Company[]> {
   }
 
   const companies = (data as SupabaseRow[]).map(transformRow);
-  cachedCompanies = computeScores(companies).sort((a, b) => b.score - a.score);
-  return cachedCompanies;
+  return computeScores(companies).sort((a, b) => b.score - a.score);
 }
 
 export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {

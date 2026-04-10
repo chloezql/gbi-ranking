@@ -1,6 +1,8 @@
 import { getAllCompanies, getCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const companies = await getAllCompanies();
   const categories = await getCategories();

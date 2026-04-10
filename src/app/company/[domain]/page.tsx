@@ -11,10 +11,7 @@ import {
 } from "@/lib/utils";
 import { ScoreBadge } from "@/components/ScoreBadge";
 
-export async function generateStaticParams() {
-  const companies = await getAllCompanies();
-  return companies.map((c) => ({ domain: c.domain }));
-}
+export const dynamic = "force-dynamic";
 
 function MetricCard({
   label,
