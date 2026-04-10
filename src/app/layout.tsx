@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GBI Index - Global Index",
-  description: "Comprehensive ranking of Chinese companies going global, based on traffic, growth, engagement and more.",
+  description: "GBI Index is the core platform under GBI (Global Brand Infrastructure), encompassing both ranked and unranked brands and service providers across global markets.",
   other: {
     "viewport": "width=device-width, initial-scale=1, viewport-fit=cover",
   },

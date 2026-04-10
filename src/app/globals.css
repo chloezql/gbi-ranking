@@ -8,8 +8,8 @@
   --card: #ffffff;
   --border: #e5e7eb;
   --muted: #6b7280;
-  --accent: #ff6154;
-  --accent-light: #fff1f0;
+  --accent: #E06133;
+  --accent-light: #fdf0eb;
   --success: #10b981;
   --danger: #ef4444;
 }
@@ -20,8 +20,8 @@
   --card: #1a1a2e;
   --border: #2d2d44;
   --muted: #9ca3af;
-  --accent: #ff6154;
-  --accent-light: #2a1a1a;
+    --accent: #E06133;
+    --accent-light: #2a1c16;
 }
 
 @theme inline {
