@@ -1,5 +1,6 @@
 import { getAllCompanies, getCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
+import { FeaturedRankings } from "@/components/FeaturedRankings";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,9 @@ export default async function HomePage() {
           Learn More →
         </a>
       </div>
+
+      {/* Featured Rankings */}
+      <FeaturedRankings companies={companies} />
 
       <div className="mb-6">
         <h1 className="text-3xl font-bold tracking-tight">
