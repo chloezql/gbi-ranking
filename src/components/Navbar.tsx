@@ -8,7 +8,15 @@ export function Navbar() {
         <a href="https://gbiworld.org" target="_blank" rel="noopener noreferrer" className="flex items-center">
           <Logo />
         </a>
-        <ThemeToggle />
+        <div className="flex items-center gap-3">
+          <a
+            href="/methodology"
+            className="text-xs text-muted hover:text-foreground transition-colors font-medium"
+          >
+            How we score
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

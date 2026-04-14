@@ -7,16 +7,19 @@ function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey 
   let value: string;
   let label: string;
   let colorClass: string;
+  let tooltip: string;
 
   switch (sortKey) {
     case "visits":
       value = formatNumber(company.visits);
       label = "visits";
+      tooltip = "Monthly website visits";
       colorClass = "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
       break;
     case "growthRate":
       value = formatGrowth(company.growthRate);
       label = "growth";
+      tooltip = "3-month traffic growth rate";
       colorClass = company.growthRate >= 0
         ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
         : "bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400";
@@ -24,6 +27,7 @@ function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey 
     default:
       value = String(company.score);
       label = "pts";
+      tooltip = "GBI Score: traffic, growth, engagement & bounce rate";
       colorClass = company.score >= 75
         ? "bg-accent text-white"
         : company.score >= 50
@@ -33,7 +37,7 @@ function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey 
   }
 
   return (
-    <div className={cn("flex flex-col items-center justify-center min-w-14 px-3 h-14 rounded-xl text-center shrink-0", colorClass)}>
+    <div title={tooltip} className={cn("flex flex-col items-center justify-center min-w-14 px-3 h-14 rounded-xl text-center shrink-0 cursor-default", colorClass)}>
       <span className="text-base font-bold leading-none whitespace-nowrap">{value}</span>
       <span className="text-[10px] opacity-70 mt-0.5">{label}</span>
     </div>
@@ -100,20 +104,26 @@ export function CompanyCard({
           {company.description || company.title}
         </p>
         <div className="flex items-center gap-3 sm:gap-4 mt-1.5 text-xs text-muted">
-          <span title="Monthly visits">
+          <span
+            title="Total website visits in the most recent month"
+            className="cursor-default"
+          >
             <span className="text-foreground font-medium">{formatNumber(company.visits)}</span>
-            {" "}visits
+            {" "}visits/mo
           </span>
           <span
-            title="3-month growth"
+            title="3-month traffic growth rate compared to 3 months ago"
             className={cn(
-              "font-medium",
+              "font-medium cursor-default",
               isGrowing ? "text-success" : "text-danger"
             )}
           >
-            {formatGrowth(company.growthRate)}
+            {formatGrowth(company.growthRate)} growth
           </span>
-          <span className="hidden sm:inline text-foreground font-medium">
+          <span
+            title="GBI Score: composite rating based on traffic, growth, engagement & bounce rate (0–95)"
+            className="hidden sm:inline text-foreground font-medium cursor-default"
+          >
             {company.score} pts
           </span>
         </div>

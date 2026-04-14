@@ -261,6 +261,20 @@ export default async function CompanyPage({
           </div>
         </div>
       )}
+
+      {/* Data source */}
+      <p className="text-[11px] text-muted mt-8 text-center">
+        Traffic data sourced from{" "}
+        <a
+          href="https://www.similarweb.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-foreground transition-colors"
+        >
+          SimilarWeb
+        </a>
+        . Scores are calculated by GBI.
+      </p>
     </div>
   );
 }

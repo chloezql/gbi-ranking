@@ -43,11 +43,32 @@ export function countryCodeToFlag(code: string): string {
 }
 
 const COUNTRY_NAMES: Record<string, string> = {
-  CN: "China", KR: "South Korea", JP: "Japan", US: "United States",
-  TW: "Taiwan", DE: "Germany", GB: "United Kingdom", FR: "France",
-  SE: "Sweden", NL: "Netherlands", SG: "Singapore", HK: "Hong Kong",
-  CA: "Canada", AU: "Australia", IL: "Israel", IN: "India",
-  IT: "Italy", ES: "Spain", BR: "Brazil", MX: "Mexico",
+  CN: "China Mainland",
+  HK: "Hong Kong",
+  TW: "Taiwan",
+  KR: "South Korea",
+  JP: "Japan",
+  IN: "India",
+  SG: "Singapore",
+  TH: "Thailand",
+  VN: "Vietnam",
+  ID: "Indonesia",
+  MY: "Malaysia",
+  PH: "Philippines",
+  US: "United States",
+  CA: "Canada",
+  DE: "Germany",
+  GB: "United Kingdom",
+  FR: "France",
+  SE: "Sweden",
+  NL: "Netherlands",
+  AU: "Australia",
+  IL: "Israel",
+  IT: "Italy",
+  ES: "Spain",
+  BR: "Brazil",
+  MX: "Mexico",
+  HR: "Croatia",
 };
 
 export function countryName(code: string): string {
