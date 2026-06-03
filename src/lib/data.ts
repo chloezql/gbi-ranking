@@ -95,6 +95,18 @@ export async function getCompanyByDomain(domain: string): Promise<Company | unde
   return companies.find((c) => c.domain === domain);
 }
 
+export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
+  if (ids.length === 0) return [];
+  const { data, error } = await supabase
+    .from("company_latest")
+    .select("*")
+    .in("company_id", ids);
+
+  if (error || !data) return [];
+  const companies = (data as SupabaseRow[]).map(transformRow);
+  return computeScores(companies);
+}
+
 export async function getCategories(): Promise<CategoryInfo[]> {
   const companies = await getAllCompanies();
   const map = new Map<string, { name: string; count: number }>();
