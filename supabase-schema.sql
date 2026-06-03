@@ -129,3 +129,14 @@ create policy "Users can insert own profile"
 create policy "Users can update own profile"
   on public.user_profiles for update to authenticated
   using (auth.uid() = id);
+
+-- 7. Storage bucket for profile avatars
+insert into storage.buckets (id, name, public)
+  values ('avatars', 'avatars', true);
+
+create policy "Users manage own avatar"
+  on storage.objects
+  for all
+  to authenticated
+  using (bucket_id = 'avatars' and auth.uid()::text = (storage.foldername(name))[1])
+  with check (bucket_id = 'avatars' and auth.uid()::text = (storage.foldername(name))[1]);
