@@ -245,7 +245,7 @@ export function RankingList({
         case "visits":
           return b.visits - a.visits;
         case "growthRate":
-          return b.growthRate - a.growthRate;
+          return b.effectiveGrowthScore - a.effectiveGrowthScore || b.growthRate - a.growthRate;
       }
     });
 

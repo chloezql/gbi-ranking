@@ -54,6 +54,7 @@ export interface Company {
 
   score: number;
   growthRate: number;
+  effectiveGrowthScore: number;
 }
 
 export type SortKey = "score" | "visits" | "growthRate";
