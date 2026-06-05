@@ -130,7 +130,39 @@ create policy "Users can update own profile"
   on public.user_profiles for update to authenticated
   using (auth.uid() = id);
 
--- 7. Storage bucket for profile avatars
+-- 8. Company claims (user ↔ company ownership)
+create table company_claims (
+  id uuid default gen_random_uuid() primary key,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  company_id uuid not null references companies(id) on delete cascade,
+  user_email text not null,
+  status text not null default 'pending'
+    check (status in ('pending', 'approved', 'rejected', 'manual_review')),
+  review_note text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now(),
+  unique(user_id, company_id)
+);
+
+create index idx_claims_user on company_claims(user_id);
+create index idx_claims_company on company_claims(company_id);
+create index idx_claims_status on company_claims(status);
+
+alter table company_claims enable row level security;
+
+create policy "Users can read own claims"
+  on company_claims for select to authenticated
+  using (auth.uid() = user_id);
+
+-- Only approved claims are inserted directly from the client (domain check happens in UI)
+create policy "Users can insert own approved claims"
+  on company_claims for insert to authenticated
+  with check (auth.uid() = user_id and status = 'approved');
+
+grant select, insert on public.company_claims to authenticated;
+grant select, insert, update, delete on public.company_claims to service_role;
+
+-- 10. Storage bucket for profile avatars
 insert into storage.buckets (id, name, public)
   values ('avatars', 'avatars', true);
 

@@ -1,4 +1,4 @@
-import type { Company, CategoryInfo } from "./types";
+import type { Company, CategoryInfo, CompanyClaim } from "./types";
 import { computeScores, computeGrowthRate } from "./scoring";
 import { humanizeSlug } from "./utils";
 import { supabase } from "./supabase";
@@ -105,6 +105,53 @@ export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
   if (error || !data) return [];
   const companies = (data as SupabaseRow[]).map(transformRow);
   return computeScores(companies);
+}
+
+export async function submitClaim(domain: string): Promise<void> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
+
+  const { data: company } = await supabase
+    .from("companies")
+    .select("id")
+    .eq("domain", domain)
+    .single();
+  if (!company) throw new Error("Company not found");
+
+  const { error } = await supabase.from("company_claims").insert({
+    user_id: user.id,
+    company_id: company.id,
+    user_email: user.email ?? "",
+    status: "approved",
+  });
+  if (error) throw new Error(error.message);
+}
+
+export async function getClaimStatus(domain: string): Promise<string> {
+  const { data: company } = await supabase
+    .from("companies")
+    .select("id")
+    .eq("domain", domain)
+    .single();
+
+  if (!company) return "unclaimed";
+
+  const { data: claim } = await supabase
+    .from("company_claims")
+    .select("status")
+    .eq("company_id", company.id)
+    .single();
+
+  return claim?.status ?? "unclaimed";
+}
+
+export async function getUserClaims(): Promise<CompanyClaim[]> {
+  const { data } = await supabase
+    .from("company_claims")
+    .select("id, status, created_at, companies ( domain, title, logo_url )")
+    .order("created_at", { ascending: false });
+
+  return (data ?? []) as unknown as CompanyClaim[];
 }
 
 export async function getCategories(): Promise<CategoryInfo[]> {
