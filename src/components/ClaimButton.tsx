@@ -13,7 +13,7 @@ function domainsMatch(userEmail: string, companyDomain: string): boolean {
 }
 
 export function ClaimButton({ domain }: { domain: string }) {
-  const { user, openModal, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [status, setStatus] = useState<ClaimStatus>("loading");
   const [showMismatch, setShowMismatch] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function ClaimButton({ domain }: { domain: string }) {
   useEffect(() => {
     if (authLoading) return;
     if (!user) {
-      setStatus("unclaimed");
+      setStatus("unclaimed"); // will render null below
       return;
     }
     let cancelled = false;
@@ -32,12 +32,7 @@ export function ClaimButton({ domain }: { domain: string }) {
   }, [user, domain, authLoading]);
 
   const handleClaim = async () => {
-    if (!user) {
-      openModal();
-      return;
-    }
-
-    if (!domainsMatch(user.email ?? "", domain)) {
+    if (!domainsMatch(user!.email ?? "", domain)) {
       setShowMismatch(true);
       return;
     }
@@ -52,6 +47,8 @@ export function ClaimButton({ domain }: { domain: string }) {
       setStatus("unclaimed");
     }
   };
+
+  if (!authLoading && !user) return null;
 
   if (status === "loading") {
     return (

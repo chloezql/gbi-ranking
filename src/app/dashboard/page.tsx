@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { getUserClaims } from "@/lib/data";
 import type { CompanyClaim } from "@/lib/types";
+import { UserSidebar } from "@/components/UserSidebar";
 
 interface UserProfile {
   display_name: string | null;
@@ -38,10 +39,12 @@ export default function DashboardPage() {
   if (loading || !user) return null;
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-10">
-      <ProfileSection user={user} profile={profile} onSave={setProfile} />
-
-      <MyCompanySection user={user} />
+    <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col md:flex-row md:gap-8">
+      <UserSidebar />
+      <div className="flex-1 flex flex-col gap-10 min-w-0">
+        <ProfileSection user={user} profile={profile} onSave={setProfile} />
+        <MyCompanySection user={user} />
+      </div>
     </div>
   );
 }
@@ -84,9 +87,9 @@ function MyCompanySection({ user }: { user: User }) {
           <p className="text-muted text-sm">Loading…</p>
         </div>
       ) : claims.length === 0 ? (
-        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
-          <p className="text-muted text-sm">No companies yet.</p>
-          <p className="text-muted text-xs mt-1">
+        <div className="rounded-xl border border-border bg-card px-10 py-12 text-center">
+          <p className="text-muted text-sm font-medium">No companies yet.</p>
+          <p className="text-muted text-xs mt-2 leading-relaxed">
             Visit a company page and click &ldquo;Claim this company&rdquo; to get started.
           </p>
         </div>
