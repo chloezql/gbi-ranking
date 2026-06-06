@@ -8,7 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { getUserClaims } from "@/lib/data";
 import type { CompanyClaim } from "@/lib/types";
-import { UserSidebar } from "@/components/UserSidebar";
 
 interface UserProfile {
   display_name: string | null;
@@ -39,9 +38,15 @@ export default function DashboardPage() {
   if (loading || !user) return null;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10 flex flex-col md:flex-row md:gap-8">
-      <UserSidebar />
-      <div className="flex-1 flex flex-col gap-10 min-w-0">
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <nav className="text-sm text-muted mb-8">
+        <Link href="/" className="hover:text-accent transition-colors">
+          Rankings
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-foreground">Dashboard</span>
+      </nav>
+      <div className="flex flex-col gap-10">
         <ProfileSection user={user} profile={profile} onSave={setProfile} />
         <MyCompanySection user={user} />
       </div>
