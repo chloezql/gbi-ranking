@@ -80,6 +80,12 @@ export function Navbar() {
           >
             How we score
           </a>
+          <a
+            href="/committee"
+            className="text-xs text-muted hover:text-foreground transition-colors font-medium"
+          >
+            Committee
+          </a>
           <ThemeToggle />
           {!loading && (
             user ? (
