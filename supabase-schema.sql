@@ -154,13 +154,68 @@ create policy "Users can read own claims"
   on company_claims for select to authenticated
   using (auth.uid() = user_id);
 
--- Only approved claims are inserted directly from the client (domain check happens in UI)
-create policy "Users can insert own approved claims"
-  on company_claims for insert to authenticated
-  with check (auth.uid() = user_id and status = 'approved');
-
-grant select, insert on public.company_claims to authenticated;
+-- Clients can only read their own claims; all inserts go through the RPC below
+grant select on public.company_claims to authenticated;
 grant select, insert, update, delete on public.company_claims to service_role;
+
+-- 9. claim_company RPC
+-- SECURITY DEFINER so it runs as the function owner and bypasses RLS for inserts.
+-- Inserts a pending row, then resolves to 'approved' (domain match) or 'rejected'.
+-- user_email and status are never trusted from the client.
+create or replace function claim_company(p_domain text)
+returns text
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_company_id      uuid;
+  v_company_domain  text;
+  v_user_id         uuid;
+  v_user_email      text;
+  v_email_domain    text;
+  v_domain_clean    text;
+  v_status          text;
+begin
+  v_user_id    := auth.uid();
+  v_user_email := auth.jwt() ->> 'email';
+
+  if v_user_id is null then
+    raise exception 'Not authenticated';
+  end if;
+
+  select id, domain into v_company_id, v_company_domain
+  from companies where domain = p_domain;
+
+  if v_company_id is null then
+    raise exception 'Company not found';
+  end if;
+
+  v_email_domain := lower(split_part(v_user_email, '@', 2));
+  v_domain_clean := lower(regexp_replace(v_company_domain, '^www\.', ''));
+
+  if v_email_domain = v_domain_clean
+     or v_email_domain like ('%.' || v_domain_clean) then
+    v_status := 'approved';
+  else
+    v_status := 'rejected';
+  end if;
+
+  -- Insert as pending first (audit trail), then update to final status
+  insert into company_claims (user_id, company_id, user_email, status)
+  values (v_user_id, v_company_id, v_user_email, 'pending')
+  on conflict (user_id, company_id)
+  do update set status = 'pending', updated_at = now();
+
+  update company_claims
+  set status = v_status, updated_at = now()
+  where user_id = v_user_id and company_id = v_company_id;
+
+  return v_status;
+end;
+$$;
+
+grant execute on function claim_company(text) to authenticated;
 
 -- 10. Storage bucket for profile avatars
 insert into storage.buckets (id, name, public)

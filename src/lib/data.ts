@@ -107,24 +107,10 @@ export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
   return computeScores(companies);
 }
 
-export async function submitClaim(domain: string): Promise<void> {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Not authenticated");
-
-  const { data: company } = await supabase
-    .from("companies")
-    .select("id")
-    .eq("domain", domain)
-    .single();
-  if (!company) throw new Error("Company not found");
-
-  const { error } = await supabase.from("company_claims").insert({
-    user_id: user.id,
-    company_id: company.id,
-    user_email: user.email ?? "",
-    status: "approved",
-  });
+export async function submitClaim(domain: string): Promise<string> {
+  const { data, error } = await supabase.rpc("claim_company", { p_domain: domain });
   if (error) throw new Error(error.message);
+  return data as string;
 }
 
 export async function getClaimStatus(domain: string): Promise<string> {
