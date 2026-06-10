@@ -10,6 +10,9 @@ interface UserProfile {
   display_name: string | null;
   avatar_url: string | null;
   bio: string | null;
+  title: string | null;
+  link_url: string | null;
+  is_committee_member: boolean | null;
 }
 
 export default function DashboardPage() {
@@ -26,7 +29,7 @@ export default function DashboardPage() {
 
     supabase
       .from("user_profiles")
-      .select("display_name, avatar_url, bio")
+      .select("display_name, avatar_url, bio, title, link_url, is_committee_member")
       .eq("id", user.id)
       .single()
       .then(({ data }) => setProfile(data));
@@ -48,6 +51,92 @@ export default function DashboardPage() {
   );
 }
 
+function InlineField({
+  value,
+  onSave,
+  placeholder,
+  inputType = "text",
+  displayClassName = "text-sm text-foreground",
+  emptyLabel,
+}: {
+  value: string;
+  onSave: (val: string) => Promise<boolean>;
+  placeholder: string;
+  inputType?: string;
+  displayClassName?: string;
+  emptyLabel?: string;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [input, setInput] = useState("");
+  const [saving, setSaving] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (editing) inputRef.current?.focus();
+  }, [editing]);
+
+  const handleSave = async () => {
+    setSaving(true);
+    const ok = await onSave(input);
+    if (ok) setEditing(false);
+    setSaving(false);
+  };
+
+  const PencilIcon = () => (
+    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+    </svg>
+  );
+
+  if (editing) {
+    return (
+      <div className="flex items-center gap-2">
+        <input
+          ref={inputRef}
+          type={inputType}
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => { if (e.key === "Enter") handleSave(); if (e.key === "Escape") setEditing(false); }}
+          placeholder={placeholder}
+          className="flex-1 px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+        />
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="w-7 h-7 rounded-lg bg-accent text-white flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 shrink-0"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+          </svg>
+        </button>
+        <button
+          onClick={() => setEditing(false)}
+          className="w-7 h-7 rounded-lg border border-border text-muted flex items-center justify-center hover:text-foreground hover:bg-border/40 transition-colors shrink-0"
+        >
+          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <span className={`truncate ${displayClassName}`}>
+        {value || (emptyLabel ? <span className="text-muted italic">{emptyLabel}</span> : <span className="text-muted italic">{placeholder}</span>)}
+      </span>
+      <button
+        onClick={() => { setInput(value); setEditing(true); }}
+        className="text-muted hover:text-foreground transition-colors shrink-0"
+        title={`Edit ${placeholder.toLowerCase()}`}
+      >
+        <PencilIcon />
+      </button>
+    </div>
+  );
+}
+
 function ProfileSection({
   user,
   profile,
@@ -57,32 +146,29 @@ function ProfileSection({
   profile: UserProfile | null;
   onSave: (updated: UserProfile) => void;
 }) {
+  const isCommittee = !!profile?.is_committee_member;
+
   const [displayName, setDisplayName] = useState(profile?.display_name ?? "");
   const [bio, setBio] = useState(profile?.bio ?? "");
   const [avatarUrl, setAvatarUrl] = useState(profile?.avatar_url ?? "");
+  const [title, setTitle] = useState(profile?.title ?? "");
+  const [linkUrl, setLinkUrl] = useState(profile?.link_url ?? "");
 
-  const [editingName, setEditingName] = useState(false);
   const [editingBio, setEditingBio] = useState(false);
-  const [nameInput, setNameInput] = useState("");
   const [bioInput, setBioInput] = useState("");
-
-  const [savingName, setSavingName] = useState(false);
   const [savingBio, setSavingBio] = useState(false);
   const [uploading, setUploading] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const nameInputRef = useRef<HTMLInputElement>(null);
   const bioInputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     setDisplayName(profile?.display_name ?? "");
     setBio(profile?.bio ?? "");
     setAvatarUrl(profile?.avatar_url ?? "");
+    setTitle(profile?.title ?? "");
+    setLinkUrl(profile?.link_url ?? "");
   }, [profile]);
-
-  useEffect(() => {
-    if (editingName) nameInputRef.current?.focus();
-  }, [editingName]);
 
   useEffect(() => {
     if (editingBio) bioInputRef.current?.focus();
@@ -94,12 +180,21 @@ function ProfileSection({
       display_name: displayName || null,
       avatar_url: avatarUrl || null,
       bio: bio || null,
+      title: title || null,
+      link_url: linkUrl || null,
       updated_at: new Date().toISOString(),
       ...patch,
     };
     const { error } = await supabase.from("user_profiles").upsert(row);
     if (!error) {
-      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio });
+      onSave({
+        display_name: row.display_name,
+        avatar_url: row.avatar_url,
+        bio: row.bio,
+        title: row.title,
+        link_url: row.link_url,
+        is_committee_member: profile?.is_committee_member ?? null,
+      });
     }
     return !error;
   };
@@ -121,21 +216,12 @@ function ProfileSection({
     e.target.value = "";
   };
 
-  const handleSaveName = async () => {
-    setSavingName(true);
-    const ok = await upsert({ display_name: nameInput || null });
-    if (ok) { setDisplayName(nameInput); setEditingName(false); }
-    setSavingName(false);
-  };
-
   const handleSaveBio = async () => {
     setSavingBio(true);
     const ok = await upsert({ bio: bioInput || null });
     if (ok) { setBio(bioInput); setEditingBio(false); }
     setSavingBio(false);
   };
-
-  const viewName = displayName || user.email?.split("@")[0] || "User";
 
   return (
     <section>
@@ -189,52 +275,47 @@ function ProfileSection({
           <div className="flex-1 min-w-0 flex flex-col gap-3 pt-1">
 
             {/* Display name */}
-            {editingName ? (
-              <div className="flex items-center gap-2">
-                <input
-                  ref={nameInputRef}
-                  type="text"
-                  value={nameInput}
-                  onChange={e => setNameInput(e.target.value)}
-                  onKeyDown={e => { if (e.key === "Enter") handleSaveName(); if (e.key === "Escape") setEditingName(false); }}
-                  placeholder="Your name"
-                  className="flex-1 px-3 py-1.5 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
-                />
-                <button
-                  onClick={handleSaveName}
-                  disabled={savingName}
-                  className="w-7 h-7 rounded-lg bg-accent text-white flex items-center justify-center hover:opacity-90 transition-opacity disabled:opacity-50 shrink-0"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => setEditingName(false)}
-                  className="w-7 h-7 rounded-lg border border-border text-muted flex items-center justify-center hover:text-foreground hover:bg-border/40 transition-colors shrink-0"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            ) : (
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-bold truncate">{viewName}</span>
-                <button
-                  onClick={() => { setNameInput(displayName); setEditingName(true); }}
-                  className="text-muted hover:text-foreground transition-colors"
-                  title="Edit name"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                  </svg>
-                </button>
-              </div>
-            )}
+            <InlineField
+              value={displayName}
+              placeholder="Your name"
+              displayClassName="text-xl font-bold"
+              onSave={async (val) => {
+                const ok = await upsert({ display_name: val || null });
+                if (ok) setDisplayName(val);
+                return ok;
+              }}
+            />
 
             {/* Email */}
             <p className="text-sm text-muted -mt-1">{user.email}</p>
+
+            {/* Title (committee only) */}
+            {isCommittee && (
+              <InlineField
+                value={title}
+                placeholder="Title / affiliation"
+                onSave={async (val) => {
+                  const ok = await upsert({ title: val || null });
+                  if (ok) setTitle(val);
+                  return ok;
+                }}
+              />
+            )}
+
+            {/* URL (committee only) */}
+            {isCommittee && (
+              <InlineField
+                value={linkUrl}
+                placeholder="Profile URL"
+                inputType="url"
+                displayClassName="text-sm text-muted"
+                onSave={async (val) => {
+                  const ok = await upsert({ link_url: val || null });
+                  if (ok) setLinkUrl(val);
+                  return ok;
+                }}
+              />
+            )}
 
             {/* Bio */}
             {editingBio ? (

@@ -83,7 +83,7 @@ export default async function CommitteePage() {
       {/* Breadcrumb */}
       <nav className="text-sm text-muted mb-8">
         <Link href="/" className="hover:text-accent transition-colors">
-          Rankings
+          Home
         </Link>
         <span className="mx-2">/</span>
         <span className="text-foreground">Committee</span>
