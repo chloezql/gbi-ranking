@@ -27,6 +27,7 @@ export interface Company {
   domain: string;
   title: string;
   description: string;
+  descriptionUsable: boolean;
   screenshotUrl: string;
   logoUrl: string;
   originCountry: string;
