@@ -3,6 +3,7 @@
  *
  * Usage:
  *   OPENAI_API_KEY=xxx SUPABASE_SERVICE_ROLE_KEY=xxx node scripts/detect-countries.mjs
+ *   node scripts/detect-countries.mjs --batch-size=30 --concurrency=4
  */
 
 import OpenAI from "openai";
@@ -19,6 +20,27 @@ if (!SERVICE_ROLE_KEY || !OPENAI_API_KEY) {
 
 const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+
+function getArg(name, defaultValue = null) {
+  const prefix = `--${name}=`;
+  const arg = process.argv.find((item) => item.startsWith(prefix));
+  if (!arg) return defaultValue;
+  return arg.slice(prefix.length);
+}
+
+const batchSize = Math.max(1, parseInt(getArg("batch-size", "30"), 10));
+const concurrency = Math.max(1, parseInt(getArg("concurrency", "4"), 10));
+
+async function mapWithConcurrency(items, limit, handler) {
+  let index = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (index < items.length) {
+      const currentIndex = index++;
+      await handler(items[currentIndex], currentIndex);
+    }
+  });
+  await Promise.all(workers);
+}
 
 async function detectCountries(companies) {
   const list = companies
@@ -65,37 +87,45 @@ async function main() {
   }
 
   console.log(`${companies.length} companies need country detection.\n`);
+  console.log(`Batch size: ${batchSize}`);
+  console.log(`Concurrency: ${concurrency}\n`);
 
-  // Process in batches of 30 to stay within token limits
-  const BATCH = 30;
   let total = 0;
+  let failedBatches = 0;
+  const batches = [];
 
-  for (let i = 0; i < companies.length; i += BATCH) {
-    const batch = companies.slice(i, i + BATCH);
-    console.log(`Batch ${Math.floor(i / BATCH) + 1}: ${batch.length} companies...`);
+  for (let i = 0; i < companies.length; i += batchSize) {
+    batches.push(companies.slice(i, i + batchSize));
+  }
+
+  await mapWithConcurrency(batches, concurrency, async (batch, batchIndex) => {
+    console.log(`Batch ${batchIndex + 1}/${batches.length}: ${batch.length} companies...`);
 
     try {
       const results = await detectCountries(batch);
 
-      for (const { domain, country_code } of results) {
-        const { error: updateErr } = await supabase
-          .from("companies")
-          .update({ country_code })
-          .eq("domain", domain);
+      await Promise.all(
+        results.map(async ({ domain, country_code }) => {
+          const { error: updateErr } = await supabase
+            .from("companies")
+            .update({ country_code })
+            .eq("domain", domain);
 
-        if (updateErr) {
-          console.error(`  ${domain} — update failed: ${updateErr.message}`);
-        } else {
-          console.log(`  ${domain} → ${country_code}`);
-          total++;
-        }
-      }
+          if (updateErr) {
+            console.error(`  ${domain} - update failed: ${updateErr.message}`);
+          } else {
+            console.log(`  ${domain} -> ${country_code}`);
+            total++;
+          }
+        })
+      );
     } catch (err) {
-      console.error(`  Batch failed: ${err.message}`);
+      failedBatches++;
+      console.error(`  Batch ${batchIndex + 1} failed: ${err.message}`);
     }
-  }
+  });
 
-  console.log(`\nDone! Updated ${total} companies.`);
+  console.log(`\nDone! Updated ${total} companies. Failed batches: ${failedBatches}.`);
 }
 
 main().catch(console.error);

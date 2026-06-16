@@ -73,6 +73,7 @@ function transformRow(row: SupabaseRow): Company {
     })),
     score: 0,
     growthRate,
+    effectiveGrowthScore: 0,
   };
 }
 
