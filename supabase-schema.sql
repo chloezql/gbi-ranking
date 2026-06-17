@@ -102,6 +102,9 @@ create table user_profiles (
   display_name text,
   avatar_url text,
   bio text,
+  is_committee_member boolean default false,
+  title text,
+  link_url text,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -111,12 +114,21 @@ grant select, insert, update
   on public.user_profiles
   to authenticated;
 
+grant select
+  on public.user_profiles
+  to anon;
+
 grant select, insert, update, delete
   on public.user_profiles
   to service_role;
 
 -- RLS (row-level security restricts authenticated users to their own row)
 alter table public.user_profiles enable row level security;
+
+-- Public can read committee members (no login required)
+create policy "Public can read committee members"
+  on public.user_profiles for select
+  using (is_committee_member = true);
 
 create policy "Users can read own profile"
   on public.user_profiles for select to authenticated
