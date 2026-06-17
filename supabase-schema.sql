@@ -102,6 +102,7 @@ create table user_profiles (
   display_name text,
   avatar_url text,
   bio text,
+  role text not null default 'user' check (role in ('user', 'admin')),
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -130,7 +131,47 @@ create policy "Users can update own profile"
   on public.user_profiles for update to authenticated
   using (auth.uid() = id);
 
--- 7. Storage bucket for profile avatars
+-- 7. Company submissions (pending review queue)
+create table company_submissions (
+  id                uuid primary key default gen_random_uuid(),
+  submitted_by      uuid not null references auth.users(id),
+  status            text not null default 'pending'
+                      check (status in ('pending', 'approved', 'rejected')),
+  company_type      text not null
+                      check (company_type in ('brand', 'service_provider')),
+  name              text not null,
+  domain            text not null,
+  images            jsonb not null default '[]',
+  related_companies jsonb not null default '[]',
+  reviewer_notes    text,
+  reviewed_at       timestamptz,
+  apify_status      text not null default 'pending'
+                      check (apify_status in ('pending', 'running', 'complete', 'failed')),
+  apify_run_id      text,
+  created_at        timestamptz default now(),
+  updated_at        timestamptz default now()
+);
+
+create index idx_submissions_user   on company_submissions(submitted_by);
+create index idx_submissions_domain on company_submissions(domain);
+create index idx_submissions_status on company_submissions(status);
+
+alter table company_submissions enable row level security;
+
+create policy "Users read own submissions"
+  on company_submissions for select
+  to authenticated
+  using (auth.uid() = submitted_by);
+
+create policy "Users insert own submissions"
+  on company_submissions for insert
+  to authenticated
+  with check (auth.uid() = submitted_by);
+
+grant select, insert on public.company_submissions to authenticated;
+grant all on public.company_submissions to service_role;
+
+-- 8. Storage bucket for profile avatars
 insert into storage.buckets (id, name, public)
   values ('avatars', 'avatars', true);
 
@@ -140,3 +181,30 @@ create policy "Users manage own avatar"
   to authenticated
   using (bucket_id = 'avatars' and auth.uid()::text = (storage.foldername(name))[1])
   with check (bucket_id = 'avatars' and auth.uid()::text = (storage.foldername(name))[1]);
+
+-- 9. Storage bucket for company images
+insert into storage.buckets (id, name, public)
+  values ('company-images', 'company-images', true);
+
+create policy "Users upload company images"
+  on storage.objects for insert
+  to authenticated
+  with check (
+    bucket_id = 'company-images'
+    and auth.uid()::text = (storage.foldername(name))[1]
+  );
+
+create policy "Public read company images"
+  on storage.objects for select
+  using (bucket_id = 'company-images');
+
+-- 10. Admin policies
+create policy "Admins read all submissions"
+  on company_submissions for select
+  to authenticated
+  using (
+    exists (
+      select 1 from user_profiles
+      where id = auth.uid() and role = 'admin'
+    )
+  );

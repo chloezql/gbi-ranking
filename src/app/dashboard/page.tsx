@@ -2,20 +2,25 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
+import type { CompanySubmission } from "@/lib/types";
+import { SubmissionCard } from "@/components/SubmissionCard";
 
 interface UserProfile {
   display_name: string | null;
   avatar_url: string | null;
   bio: string | null;
+  role: "user" | "admin";
 }
 
 export default function DashboardPage() {
-  const { user, loading } = useAuth();
+  const { user, role, loading } = useAuth();
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [submissions, setSubmissions] = useState<CompanySubmission[]>([]);
 
   useEffect(() => {
     if (!loading && !user) router.replace("/");
@@ -26,25 +31,146 @@ export default function DashboardPage() {
 
     supabase
       .from("user_profiles")
-      .select("display_name, avatar_url, bio")
+      .select("display_name, avatar_url, bio, role")
       .eq("id", user.id)
       .single()
       .then(({ data }) => setProfile(data));
   }, [user]);
 
+  useEffect(() => {
+    if (!user || role === null) return;
+
+    const query = supabase
+      .from("company_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (role !== "admin") {
+      query.eq("submitted_by", user.id);
+    }
+
+    query.then(({ data }) => setSubmissions((data as CompanySubmission[]) ?? []));
+  }, [user, role]);
+
   if (loading || !user) return null;
+
+  const isAdmin = role === "admin";
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-10">
       <ProfileSection user={user} profile={profile} onSave={setProfile} />
+      {isAdmin
+        ? <AdminReviewSection submissions={submissions} />
+        : <CompanySection submissions={submissions} />
+      }
+    </div>
+  );
+}
 
-      <section>
-        <h2 className="text-lg font-semibold mb-4">My Company</h2>
+const STATUS_CONFIG = {
+  pending:  { label: "Pending review", className: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" },
+  approved: { label: "Approved",       className: "bg-success/10 text-success" },
+  rejected: { label: "Rejected",       className: "bg-danger/10 text-danger" },
+};
+
+function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
+  return (
+    <section>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold">My Companies</h2>
+        <Link
+          href="/company/create"
+          className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
+        >
+          + Add company
+        </Link>
+      </div>
+
+      {submissions.length === 0 ? (
         <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
           <p className="text-muted text-sm">No companies yet.</p>
         </div>
-      </section>
-    </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {submissions.map(s => {
+            const cfg = STATUS_CONFIG[s.status];
+            return (
+              <div
+                key={s.id}
+                className="rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4"
+              >
+                <div className="min-w-0">
+                  <p className="font-medium text-sm truncate">{s.name}</p>
+                  <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs text-muted capitalize">
+                    {s.company_type === "service_provider" ? "Service Provider" : "Brand"}
+                  </span>
+                  <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${cfg.className}`}>
+                    {cfg.label}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+type FilterStatus = "pending" | "approved" | "rejected";
+
+function AdminReviewSection({ submissions }: { submissions: CompanySubmission[] }) {
+  const [filter, setFilter] = useState<FilterStatus>("pending");
+
+  const filtered = submissions.filter(s => s.status === filter);
+  const counts = {
+    pending:  submissions.filter(s => s.status === "pending").length,
+    approved: submissions.filter(s => s.status === "approved").length,
+    rejected: submissions.filter(s => s.status === "rejected").length,
+  };
+
+  return (
+    <section>
+      <h2 className="text-lg font-semibold mb-4">Company Submissions</h2>
+
+      <div className="flex gap-1 mb-4 p-1 bg-border/30 rounded-xl w-fit">
+        {(["pending", "approved", "rejected"] as const).map(tab => (
+          <button
+            key={tab}
+            onClick={() => setFilter(tab)}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
+              filter === tab
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted hover:text-foreground"
+            }`}
+          >
+            {tab}
+            {counts[tab] > 0 && (
+              <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
+                filter === tab ? "bg-accent text-white" : "bg-border text-muted"
+              }`}>
+                {counts[tab]}
+              </span>
+            )}
+          </button>
+        ))}
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm">No {filter} submissions.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {filtered.map(s => (
+            <SubmissionCard key={s.id} submission={s} />
+          ))}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -99,7 +225,7 @@ function ProfileSection({
     };
     const { error } = await supabase.from("user_profiles").upsert(row);
     if (!error) {
-      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio });
+      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio, role: profile?.role ?? "user" });
     }
     return !error;
   };

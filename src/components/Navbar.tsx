@@ -7,7 +7,7 @@ import { Logo } from "./Logo";
 import { useAuth } from "@/context/AuthContext";
 
 function UserMenu() {
-  const { user, signOut } = useAuth();
+  const { user, role, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +49,18 @@ function UserMenu() {
             </svg>
             Dashboard
           </Link>
+          {role !== "admin" && (
+            <Link
+              href="/company/create"
+              onClick={() => setOpen(false)}
+              className="w-full text-left px-4 py-3 text-sm font-medium text-muted hover:text-foreground hover:bg-border/40 transition-colors flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.5v15m7.5-7.5h-15" />
+              </svg>
+              Add company
+            </Link>
+          )}
           <button
             onClick={() => { setOpen(false); signOut(); }}
             className="w-full text-left px-4 py-3 text-sm font-medium text-muted hover:text-foreground hover:bg-border/40 transition-colors flex items-center gap-2"

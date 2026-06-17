@@ -58,6 +58,26 @@ export interface Company {
 
 export type SortKey = "score" | "visits" | "growthRate";
 
+export type CompanyType = "brand" | "service_provider";
+export type SubmissionStatus = "pending" | "approved" | "rejected";
+
+export interface CompanySubmission {
+  id: string;
+  submitted_by: string;
+  status: SubmissionStatus;
+  company_type: CompanyType;
+  name: string;
+  domain: string;
+  images: string[];
+  related_companies: string[];
+  reviewer_notes: string | null;
+  reviewed_at: string | null;
+  apify_status: "pending" | "running" | "complete" | "failed";
+  apify_run_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface CategoryInfo {
   slug: string;
   name: string;
