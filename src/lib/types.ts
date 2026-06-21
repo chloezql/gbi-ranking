@@ -60,6 +60,13 @@ export interface Company {
 
 export type SortKey = "score" | "visits" | "growthRate";
 
+export interface CompanyClaim {
+  id: string;
+  status: string;
+  created_at: string;
+  companies: { domain: string; title: string | null; logo_url: string | null } | null;
+}
+
 export interface CategoryInfo {
   slug: string;
   name: string;
