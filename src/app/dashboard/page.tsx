@@ -6,8 +6,9 @@ import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
-import type { CompanySubmission } from "@/lib/types";
+import type { CompanySubmission, CompanyClaim } from "@/lib/types";
 import { SubmissionCard } from "@/components/SubmissionCard";
+import { getUserClaims } from "@/lib/data";
 
 interface UserProfile {
   display_name: string | null;
@@ -57,12 +58,25 @@ export default function DashboardPage() {
   const isAdmin = role === "admin";
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 flex flex-col gap-10">
-      <ProfileSection user={user} profile={profile} onSave={setProfile} />
-      {isAdmin
-        ? <AdminReviewSection submissions={submissions} />
-        : <CompanySection submissions={submissions} />
-      }
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <nav className="text-sm text-muted mb-8">
+        <Link href="/" className="hover:text-accent transition-colors">
+          Rankings
+        </Link>
+        <span className="mx-2">/</span>
+        <span className="text-foreground">Dashboard</span>
+      </nav>
+      <div className="flex flex-col gap-10">
+        <ProfileSection user={user} profile={profile} onSave={setProfile} />
+        {isAdmin ? (
+          <AdminReviewSection submissions={submissions} />
+        ) : (
+          <>
+            <MyCompanySection user={user} />
+            <CompanySection submissions={submissions} />
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -73,11 +87,102 @@ const STATUS_CONFIG = {
   rejected: { label: "Rejected",       className: "bg-danger/10 text-danger" },
 };
 
+const STATUS_LABEL: Record<string, { label: string; className: string }> = {
+  approved: {
+    label: "Claimed",
+    className: "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800",
+  },
+  manual_review: {
+    label: "Email mismatch",
+    className: "bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800",
+  },
+  rejected: {
+    label: "Rejected",
+    className: "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800",
+  },
+  pending: {
+    label: "Pending",
+    className: "bg-gray-100 dark:bg-gray-800 text-muted border-border",
+  },
+};
+
+function MyCompanySection({ user }: { user: User }) {
+  const [claims, setClaims] = useState<CompanyClaim[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getUserClaims()
+      .then(setClaims)
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [user.id]);
+
+  return (
+    <section>
+      <h2 className="text-lg font-semibold mb-4">Claimed Companies</h2>
+      {loading ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm">Loading…</p>
+        </div>
+      ) : claims.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-10 py-12 text-center">
+          <p className="text-muted text-sm font-medium">No claimed companies yet.</p>
+          <p className="text-muted text-xs mt-2 leading-relaxed">
+            Visit a company page and click &ldquo;Claim this company&rdquo; to get started.
+          </p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {claims.map((claim) => {
+            const company = claim.companies;
+            const badge = STATUS_LABEL[claim.status] ?? STATUS_LABEL.pending;
+            return (
+              <div
+                key={claim.id}
+                className="flex items-center gap-4 rounded-xl border border-border bg-card px-5 py-4"
+              >
+                {company?.logo_url ? (
+                  <img
+                    src={company.logo_url}
+                    alt={company.domain}
+                    className="w-10 h-10 rounded-lg object-contain border border-border shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-lg border border-border bg-background flex items-center justify-center shrink-0 text-sm font-semibold text-foreground">
+                    {company?.domain?.charAt(0).toUpperCase()}
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-base text-foreground truncate">
+                    {company?.title && company.title !== company.domain
+                      ? company.title
+                      : company?.domain}
+                  </p>
+                  <p className="text-sm text-muted mt-0.5 truncate">{company?.domain}</p>
+                </div>
+                <span className={`text-sm font-medium px-2.5 py-1 rounded-full border ${badge.className}`}>
+                  {badge.label}
+                </span>
+                <Link
+                  href={`/company/${encodeURIComponent(company?.domain ?? "")}`}
+                  className="text-sm text-accent hover:underline shrink-0"
+                >
+                  View
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
 function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
   return (
     <section>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">My Companies</h2>
+        <h2 className="text-lg font-semibold">Created Companies</h2>
         <Link
           href="/company/create"
           className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
@@ -88,7 +193,7 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
 
       {submissions.length === 0 ? (
         <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
-          <p className="text-muted text-sm">No companies yet.</p>
+          <p className="text-muted text-sm">Loading…</p>
         </div>
       ) : (
         <div className="flex flex-col gap-3">

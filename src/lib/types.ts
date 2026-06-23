@@ -54,9 +54,17 @@ export interface Company {
 
   score: number;
   growthRate: number;
+  effectiveGrowthScore: number;
 }
 
 export type SortKey = "score" | "visits" | "growthRate";
+
+export interface CompanyClaim {
+  id: string;
+  status: string;
+  created_at: string;
+  companies: { domain: string; title: string | null; logo_url: string | null } | null;
+}
 
 export type CompanyType = "brand" | "service_provider";
 export type SubmissionStatus = "pending" | "approved" | "rejected";
