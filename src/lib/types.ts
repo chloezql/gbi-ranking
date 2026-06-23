@@ -54,11 +54,16 @@ export interface Company {
   topKeywords: { name: string; estimatedValue: number; cpc: number | null }[];
 
   score: number;
+  scoreBreakdown: {
+    traffic: number;
+    growth: number;
+    visitDepth: number;
+    bounceQuality: number;
+    sessionTime: number;
+  };
   growthRate: number;
   effectiveGrowthScore: number;
 }
-
-export type SortKey = "score" | "visits" | "growthRate";
 
 export interface CompanyClaim {
   id: string;

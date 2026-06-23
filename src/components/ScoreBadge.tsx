@@ -11,12 +11,12 @@ export function ScoreBadge({ score }: { score: number }) {
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center w-14 h-14 rounded-xl text-center shrink-0",
+        "flex flex-col items-center justify-center w-[84px] h-[84px] rounded-2xl text-center shrink-0 cursor-help shadow-sm transition-transform duration-200 hover:scale-[1.02]",
         color
       )}
     >
-      <span className="text-lg font-bold leading-none">{score}</span>
-      <span className="text-[10px] opacity-70 mt-0.5">pts</span>
+      <span className="text-[26px] font-bold leading-none">{score}</span>
+      <span className="text-xs opacity-70 mt-1">pts</span>
     </div>
   );
 }

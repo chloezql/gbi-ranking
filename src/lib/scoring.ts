@@ -88,16 +88,43 @@ export function computeScores(companies: Company[]): Company[] {
   const CEIL = 95;
   const effectiveGrowthScores = computeEffectiveGrowthScores(companies);
 
-  return companies.map((company, i) => ({
-    ...company,
-    score: applyTrafficCap(
+  return companies.map((company, i) => {
+    const score = applyTrafficCap(
       maxRaw === minRaw
         ? 50
         : Math.round(FLOOR + ((rawScores[i] - minRaw) / (maxRaw - minRaw)) * (CEIL - FLOOR)),
       company.visits
-    ),
-    effectiveGrowthScore: effectiveGrowthScores[i],
-  }));
+    );
+    const weightedSignals = [
+      normVisits[i] * 0.6,
+      normGrowth[i] * 0.15,
+      normPages[i] * 0.1,
+      normBounce[i] * 0.075,
+      normTime[i] * 0.075,
+    ];
+    const signalTotal = weightedSignals.reduce((sum, value) => sum + value, 0);
+    const exactContributions =
+      signalTotal > 0
+        ? weightedSignals.map((value) => (value / signalTotal) * score)
+        : [score * 0.6, score * 0.15, score * 0.1, score * 0.075, score * 0.075];
+    const roundedContributions = exactContributions.map((value) => Math.round(value));
+    const roundingDifference =
+      score - roundedContributions.reduce((sum, value) => sum + value, 0);
+    roundedContributions[0] += roundingDifference;
+
+    return {
+      ...company,
+      score,
+      scoreBreakdown: {
+        traffic: roundedContributions[0],
+        growth: roundedContributions[1],
+        visitDepth: roundedContributions[2],
+        bounceQuality: roundedContributions[3],
+        sessionTime: roundedContributions[4],
+      },
+      effectiveGrowthScore: effectiveGrowthScores[i],
+    };
+  });
 }
 
 export function computeGrowthRate(monthlyVisits: { month: string; visits: number }[]): number {
