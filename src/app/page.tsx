@@ -1,6 +1,5 @@
 import { getAllCompanies, getCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
-import { FeaturedRankings } from "@/components/FeaturedRankings";
 
 export const dynamic = "force-dynamic";
 
@@ -10,39 +9,59 @@ export default async function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Banner */}
-      <div className="relative rounded-xl overflow-hidden mb-6 h-28 sm:h-36">
+      <a
+        href="https://gbiworld.org"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative block overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow mb-8"
+      >
         <img
-          src="/banner.webp"
+          src="/banner.png"
           alt="Global Brand Innovation Forum"
-          className="w-full h-full object-cover"
+          className="w-full h-[160px] sm:h-[220px] lg:h-[280px] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
-        <a
-          href="https://gbiworld.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-4 py-2 bg-accent text-white text-xs sm:text-sm font-semibold rounded-full border border-amber-400/60 hover:opacity-90 transition-opacity shadow-lg"
-        >
-          Learn More →
-        </a>
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
+        <span className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-full shadow-lg group-hover:brightness-110 transition-all">
+          Learn more
+          <svg
+            className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </span>
+      </a>
 
-      {/* Featured Rankings */}
-      <FeaturedRankings companies={companies} />
-
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight">
-          GBI Index
-        </h1>
-        <p className="text-muted mt-2 text-sm">
-        GBI 100 is the flagship ranking within GBI (Global Brand Infrastructure), designed to identify and showcase the leading brands and service providers driving global expansion across markets and categories. · Updated{" "}
-          {companies[0]?.snapshotDate
-            ? new Date(companies[0].snapshotDate).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-              })
-            : "N/A"}
+      <div id="rankings" className="mb-6 scroll-mt-16">
+        <div className="flex items-center gap-3">
+          <img
+            src="/gbi-dark.png"
+            alt=""
+            aria-hidden
+            className="h-9 sm:h-10 w-auto dark:hidden"
+          />
+          <img
+            src="/gbi-white.png"
+            alt=""
+            aria-hidden
+            className="h-9 sm:h-10 w-auto hidden dark:block"
+          />
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+            Index
+          </h2>
+        </div>
+        <p className="text-muted mt-3 text-base leading-relaxed">
+          GBI 100 is the flagship ranking within GBI (Global Brand
+          Infrastructure), designed to identify and showcase the leading brands
+          and service providers driving global expansion across markets and
+          categories.
         </p>
       </div>
 

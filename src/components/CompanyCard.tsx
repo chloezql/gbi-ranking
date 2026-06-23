@@ -1,137 +1,178 @@
 import Link from "next/link";
-import type { Company, SortKey } from "@/lib/types";
+import type { Company } from "@/lib/types";
 import { formatNumber, formatGrowth, cn, countryName } from "@/lib/utils";
 import { LogoImage } from "./LogoImage";
+import { CountUp } from "./CountUp";
 
-function MetricBadge({ company, sortKey }: { company: Company; sortKey: SortKey }) {
-  let value: string;
-  let label: string;
-  let colorClass: string;
-  let tooltip: string;
+const TOP3_THEME: Record<
+  1 | 2 | 3,
+  { ribbon: string; cardBg: string; border: string; scoreText: string }
+> = {
+  1: {
+    ribbon: "bg-gradient-to-b from-amber-300 via-amber-400 to-amber-600",
+    cardBg:
+      "bg-gradient-to-r from-amber-50 via-amber-50/40 to-transparent dark:from-amber-500/15 dark:via-amber-500/5 dark:to-transparent",
+    border: "border-amber-200/70 dark:border-amber-500/30",
+    scoreText: "text-amber-600 dark:text-amber-400",
+  },
+  2: {
+    ribbon: "bg-gradient-to-b from-slate-200 via-slate-300 to-slate-500",
+    cardBg:
+      "bg-gradient-to-r from-slate-100 via-slate-100/40 to-transparent dark:from-slate-400/15 dark:via-slate-400/5 dark:to-transparent",
+    border: "border-slate-200/70 dark:border-slate-400/30",
+    scoreText: "text-slate-600 dark:text-slate-300",
+  },
+  3: {
+    ribbon: "bg-gradient-to-b from-orange-300 via-orange-500 to-orange-700",
+    cardBg:
+      "bg-gradient-to-r from-orange-50 via-orange-50/40 to-transparent dark:from-orange-500/15 dark:via-orange-500/5 dark:to-transparent",
+    border: "border-orange-200/70 dark:border-orange-500/30",
+    scoreText: "text-orange-600 dark:text-orange-400",
+  },
+};
 
-  switch (sortKey) {
-    case "visits":
-      value = formatNumber(company.visits);
-      label = "visits";
-      tooltip = "Monthly website visits";
-      colorClass = "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400";
-      break;
-    case "growthRate":
-      value = String(company.effectiveGrowthScore);
-      label = "growth";
-      tooltip = `Effective growth score, based on rate, added visits, and starting traffic. Raw growth: ${formatGrowth(company.growthRate)}`;
-      colorClass = company.effectiveGrowthScore >= 70
-        ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400"
-        : company.effectiveGrowthScore >= 40
-          ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
-          : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400";
-      break;
-    default:
-      value = String(company.score);
-      label = "pts";
-      tooltip = "GBI Score: traffic, growth, engagement & bounce rate";
-      colorClass = company.score >= 75
-        ? "bg-accent text-white"
-        : company.score >= 50
-          ? "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400"
-          : "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400";
-      break;
-  }
-
+function PennantRibbon({
+  rank,
+  className,
+}: {
+  rank: 1 | 2 | 3;
+  className: string;
+}) {
   return (
-    <div title={tooltip} className={cn("flex flex-col items-center justify-center min-w-14 px-3 h-14 rounded-xl text-center shrink-0 cursor-default", colorClass)}>
-      <span className="text-base font-bold leading-none whitespace-nowrap">{value}</span>
-      <span className="text-[10px] opacity-70 mt-0.5">{label}</span>
-    </div>
+    <span
+      className={cn(
+        "relative inline-flex items-center justify-center w-12 h-16 text-2xl font-extrabold text-white shadow-md",
+        className
+      )}
+      style={{
+        clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%)",
+      }}
+    >
+      {rank}
+    </span>
   );
 }
 
 export function CompanyCard({
   company,
   rank,
-  sortKey,
+  index = 0,
   eager = false,
 }: {
   company: Company;
   rank: number;
-  sortKey: SortKey;
+  index?: number;
   eager?: boolean;
 }) {
   const isGrowing = company.growthRate >= 0;
+  const isTop3 = rank <= 3;
+  const theme = isTop3 ? TOP3_THEME[rank as 1 | 2 | 3] : null;
 
   return (
     <Link
       href={`/company/${company.domain}`}
-      className="group flex items-center gap-3 sm:gap-4 px-3 sm:px-4 py-3 sm:py-4 bg-card rounded-xl border border-border hover:border-accent/30 hover:shadow-md transition-all duration-200"
+      style={{ animationDelay: `${index * 30}ms` }}
+      className={cn(
+        "group grid items-center gap-4 grid-cols-[3.5rem_minmax(0,1fr)_4.5rem] sm:grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem] transition-all duration-200 last:border-0 animate-[slideUpFade_420ms_ease-out_both]",
+        theme
+          ? cn(
+              "mx-2 my-2 px-4 sm:px-5 py-5 sm:py-6 rounded-xl border shadow-sm hover:shadow-lg hover:-translate-y-0.5",
+              theme.cardBg,
+              theme.border
+            )
+          : "px-5 sm:px-6 py-5 border-b border-border last:rounded-b-xl hover:bg-accent-light/40"
+      )}
     >
-      <span className="text-sm font-mono text-muted w-5 sm:w-6 text-right shrink-0">
-        {rank}
-      </span>
-
-      <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shrink-0 border border-border flex items-center justify-center p-1">
-        {(company.logoUrl || company.screenshotUrl) ? (
-          <LogoImage
-            src={company.logoUrl || company.screenshotUrl}
-            alt={company.domain}
-            eager={eager}
-          />
+      <span className="flex items-center justify-start">
+        {theme ? (
+          <PennantRibbon rank={rank as 1 | 2 | 3} className={theme.ribbon} />
         ) : (
-          <span className="text-muted text-xs font-bold">
-            {company.domain.charAt(0).toUpperCase()}
+          <span className="block text-center text-lg font-mono text-muted w-full">
+            {rank}
           </span>
         )}
-      </div>
+      </span>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5">
-          <h3 className="font-semibold text-sm group-hover:text-accent transition-colors truncate">
-            {company.domain}
-          </h3>
-          {company.originCountry && (
-            <img
-              src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}
-              alt={countryName(company.originCountry)}
-              title={countryName(company.originCountry)}
-              className="shrink-0 w-5 h-3.5 object-cover rounded-[2px] border border-border/50 cursor-default"
-              loading="lazy"
+      <div className="flex items-center gap-4 min-w-0">
+        <div
+          className={cn(
+            "rounded-xl overflow-hidden bg-white dark:bg-gray-800 border border-border flex items-center justify-center shrink-0 p-1.5 transition-transform duration-200 group-hover:scale-[1.03]",
+            isTop3 ? "w-16 h-16" : "w-14 h-14"
+          )}
+        >
+          {company.logoUrl || company.screenshotUrl ? (
+            <LogoImage
+              src={company.logoUrl || company.screenshotUrl}
+              alt={company.domain}
+              eager={eager}
             />
+          ) : (
+            <span className="text-muted text-base font-bold">
+              {company.domain.charAt(0).toUpperCase()}
+            </span>
           )}
         </div>
-        <div className="flex items-center gap-2 mt-0.5">
-          <span className="text-[11px] px-2 py-0.5 rounded-full bg-accent-light text-accent font-medium truncate max-w-[120px] sm:max-w-none">
-            {company.categoryName}
-          </span>
-        </div>
-        <p className="text-xs text-muted mt-1 truncate max-w-xl hidden sm:block">
-          {company.description || company.title}
-        </p>
-        <div className="flex items-center gap-3 sm:gap-4 mt-1.5 text-xs text-muted">
-          <span
-            title="Total website visits in the most recent month"
-            className="cursor-default"
-          >
-            <span className="text-foreground font-medium">{formatNumber(company.visits)}</span>
-            {" "}visits/mo
-          </span>
-          <span
-            title="3-month traffic growth rate compared to 3 months ago"
-            className={cn(
-              "font-medium cursor-default",
-              isGrowing ? "text-success" : "text-danger"
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2 flex-wrap">
+            <h3
+              className={cn(
+                "font-semibold truncate group-hover:text-accent transition-colors",
+                isTop3 ? "text-xl" : "text-lg"
+              )}
+            >
+              {company.domain}
+            </h3>
+            {company.originCountry && (
+              <img
+                src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}
+                alt={countryName(company.originCountry)}
+                title={countryName(company.originCountry)}
+                className="w-5 h-3.5 object-cover rounded-[2px] border border-border/50 shrink-0"
+              />
             )}
-          >
-            {formatGrowth(company.growthRate)} growth
-          </span>
-          <span
-            title="GBI Score: composite rating based on traffic, growth, engagement & bounce rate (0–95)"
-            className="hidden sm:inline text-foreground font-medium cursor-default"
-          >
-            {company.score} pts
-          </span>
+            <span className="hidden md:inline text-xs px-2 py-0.5 rounded-full bg-accent-light text-accent font-medium truncate max-w-[180px]">
+              {company.categoryName}
+            </span>
+          </div>
+          <p className="hidden md:block text-sm text-muted truncate mt-1.5 max-w-2xl leading-relaxed">
+            {company.description || company.title}
+          </p>
+          {/* Mobile collapsed metrics */}
+          <div className="flex sm:hidden items-center gap-3 text-sm text-muted mt-1">
+            <span className="tabular-nums">{formatNumber(company.visits)}</span>
+            <span
+              className={cn(
+                "tabular-nums font-medium",
+                isGrowing ? "text-success" : "text-danger"
+              )}
+            >
+              {formatGrowth(company.growthRate)}
+            </span>
+          </div>
         </div>
       </div>
 
-      <MetricBadge company={company} sortKey={sortKey} />
+      <span className="hidden sm:block text-right text-lg font-medium tabular-nums">
+        {formatNumber(company.visits)}
+      </span>
+      <span
+        className={cn(
+          "hidden sm:block text-right text-lg font-medium tabular-nums",
+          isGrowing ? "text-success" : "text-danger"
+        )}
+      >
+        {formatGrowth(company.growthRate)}
+      </span>
+      <span
+        className={cn(
+          "text-right font-bold tabular-nums",
+          isTop3
+            ? cn("text-3xl", theme?.scoreText ?? "text-accent")
+            : "text-2xl text-foreground"
+        )}
+      >
+        {isTop3 ? <CountUp value={company.score} /> : company.score}
+      </span>
     </Link>
   );
 }

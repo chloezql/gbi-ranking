@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
-import { Logo } from "./Logo";
 import { useAuth } from "@/context/AuthContext";
 
 function UserMenu() {
@@ -25,7 +25,7 @@ function UserMenu() {
     <div ref={menuRef} className="relative">
       <button
         onClick={() => setOpen(o => !o)}
-        className="w-8 h-8 rounded-full border border-accent bg-card text-accent flex items-center justify-center hover:opacity-80 transition-opacity"
+        className="w-7 h-7 rounded-full border border-white/25 bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors"
         aria-label="User menu"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -78,33 +78,61 @@ function UserMenu() {
 
 export function Navbar() {
   const { user, loading, openModal } = useAuth();
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/tv")) return null;
 
   return (
-    <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-md border-b border-border pt-[env(safe-area-inset-top)]">
-      <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <a href="https://gbiworld.org" target="_blank" rel="noopener noreferrer" className="flex items-center">
-          <Logo />
-        </a>
-        <div className="flex items-center gap-3">
+    <header className="sticky top-0 z-50 bg-[#111923] border-y border-white/10 shadow-sm pt-[env(safe-area-inset-top)]">
+        <div className="max-w-6xl mx-auto px-4 h-12 flex items-center justify-between gap-4">
           <a
-            href="/methodology"
-            className="text-xs text-muted hover:text-foreground transition-colors font-medium"
+            href="https://gbiworld.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center shrink-0"
           >
-            How we score
+            <img src="/gbi-white.png" alt="GBI" className="h-7 w-auto" />
           </a>
-          <ThemeToggle />
-          {!loading && (
-            user ? (
-              <UserMenu />
-            ) : (
+
+          <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+            <Link
+              href="/#rankings"
+              className="px-3 py-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+            >
+              Rankings
+            </Link>
+            <a
+              href="https://gbiworld.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+            >
+              About
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            {loading ? (
               <button
-                onClick={openModal}
-                className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
+                type="button"
+                disabled
+                className="text-sm font-semibold px-3.5 py-1.5 rounded-lg bg-accent text-white opacity-70"
               >
                 Sign in
               </button>
-            )
-          )}
+            ) : (
+              user ? (
+                <UserMenu />
+              ) : (
+                <button
+                  onClick={openModal}
+                  className="text-sm font-semibold px-3.5 py-1.5 rounded-lg bg-accent text-white hover:brightness-110 transition-all"
+                >
+                  Sign in
+                </button>
+              )
+            )}
         </div>
       </div>
     </header>

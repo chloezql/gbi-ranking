@@ -8,6 +8,7 @@ interface SupabaseRow {
   domain: string;
   title: string | null;
   description: string | null;
+  description_usable: boolean | null;
   screenshot_url: string | null;
   logo_url: string | null;
   country_code: string | null;
@@ -30,6 +31,40 @@ interface SupabaseRow {
   top_keywords: { name: string; esitmatedValue: number; cpc: number | null }[] | null;
 }
 
+function isMissingDescriptionUsableColumn(error: unknown): boolean {
+  const candidate = error as { code?: string; message?: string };
+  return (
+    candidate.code === "42703" ||
+    candidate.message?.includes("description_usable") === true
+  );
+}
+
+async function queryCompanyLatest(ids?: string[]) {
+  let query = supabase
+    .from("company_latest")
+    .select("*")
+    .or("description_usable.eq.true,description_usable.is.null");
+
+  if (ids?.length) {
+    query = query.in("company_id", ids);
+  }
+
+  const result = await query;
+  if (!result.error || !isMissingDescriptionUsableColumn(result.error)) {
+    return result;
+  }
+
+  console.warn(
+    "Supabase company_latest.description_usable is missing; falling back to unfiltered company query."
+  );
+
+  let fallback = supabase.from("company_latest").select("*");
+  if (ids?.length) {
+    fallback = fallback.in("company_id", ids);
+  }
+  return fallback;
+}
+
 function transformRow(row: SupabaseRow): Company {
   const monthlyVisits = Object.entries(row.monthly_visits || {})
     .map(([month, visits]) => ({ month, visits }))
@@ -41,6 +76,7 @@ function transformRow(row: SupabaseRow): Company {
     domain: row.domain,
     title: row.title || row.domain,
     description: row.description || "",
+    descriptionUsable: row.description_usable === true,
     screenshotUrl: row.screenshot_url || "",
     logoUrl: row.logo_url || "",
     originCountry: row.country_code || "",
@@ -72,15 +108,20 @@ function transformRow(row: SupabaseRow): Company {
       cpc: k.cpc,
     })),
     score: 0,
+    scoreBreakdown: {
+      traffic: 0,
+      growth: 0,
+      visitDepth: 0,
+      bounceQuality: 0,
+      sessionTime: 0,
+    },
     growthRate,
     effectiveGrowthScore: 0,
   };
 }
 
 export async function getAllCompanies(): Promise<Company[]> {
-  const { data, error } = await supabase
-    .from("company_latest")
-    .select("*");
+  const { data, error } = await queryCompanyLatest();
 
   if (error) {
     console.error("Supabase error:", error);
@@ -93,15 +134,50 @@ export async function getAllCompanies(): Promise<Company[]> {
 
 export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {
   const companies = await getAllCompanies();
-  return companies.find((c) => c.domain === domain);
+  const company = companies.find((c) => c.domain === domain);
+  if (!company) return undefined;
+
+  const { data: companyRow } = await supabase
+    .from("companies")
+    .select("id")
+    .eq("domain", domain)
+    .single();
+
+  if (!companyRow) return company;
+
+  const { data: snapshots, error } = await supabase
+    .from("snapshots")
+    .select("snapshot_date, visits, monthly_visits")
+    .eq("company_id", companyRow.id)
+    .order("snapshot_date", { ascending: true });
+
+  if (error || !snapshots?.length) return company;
+
+  const visitsByMonth = new Map<string, number>();
+  for (const snapshot of snapshots as {
+    snapshot_date: string | null;
+    visits: number | null;
+    monthly_visits: Record<string, number> | null;
+  }[]) {
+    for (const [month, visits] of Object.entries(snapshot.monthly_visits || {})) {
+      visitsByMonth.set(month, Number(visits) || 0);
+    }
+    if (snapshot.snapshot_date && snapshot.visits) {
+      visitsByMonth.set(snapshot.snapshot_date, Number(snapshot.visits));
+    }
+  }
+
+  const monthlyVisits = Array.from(visitsByMonth.entries())
+    .map(([month, visits]) => ({ month, visits }))
+    .sort((a, b) => a.month.localeCompare(b.month))
+    .slice(-6);
+
+  return monthlyVisits.length ? { ...company, monthlyVisits } : company;
 }
 
 export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
   if (ids.length === 0) return [];
-  const { data, error } = await supabase
-    .from("company_latest")
-    .select("*")
-    .in("company_id", ids);
+  const { data, error } = await queryCompanyLatest(ids);
 
   if (error || !data) return [];
   const companies = (data as SupabaseRow[]).map(transformRow);
