@@ -51,8 +51,8 @@ async function detectOriginCountry(domain: string, title: string, description: s
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
-          { role: "system", content: "Determine the origin country (founded/headquartered) of a company. Return ONLY the ISO 3166-1 alpha-2 code (e.g. CN, US, KR). No explanation." },
-          { role: "user", content: `domain: ${domain}\ntitle: ${title}\ndescription: ${description}` },
+          { role: "system", content: "Determine each company's origin country — where the company or brand was founded. Return ONLY the ISO 3166-1 alpha-2 code (e.g. CN, US, KR). Use current headquarters only when founding country cannot be established. Do not use website traffic country. No explanation." },
+          { role: "user", content: `domain: ${domain}\ntitle: ${title}\ndescription: ${description.slice(0, 200)}` },
         ],
         max_tokens: 5,
       }),

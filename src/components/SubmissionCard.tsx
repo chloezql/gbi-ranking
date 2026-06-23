@@ -51,6 +51,7 @@ interface StagedCompany {
   id: string;
   description: string | null;
   screenshot_url: string | null;
+  logo_url: string | null;
 }
 
 interface StagedData {
@@ -76,6 +77,16 @@ function StagedDataView({ stagedData }: { stagedData: StagedData }) {
           alt="Company screenshot"
           className="w-full aspect-video object-cover rounded-lg border border-border"
         />
+      )}
+      {company.logo_url && (
+        <div className="flex items-center gap-3">
+          <img
+            src={company.logo_url}
+            alt="Company logo"
+            className="w-10 h-10 rounded-lg object-contain border border-border bg-white p-1"
+          />
+          <span className="text-xs text-muted">Logo</span>
+        </div>
       )}
       {company.description && (
         <p className="text-xs text-muted leading-relaxed">{company.description}</p>
@@ -191,7 +202,7 @@ function SubmissionDetailModal({
     (async () => {
       const { data: company } = await supabase
         .from("staged_companies")
-        .select("id, description, screenshot_url")
+        .select("id, description, screenshot_url, logo_url")
         .eq("submission_id", s.id)
         .maybeSingle();
 
