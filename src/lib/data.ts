@@ -8,6 +8,7 @@ interface SupabaseRow {
   domain: string;
   title: string | null;
   description: string | null;
+  description_usable: boolean | null;
   screenshot_url: string | null;
   logo_url: string | null;
   country_code: string | null;
@@ -30,6 +31,40 @@ interface SupabaseRow {
   top_keywords: { name: string; esitmatedValue: number; cpc: number | null }[] | null;
 }
 
+function isMissingDescriptionUsableColumn(error: unknown): boolean {
+  const candidate = error as { code?: string; message?: string };
+  return (
+    candidate.code === "42703" ||
+    candidate.message?.includes("description_usable") === true
+  );
+}
+
+async function queryCompanyLatest(ids?: string[]) {
+  let query = supabase
+    .from("company_latest")
+    .select("*")
+    .or("description_usable.eq.true,description_usable.is.null");
+
+  if (ids?.length) {
+    query = query.in("company_id", ids);
+  }
+
+  const result = await query;
+  if (!result.error || !isMissingDescriptionUsableColumn(result.error)) {
+    return result;
+  }
+
+  console.warn(
+    "Supabase company_latest.description_usable is missing; falling back to unfiltered company query."
+  );
+
+  let fallback = supabase.from("company_latest").select("*");
+  if (ids?.length) {
+    fallback = fallback.in("company_id", ids);
+  }
+  return fallback;
+}
+
 function transformRow(row: SupabaseRow): Company {
   const monthlyVisits = Object.entries(row.monthly_visits || {})
     .map(([month, visits]) => ({ month, visits }))
@@ -41,6 +76,7 @@ function transformRow(row: SupabaseRow): Company {
     domain: row.domain,
     title: row.title || row.domain,
     description: row.description || "",
+    descriptionUsable: row.description_usable === true,
     screenshotUrl: row.screenshot_url || "",
     logoUrl: row.logo_url || "",
     originCountry: row.country_code || "",
@@ -78,9 +114,7 @@ function transformRow(row: SupabaseRow): Company {
 }
 
 export async function getAllCompanies(): Promise<Company[]> {
-  const { data, error } = await supabase
-    .from("company_latest")
-    .select("*");
+  const { data, error } = await queryCompanyLatest();
 
   if (error) {
     console.error("Supabase error:", error);
@@ -98,10 +132,7 @@ export async function getCompanyByDomain(domain: string): Promise<Company | unde
 
 export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
   if (ids.length === 0) return [];
-  const { data, error } = await supabase
-    .from("company_latest")
-    .select("*")
-    .in("company_id", ids);
+  const { data, error } = await queryCompanyLatest(ids);
 
   if (error || !data) return [];
   const companies = (data as SupabaseRow[]).map(transformRow);

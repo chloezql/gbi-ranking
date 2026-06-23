@@ -4,14 +4,31 @@
  * Usage:
  *   SUPABASE_SERVICE_ROLE_KEY=your_key node scripts/import-similarweb-file.mjs dataset_similarweb-scraper_2026-06-01_batch5.json
  *   node scripts/import-similarweb-file.mjs dataset_similarweb-scraper_2026-06-01_batch5.json --dry-run
+ *   node scripts/import-similarweb-file.mjs dataset-reviewed.json --include-unusable
  */
 
 import { createClient } from "@supabase/supabase-js";
 import { existsSync, readFileSync } from "fs";
 import { resolve } from "path";
+import { loadEnvFile } from "process";
+
+const ENV_FILE = resolve(".env.local");
+if (existsSync(ENV_FILE)) loadEnvFile(ENV_FILE);
 
 const inputArg = process.argv.find((arg) => arg.endsWith(".json"));
 const dryRun = process.argv.includes("--dry-run");
+const includeUnusable = process.argv.includes("--include-unusable");
+
+function getArg(name, defaultValue = null) {
+  const prefix = `--${name}=`;
+  const arg = process.argv.find((item) => item.startsWith(prefix));
+  if (!arg) return defaultValue;
+  return arg.slice(prefix.length);
+}
+
+const minTopCountries = parseInt(getArg("min-top-countries", "0"), 10);
+const excludeSingleCountry = getArg("exclude-single-country");
+const countryShareThreshold = parseFloat(getArg("country-share-threshold", "0.999"));
 
 if (!inputArg) {
   console.error("Usage: node scripts/import-similarweb-file.mjs <dataset.json> [--dry-run]");
@@ -57,9 +74,52 @@ function normalizeRows(rows) {
   for (const item of rows) {
     const domain = String(item.domain || "").trim().replace(/^www\./, "");
     const visits = parseInt(item.visits, 10) || 0;
+    const topCountryShares = Array.isArray(item.topCountryShares) ? item.topCountryShares : [];
+
+    if (item.description_usable === false && !includeUnusable) {
+      invalid.push({
+        domain: domain || "(missing)",
+        visits,
+        hasDescription: Boolean(item.description),
+        reason: "unusable_description",
+      });
+      continue;
+    }
 
     if (!domain || visits <= 0 || !item.description) {
-      invalid.push({ domain: domain || "(missing)", visits, hasDescription: Boolean(item.description) });
+      invalid.push({
+        domain: domain || "(missing)",
+        visits,
+        hasDescription: Boolean(item.description),
+        reason: !domain ? "missing_domain" : visits <= 0 ? "missing_visits" : "missing_description",
+      });
+      continue;
+    }
+
+    if (minTopCountries > 0 && topCountryShares.length > 0 && topCountryShares.length < minTopCountries) {
+      invalid.push({
+        domain,
+        visits,
+        hasDescription: Boolean(item.description),
+        topCountryShares,
+        reason: "too_few_top_countries",
+      });
+      continue;
+    }
+
+    if (
+      excludeSingleCountry &&
+      topCountryShares.length === 1 &&
+      topCountryShares[0]?.CountryCode === excludeSingleCountry &&
+      Number(topCountryShares[0]?.Value || 0) >= countryShareThreshold
+    ) {
+      invalid.push({
+        domain,
+        visits,
+        hasDescription: Boolean(item.description),
+        topCountryShares,
+        reason: "excluded_single_country",
+      });
       continue;
     }
 
@@ -161,6 +221,7 @@ async function importData() {
       domain: item.domain,
       title: item.title || item.domain,
       description: item.description || "",
+      description_usable: item.description_usable !== false,
       screenshot_url: item.screenshot || "",
       category_id: slugToId.get(category) || slugToId.get(category.split("/")[0]) || slugToId.get("other"),
     };

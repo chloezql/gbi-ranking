@@ -200,9 +200,14 @@ export function RankingList({
   const targetOptions = useMemo(() => {
     const map = new Map<string, number>();
     for (const c of companies) {
-      const top = c.topCountryShares[0];
-      if (!top?.countryCode) continue;
-      map.set(top.countryCode, (map.get(top.countryCode) || 0) + 1);
+      const countries = new Set(
+        c.topCountryShares
+          .map((share) => share.countryCode)
+          .filter(Boolean)
+      );
+      for (const countryCode of countries) {
+        map.set(countryCode, (map.get(countryCode) || 0) + 1);
+      }
     }
     return Array.from(map.entries())
       .map(([code, count]) => ({ code, name: countryName(code), count }))
@@ -224,7 +229,10 @@ export function RankingList({
 
     if (targetMarket !== "all") {
       result = result.filter(
-        (c) => c.topCountryShares[0]?.countryCode === targetMarket
+        (c) =>
+          c.topCountryShares.some(
+            (share) => share.countryCode === targetMarket
+          )
       );
     }
 
