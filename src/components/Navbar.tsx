@@ -71,19 +71,7 @@ export function Navbar() {
   if (pathname.startsWith("/tv")) return null;
 
   return (
-    <>
-      <section
-        aria-label="Featured banner"
-        className="bg-background pt-[env(safe-area-inset-top)]"
-      >
-        <img
-          src="/banners/banner-1.png"
-          alt=""
-          className="w-full h-[72px] sm:h-24 lg:h-[108px] object-cover border-y border-border block"
-        />
-      </section>
-
-      <header className="sticky top-0 z-50 bg-[#111923] border-y border-white/10 shadow-sm">
+    <header className="sticky top-0 z-50 bg-[#111923] border-y border-white/10 shadow-sm pt-[env(safe-area-inset-top)]">
         <div className="max-w-6xl mx-auto px-4 h-12 flex items-center justify-between gap-4">
           <a
             href="https://gbiworld.org"
@@ -133,9 +121,8 @@ export function Navbar() {
                 </button>
               )
             )}
-          </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }

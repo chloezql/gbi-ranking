@@ -8,11 +8,11 @@ import { Dropdown } from "./Dropdown";
 
 type RankingMode = "market" | "growing" | "visited" | "engagement";
 
-const MODES: { id: RankingMode; label: string; icon: string }[] = [
-  { id: "market", label: "Best in Market", icon: "🏆" },
-  { id: "growing", label: "Fastest Growing", icon: "🚀" },
-  { id: "visited", label: "Most Visited", icon: "🌐" },
-  { id: "engagement", label: "Top Engagement", icon: "💎" },
+const MODES: { id: RankingMode; label: string }[] = [
+  { id: "market", label: "Best in Market" },
+  { id: "growing", label: "Fastest Growing" },
+  { id: "visited", label: "Most Visited" },
+  { id: "engagement", label: "Top Engagement" },
 ];
 
 const STORAGE_MODE = "gbi-featured-mode";
@@ -326,13 +326,12 @@ export function RankingList({
           key={m.id}
           onClick={() => setModePersist(m.id)}
           className={cn(
-            "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
+            "px-3.5 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
             mode === m.id
               ? "bg-accent text-white shadow-sm"
               : "text-muted hover:text-foreground hover:bg-background/40"
           )}
         >
-          <span aria-hidden className="text-base leading-none">{m.icon}</span>
           {m.label}
         </button>
       ))}
@@ -350,7 +349,7 @@ export function RankingList({
             value={mode}
             options={MODES.map((m) => ({
               value: m.id,
-              label: `${m.icon}  ${m.label}`,
+              label: m.label,
             }))}
             onChange={(v) => setModePersist(v as RankingMode)}
           />
