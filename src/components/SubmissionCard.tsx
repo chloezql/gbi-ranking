@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type { CompanySubmission } from "@/lib/types";
+import { supabase } from "@/lib/supabase";
 
 const STATUS_CONFIG = {
   pending:  { label: "Pending review", className: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" },
@@ -16,52 +17,233 @@ const APIFY_CONFIG = {
   failed:   { label: "Fetch failed",  className: "bg-danger/10 text-danger" },
 };
 
-const MOCK_COMPANY_DATA = {
-  description: "A global leader in consumer beauty and personal care products, offering a wide range of skincare, haircare, and cosmetics brands across 150+ countries.",
-  screenshotUrl: "https://placehold.co/600x340/e5e7eb/9ca3af?text=Company+Screenshot",
-  globalRank: 1_482,
-  monthlyVisits: "24.3M",
-  bounceRate: "42.1%",
-  pagesPerVisit: 4.8,
-  avgVisitDuration: "3m 22s",
-  topCountries: [
-    { code: "US", name: "United States", share: 28.4 },
-    { code: "UK", name: "United Kingdom", share: 12.1 },
-    { code: "DE", name: "Germany", share: 9.7 },
-    { code: "FR", name: "France", share: 8.3 },
-  ],
-  trafficSources: [
-    { source: "Direct",        share: 38.2 },
-    { source: "Organic Search", share: 31.5 },
-    { source: "Social",        share: 14.7 },
-    { source: "Referral",      share: 10.1 },
-    { source: "Email",         share: 5.5 },
-  ],
-  topKeywords: [
-    { name: "skincare products",  visits: "320K" },
-    { name: "beauty brands",      visits: "210K" },
-    { name: "hair care routine",  visits: "185K" },
-    { name: "luxury cosmetics",   visits: "142K" },
-  ],
-};
+function typeLabel(s: CompanySubmission): string {
+  if (s.is_brand && s.is_service_provider) return "Brand & Service Provider";
+  if (s.is_service_provider) return "Service Provider";
+  return "Brand";
+}
+
+function formatVisits(v: number): string {
+  if (v >= 1e9) return `${(v / 1e9).toFixed(1)}B`;
+  if (v >= 1e6) return `${(v / 1e6).toFixed(1)}M`;
+  if (v >= 1e3) return `${(v / 1e3).toFixed(1)}K`;
+  return String(v);
+}
+
+function formatTime(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = Math.round(seconds % 60);
+  return `${m}m ${s.toString().padStart(2, "0")}s`;
+}
+
+interface StagedSnapshot {
+  global_rank: number | null;
+  visits: number | null;
+  bounce_rate: number | null;
+  pages_per_visit: number | null;
+  time_on_site: number | null;
+  top_country_shares: { CountryCode?: string; Value?: number }[] | null;
+  traffic_sources: Record<string, number> | null;
+  top_keywords: { name?: string; esitmatedValue?: number }[] | null;
+}
+
+interface StagedCompany {
+  id: string;
+  description: string | null;
+  screenshot_url: string | null;
+}
+
+interface StagedData {
+  company: StagedCompany;
+  snapshot: StagedSnapshot | null;
+}
+
+function StagedDataView({ stagedData }: { stagedData: StagedData }) {
+  const { company, snapshot } = stagedData;
+  const countries = (snapshot?.top_country_shares ?? []).slice(0, 5);
+  const maxCountryShare = countries[0]?.Value ?? 1;
+  const trafficEntries = Object.entries(snapshot?.traffic_sources ?? {})
+    .map(([source, share]) => ({ source, share: share * 100 }))
+    .sort((a, b) => b.share - a.share);
+  const maxTrafficShare = trafficEntries[0]?.share ?? 1;
+  const keywords = (snapshot?.top_keywords ?? []).slice(0, 5);
+
+  return (
+    <>
+      {company.screenshot_url && (
+        <img
+          src={company.screenshot_url}
+          alt="Company screenshot"
+          className="w-full aspect-video object-cover rounded-lg border border-border"
+        />
+      )}
+      {company.description && (
+        <p className="text-xs text-muted leading-relaxed">{company.description}</p>
+      )}
+      {snapshot && (
+        <>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { label: "Global Rank",    value: snapshot.global_rank != null ? `#${snapshot.global_rank.toLocaleString()}` : "—" },
+              { label: "Monthly Visits", value: snapshot.visits != null ? formatVisits(snapshot.visits) : "—" },
+              { label: "Bounce Rate",    value: snapshot.bounce_rate != null ? `${(snapshot.bounce_rate * 100).toFixed(1)}%` : "—" },
+              { label: "Pages / Visit",  value: snapshot.pages_per_visit?.toFixed(1) ?? "—" },
+              { label: "Avg. Duration",  value: snapshot.time_on_site != null ? formatTime(snapshot.time_on_site) : "—" },
+            ].map(({ label, value }) => (
+              <div key={label} className="bg-background rounded-lg px-3 py-2">
+                <p className="text-[10px] text-muted mb-0.5">{label}</p>
+                <p className="text-sm font-semibold">{value}</p>
+              </div>
+            ))}
+          </div>
+
+          {countries.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs font-medium text-muted">Top Countries</p>
+              {countries.map((c, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="text-xs text-foreground w-28 truncate">{c.CountryCode ?? "—"}</span>
+                  <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-accent rounded-full"
+                      style={{ width: `${((c.Value ?? 0) / maxCountryShare) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-xs text-muted w-10 text-right">
+                    {((c.Value ?? 0) * 100).toFixed(1)}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {trafficEntries.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs font-medium text-muted">Traffic Sources</p>
+              {trafficEntries.map(({ source, share }) => (
+                <div key={source} className="flex items-center gap-2">
+                  <span className="text-xs text-foreground w-28 truncate">{source}</span>
+                  <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-accent rounded-full"
+                      style={{ width: `${(share / maxTrafficShare) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-xs text-muted w-10 text-right">{share.toFixed(1)}%</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {keywords.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs font-medium text-muted">Top Keywords</p>
+              <div className="flex flex-col divide-y divide-border rounded-lg border border-border overflow-hidden">
+                {keywords.map((k, i) => (
+                  <div key={i} className="flex items-center justify-between px-3 py-2 bg-background">
+                    <span className="text-xs text-foreground">{k.name ?? "—"}</span>
+                    <span className="text-xs text-muted">
+                      {k.esitmatedValue != null ? formatVisits(k.esitmatedValue) : "—"}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </>
+  );
+}
 
 function SubmissionDetailModal({
   submission: s,
   onClose,
+  onRefresh,
 }: {
   submission: CompanySubmission;
   onClose: () => void;
+  onRefresh?: () => void;
 }) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const statusCfg = STATUS_CONFIG[s.status];
   const apifyCfg = APIFY_CONFIG[s.apify_status ?? "pending"];
   const images = s.images as string[];
 
+  const [stagedData, setStagedData] = useState<StagedData | null>(null);
+  const [loadingStaged, setLoadingStaged] = useState(false);
+
+  const [actioning, setActioning] = useState<"approve" | "reject" | null>(null);
+  const [showRejectForm, setShowRejectForm] = useState(false);
+  const [rejectNotes, setRejectNotes] = useState("");
+  const [actionError, setActionError] = useState<string | null>(null);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  useEffect(() => {
+    if (s.apify_status !== "complete") return;
+    setLoadingStaged(true);
+
+    (async () => {
+      const { data: company } = await supabase
+        .from("staged_companies")
+        .select("id, description, screenshot_url")
+        .eq("submission_id", s.id)
+        .maybeSingle();
+
+      if (!company) return;
+
+      const { data: snapshot } = await supabase
+        .from("staged_snapshots")
+        .select("global_rank, visits, bounce_rate, pages_per_visit, time_on_site, top_country_shares, traffic_sources, top_keywords")
+        .eq("staged_company_id", company.id)
+        .order("snapshot_date", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      setStagedData({ company, snapshot: snapshot ?? null });
+    })().finally(() => setLoadingStaged(false));
+  }, [s.id, s.apify_status]);
+
+  const handleApprove = async () => {
+    setActioning("approve");
+    setActionError(null);
+    const { error } = await supabase.rpc("approve_submission", { p_submission_id: s.id });
+    if (error) {
+      setActionError(error.message);
+      setActioning(null);
+    } else {
+      onRefresh?.();
+      onClose();
+    }
+  };
+
+  const handleReject = async () => {
+    setActioning("reject");
+    setActionError(null);
+    const { error } = await supabase
+      .from("company_submissions")
+      .update({
+        status: "rejected",
+        reviewer_notes: rejectNotes.trim() || null,
+        reviewed_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", s.id);
+    if (error) {
+      setActionError(error.message);
+      setActioning(null);
+    } else {
+      onRefresh?.();
+      onClose();
+    }
+  };
+
+  const canAction = s.status === "pending";
 
   return (
     <div
@@ -78,9 +260,7 @@ function SubmissionDetailModal({
             <p className="text-xs text-muted font-mono mt-0.5">{s.domain}</p>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-muted">
-              {s.company_type === "service_provider" ? "Service Provider" : "Brand"}
-            </span>
+            <span className="text-xs text-muted">{typeLabel(s)}</span>
             <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
               {statusCfg.label}
             </span>
@@ -111,9 +291,7 @@ function SubmissionDetailModal({
 
             {s.related_companies.length > 0 && (
               <>
-                <span className="text-xs text-muted self-start pt-0.5">
-                  {s.company_type === "brand" ? "Service Providers" : "Customers"}
-                </span>
+                <span className="text-xs text-muted self-start pt-0.5">Related</span>
                 <div className="flex flex-wrap gap-1.5">
                   {s.related_companies.map((name, i) => (
                     <span key={i} className="text-xs px-2.5 py-0.5 rounded-full bg-accent-light text-accent">
@@ -132,7 +310,7 @@ function SubmissionDetailModal({
             )}
           </div>
 
-          {/* Images */}
+          {/* Promotional images */}
           {images.length > 0 && (
             <div className="flex flex-col gap-2">
               <p className="text-xs font-medium text-muted">Promotional images ({images.length})</p>
@@ -149,109 +327,107 @@ function SubmissionDetailModal({
             </div>
           )}
 
-          {/* Mock company data — placeholder until Apify data is fetched */}
+          {/* Company data */}
           <div className="flex flex-col gap-4 border-t border-border pt-4">
             <div className="flex items-center gap-2">
               <p className="text-xs font-semibold text-foreground">Company Data</p>
-              <span className="text-[10px] px-1.5 py-0.5 rounded bg-border text-muted">Mock</span>
+              {s.apify_status !== "complete" && (
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${apifyCfg.className}`}>
+                  {apifyCfg.label}
+                </span>
+              )}
             </div>
 
-            {/* Screenshot */}
-            <img
-              src={MOCK_COMPANY_DATA.screenshotUrl}
-              alt="Company screenshot"
-              className="w-full aspect-video object-cover rounded-lg border border-border"
-            />
-
-            {/* Description */}
-            <p className="text-xs text-muted leading-relaxed">{MOCK_COMPANY_DATA.description}</p>
-
-            {/* Traffic stats grid */}
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { label: "Global Rank",      value: `#${MOCK_COMPANY_DATA.globalRank.toLocaleString()}` },
-                { label: "Monthly Visits",   value: MOCK_COMPANY_DATA.monthlyVisits },
-                { label: "Bounce Rate",      value: MOCK_COMPANY_DATA.bounceRate },
-                { label: "Pages / Visit",    value: MOCK_COMPANY_DATA.pagesPerVisit },
-                { label: "Avg. Duration",    value: MOCK_COMPANY_DATA.avgVisitDuration },
-              ].map(({ label, value }) => (
-                <div key={label} className="bg-background rounded-lg px-3 py-2">
-                  <p className="text-[10px] text-muted mb-0.5">{label}</p>
-                  <p className="text-sm font-semibold">{value}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Top countries */}
-            <div className="flex flex-col gap-1.5">
-              <p className="text-xs font-medium text-muted">Top Countries</p>
-              {MOCK_COMPANY_DATA.topCountries.map(c => (
-                <div key={c.code} className="flex items-center gap-2">
-                  <span className="text-xs text-foreground w-28 truncate">{c.name}</span>
-                  <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-accent rounded-full"
-                      style={{ width: `${(c.share / MOCK_COMPANY_DATA.topCountries[0].share) * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-muted w-10 text-right">{c.share}%</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Traffic sources */}
-            <div className="flex flex-col gap-1.5">
-              <p className="text-xs font-medium text-muted">Traffic Sources</p>
-              {MOCK_COMPANY_DATA.trafficSources.map(t => (
-                <div key={t.source} className="flex items-center gap-2">
-                  <span className="text-xs text-foreground w-28 truncate">{t.source}</span>
-                  <div className="flex-1 h-1.5 bg-border rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-accent rounded-full"
-                      style={{ width: `${(t.share / MOCK_COMPANY_DATA.trafficSources[0].share) * 100}%` }}
-                    />
-                  </div>
-                  <span className="text-xs text-muted w-10 text-right">{t.share}%</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Top keywords */}
-            <div className="flex flex-col gap-1.5">
-              <p className="text-xs font-medium text-muted">Top Keywords</p>
-              <div className="flex flex-col divide-y divide-border rounded-lg border border-border overflow-hidden">
-                {MOCK_COMPANY_DATA.topKeywords.map((k, i) => (
-                  <div key={i} className="flex items-center justify-between px-3 py-2 bg-background">
-                    <span className="text-xs text-foreground">{k.name}</span>
-                    <span className="text-xs text-muted">{k.visits}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {s.apify_status === "complete" && loadingStaged && (
+              <p className="text-xs text-muted">Loading…</p>
+            )}
+            {s.apify_status === "complete" && !loadingStaged && stagedData && (
+              <StagedDataView stagedData={stagedData} />
+            )}
+            {s.apify_status === "complete" && !loadingStaged && !stagedData && (
+              <p className="text-xs text-muted">No scraped data found for this submission.</p>
+            )}
+            {s.apify_status === "running" && (
+              <p className="text-xs text-muted">Data is being fetched — check back shortly.</p>
+            )}
+            {s.apify_status === "pending" && (
+              <p className="text-xs text-muted">Data fetch not started yet.</p>
+            )}
+            {s.apify_status === "failed" && (
+              <p className="text-xs text-danger">Data fetch failed. The run can be retried manually.</p>
+            )}
           </div>
         </div>
 
-        {/* Footer actions */}
-        <div className="px-6 py-4 border-t border-border shrink-0 flex gap-3">
-          <button
-            disabled
-            className="flex-1 py-2.5 rounded-lg border border-border text-sm font-medium text-muted cursor-not-allowed opacity-50"
-          >
-            Reject
-          </button>
-          <button
-            disabled
-            className="flex-1 py-2.5 rounded-lg bg-accent text-white text-sm font-semibold opacity-50 cursor-not-allowed"
-          >
-            Approve
-          </button>
-        </div>
+        {/* Footer — approve / reject (pending submissions only) */}
+        {canAction && (
+          <div className="px-6 py-4 border-t border-border shrink-0 flex flex-col gap-3">
+            {showRejectForm ? (
+              <>
+                <textarea
+                  value={rejectNotes}
+                  onChange={e => setRejectNotes(e.target.value)}
+                  placeholder="Rejection reason (optional)"
+                  rows={2}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background text-foreground text-sm placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-danger/50 focus:border-danger transition-colors resize-none"
+                />
+                {actionError && <p className="text-xs text-danger">{actionError}</p>}
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => { setShowRejectForm(false); setRejectNotes(""); setActionError(null); }}
+                    disabled={!!actioning}
+                    className="flex-1 py-2.5 rounded-lg border border-border text-sm font-medium text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleReject}
+                    disabled={!!actioning}
+                    className="flex-1 py-2.5 rounded-lg bg-danger text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {actioning === "reject" ? "Rejecting…" : "Confirm Reject"}
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                {actionError && <p className="text-xs text-danger">{actionError}</p>}
+                <div className="flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => { setShowRejectForm(true); setActionError(null); }}
+                    disabled={!!actioning}
+                    className="flex-1 py-2.5 rounded-lg border border-border text-sm font-medium text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-50"
+                  >
+                    Reject
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleApprove}
+                    disabled={!!actioning}
+                    className="flex-1 py-2.5 rounded-lg bg-accent text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {actioning === "approve" ? "Approving…" : "Approve"}
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export function SubmissionCard({ submission: s }: { submission: CompanySubmission }) {
+export function SubmissionCard({
+  submission: s,
+  onRefresh,
+}: {
+  submission: CompanySubmission;
+  onRefresh?: () => void;
+}) {
   const [modalOpen, setModalOpen] = useState(false);
   const statusCfg = STATUS_CONFIG[s.status];
 
@@ -266,9 +442,7 @@ export function SubmissionCard({ submission: s }: { submission: CompanySubmissio
           <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-muted">
-            {s.company_type === "service_provider" ? "Service Provider" : "Brand"}
-          </span>
+          <span className="text-xs text-muted">{typeLabel(s)}</span>
           <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
             {statusCfg.label}
           </span>
@@ -282,6 +456,7 @@ export function SubmissionCard({ submission: s }: { submission: CompanySubmissio
         <SubmissionDetailModal
           submission={s}
           onClose={() => setModalOpen(false)}
+          onRefresh={onRefresh}
         />
       )}
     </>

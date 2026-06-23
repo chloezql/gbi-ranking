@@ -133,23 +133,25 @@ create policy "Users can update own profile"
 
 -- 7. Company submissions (pending review queue)
 create table company_submissions (
-  id                uuid primary key default gen_random_uuid(),
-  submitted_by      uuid not null references auth.users(id),
-  status            text not null default 'pending'
-                      check (status in ('pending', 'approved', 'rejected')),
-  company_type      text not null
-                      check (company_type in ('brand', 'service_provider')),
-  name              text not null,
-  domain            text not null,
-  images            jsonb not null default '[]',
-  related_companies jsonb not null default '[]',
-  reviewer_notes    text,
-  reviewed_at       timestamptz,
-  apify_status      text not null default 'pending'
-                      check (apify_status in ('pending', 'running', 'complete', 'failed')),
-  apify_run_id      text,
-  created_at        timestamptz default now(),
-  updated_at        timestamptz default now()
+  id                    uuid primary key default gen_random_uuid(),
+  submitted_by          uuid not null references auth.users(id),
+  status                text not null default 'pending'
+                          check (status in ('pending', 'approved', 'rejected')),
+  is_brand              boolean not null default false,
+  is_service_provider   boolean not null default false,
+  check (is_brand or is_service_provider),
+  name                  text not null,
+  domain                text not null,
+  images                jsonb not null default '[]',
+  related_companies     jsonb not null default '[]',
+  reviewer_notes        text,
+  reviewed_at           timestamptz,
+  apify_status          text not null default 'pending'
+                          check (apify_status in ('pending', 'running', 'complete', 'failed')),
+  apify_run_id          text,
+  apify_logo_run_id     text,
+  created_at            timestamptz default now(),
+  updated_at            timestamptz default now()
 );
 
 create index idx_submissions_user   on company_submissions(submitted_by);
@@ -295,3 +297,153 @@ create policy "Admins read all submissions"
       where id = auth.uid() and role = 'admin'
     )
   );
+
+-- 11. Staged companies (scraped data awaiting admin approval)
+create table staged_companies (
+  id             uuid primary key default gen_random_uuid(),
+  submission_id  uuid not null references company_submissions(id) on delete cascade,
+  domain         text not null,
+  title          text,
+  description    text,
+  screenshot_url text,
+  logo_url       text,
+  country_code   text,
+  category_id    uuid references categories(id) on delete set null,
+  created_at     timestamptz default now()
+);
+
+create index idx_staged_companies_submission on staged_companies(submission_id);
+create index idx_staged_companies_domain     on staged_companies(domain);
+
+alter table staged_companies enable row level security;
+
+create policy "Admins read staged_companies"
+  on staged_companies for select to authenticated
+  using (exists (select 1 from user_profiles where id = auth.uid() and role = 'admin'));
+
+grant select on public.staged_companies to authenticated;
+grant all on public.staged_companies to service_role;
+
+-- 12. Staged snapshots (time-series data for staged companies)
+create table staged_snapshots (
+  id                 uuid primary key default gen_random_uuid(),
+  staged_company_id  uuid not null references staged_companies(id) on delete cascade,
+  snapshot_date      date not null,
+  global_rank        integer,
+  country_code       text,
+  country_rank       integer,
+  category_rank      integer,
+  visits             bigint,
+  bounce_rate        numeric,
+  pages_per_visit    numeric,
+  time_on_site       numeric,
+  monthly_visits     jsonb,
+  top_country_shares jsonb,
+  traffic_sources    jsonb,
+  top_keywords       jsonb,
+  created_at         timestamptz default now(),
+  unique(staged_company_id, snapshot_date)
+);
+
+create index idx_staged_snapshots_company on staged_snapshots(staged_company_id);
+create index idx_staged_snapshots_date    on staged_snapshots(snapshot_date desc);
+
+alter table staged_snapshots enable row level security;
+
+create policy "Admins read staged_snapshots"
+  on staged_snapshots for select to authenticated
+  using (exists (select 1 from user_profiles where id = auth.uid() and role = 'admin'));
+
+grant select on public.staged_snapshots to authenticated;
+grant all on public.staged_snapshots to service_role;
+
+-- 13. approve_submission RPC
+-- Admin-only. Promotes staged data into the live companies/snapshots tables,
+-- then marks the submission as approved.
+create or replace function approve_submission(p_submission_id uuid)
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_staged  staged_companies%rowtype;
+  v_company_id uuid;
+begin
+  -- Caller must be an admin
+  if not exists (
+    select 1 from user_profiles
+    where id = auth.uid() and role = 'admin'
+  ) then
+    raise exception 'Forbidden: admin only';
+  end if;
+
+  -- Fetch the staged company row for this submission
+  select * into v_staged
+  from staged_companies
+  where submission_id = p_submission_id
+  limit 1;
+
+  if v_staged.id is null then
+    raise exception 'No staged company found for submission %', p_submission_id;
+  end if;
+
+  -- Upsert into live companies table (keyed on domain)
+  insert into companies (domain, title, description, screenshot_url, logo_url, country_code, category_id)
+  values (v_staged.domain, v_staged.title, v_staged.description,
+          v_staged.screenshot_url, v_staged.logo_url, v_staged.country_code, v_staged.category_id)
+  on conflict (domain) do update
+    set title          = excluded.title,
+        description    = excluded.description,
+        screenshot_url = excluded.screenshot_url,
+        logo_url       = excluded.logo_url,
+        country_code   = excluded.country_code,
+        category_id    = excluded.category_id,
+        updated_at     = now()
+  returning id into v_company_id;
+
+  -- Copy staged snapshots into live snapshots, upsert on (company_id, snapshot_date)
+  insert into snapshots (
+    company_id, snapshot_date, global_rank, country_code, country_rank,
+    category_rank, visits, bounce_rate, pages_per_visit, time_on_site,
+    monthly_visits, top_country_shares, traffic_sources, top_keywords
+  )
+  select
+    v_company_id, snapshot_date, global_rank, country_code, country_rank,
+    category_rank, visits, bounce_rate, pages_per_visit, time_on_site,
+    monthly_visits, top_country_shares, traffic_sources, top_keywords
+  from staged_snapshots
+  where staged_company_id = v_staged.id
+  on conflict (company_id, snapshot_date) do update
+    set global_rank        = excluded.global_rank,
+        country_code       = excluded.country_code,
+        country_rank       = excluded.country_rank,
+        category_rank      = excluded.category_rank,
+        visits             = excluded.visits,
+        bounce_rate        = excluded.bounce_rate,
+        pages_per_visit    = excluded.pages_per_visit,
+        time_on_site       = excluded.time_on_site,
+        monthly_visits     = excluded.monthly_visits,
+        top_country_shares = excluded.top_country_shares,
+        traffic_sources    = excluded.traffic_sources,
+        top_keywords       = excluded.top_keywords;
+
+  -- Mark submission approved
+  update company_submissions
+  set status      = 'approved',
+      reviewed_at = now(),
+      updated_at  = now()
+  where id = p_submission_id;
+end;
+$$;
+
+grant execute on function approve_submission(uuid) to authenticated;
+
+-- 14. Admin UPDATE policy for reject flow (plain UPDATE, no RPC needed)
+create policy "Admins update submissions"
+  on company_submissions for update
+  to authenticated
+  using (exists (select 1 from user_profiles where id = auth.uid() and role = 'admin'))
+  with check (exists (select 1 from user_profiles where id = auth.uid() and role = 'admin'));
+
+grant update on public.company_submissions to authenticated;

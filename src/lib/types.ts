@@ -66,14 +66,14 @@ export interface CompanyClaim {
   companies: { domain: string; title: string | null; logo_url: string | null } | null;
 }
 
-export type CompanyType = "brand" | "service_provider";
 export type SubmissionStatus = "pending" | "approved" | "rejected";
 
 export interface CompanySubmission {
   id: string;
   submitted_by: string;
   status: SubmissionStatus;
-  company_type: CompanyType;
+  is_brand: boolean;
+  is_service_provider: boolean;
   name: string;
   domain: string;
   images: string[];

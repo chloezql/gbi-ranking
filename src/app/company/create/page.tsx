@@ -2,13 +2,13 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { DuplicateCompanyModal } from "@/components/DuplicateCompanyModal";
-import type { CompanyType } from "@/lib/types";
 
 type Step = "domain" | "type" | "form" | "done";
-type DuplicateReason = "listed" | "pending";
+type DuplicateReason = "listed" | "pending" | "domain_mismatch";
 
 function normalizeDomain(raw: string): string {
   return raw
@@ -101,7 +101,8 @@ export default function CreateCompanyPage() {
 
   const [duplicate, setDuplicate] = useState<{ domain: string; reason: DuplicateReason } | null>(null);
 
-  const [companyType, setCompanyType] = useState<CompanyType | null>(null);
+  const [isBrand, setIsBrand] = useState(false);
+  const [isServiceProvider, setIsServiceProvider] = useState(false);
 
   const [name, setName] = useState("");
   const [relatedCompanies, setRelatedCompanies] = useState<string[]>([]);
@@ -138,7 +139,19 @@ export default function CreateCompanyPage() {
     if (company) { setDuplicate({ domain: normalized, reason: "listed" }); return; }
     if (submission) { setDuplicate({ domain: normalized, reason: "pending" }); return; }
 
+    // Email-domain match check: warn if user's email doesn't match the company domain
+    const emailDomain = user?.email?.split("@")[1]?.toLowerCase() ?? "";
+    const domainForMatch = normalized.replace(/^www\./, "");
+    const emailMatchesDomain =
+      emailDomain === domainForMatch || emailDomain.endsWith("." + domainForMatch);
+
     setDomain(normalized);
+
+    if (!emailMatchesDomain) {
+      setDuplicate({ domain: normalized, reason: "domain_mismatch" });
+      return;
+    }
+
     setStep("type");
   };
 
@@ -162,7 +175,7 @@ export default function CreateCompanyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !companyType) return;
+    if (!user || (!isBrand && !isServiceProvider)) return;
     setSubmitError(null);
     setSubmitting(true);
 
@@ -180,16 +193,27 @@ export default function CreateCompanyPage() {
         uploadedUrls.push(data.publicUrl);
       }
 
-      const { error } = await supabase.from("company_submissions").insert({
-        submitted_by: user.id,
-        company_type: companyType,
-        name: name.trim(),
-        domain,
-        images: uploadedUrls,
-        related_companies: relatedCompanies,
-      });
+      const { data: submission, error } = await supabase
+        .from("company_submissions")
+        .insert({
+          submitted_by: user.id,
+          is_brand: isBrand,
+          is_service_provider: isServiceProvider,
+          name: name.trim(),
+          domain,
+          images: uploadedUrls,
+          related_companies: relatedCompanies,
+        })
+        .select("id")
+        .single();
 
       if (error) throw new Error(error.message);
+
+      // Fire-and-forget — don't block the user on Apify errors
+      supabase.functions.invoke("trigger-apify", {
+        body: { submissionId: submission.id },
+      }).catch(() => {});
+
       setStep("done");
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : "Something went wrong.");
@@ -217,6 +241,12 @@ export default function CreateCompanyPage() {
           onClose={() => setDuplicate(null)}
         />
       )}
+
+      <nav className="text-sm text-muted mb-8">
+        <Link href="/dashboard" className="hover:text-accent transition-colors">Dashboard</Link>
+        <span className="mx-2">/</span>
+        <span className="text-foreground">Add a company</span>
+      </nav>
 
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-1">Add a company</h1>
@@ -283,62 +313,68 @@ export default function CreateCompanyPage() {
         </div>
       )}
 
-      {/* Step 2: Type selection */}
+      {/* Step 2: Type selection — tag toggles */}
       {step === "type" && (
-        <div className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-4">
+        <div className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-6">
           <div>
             <h2 className="font-semibold mb-0.5">What type of company is this?</h2>
-            <p className="text-muted text-sm font-mono text-xs">{domain}</p>
+            <p className="text-muted text-xs font-mono">{domain}</p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3">
-            {(["brand", "service_provider"] as const).map(type => (
-              <button
-                key={type}
-                type="button"
-                onClick={() => { setCompanyType(type); setStep("form"); }}
-                className="flex flex-col items-center gap-3 p-5 rounded-xl border-2 border-border hover:border-accent hover:bg-accent-light transition-colors text-center group"
-              >
-                <div className="w-10 h-10 rounded-full bg-border group-hover:bg-accent/10 flex items-center justify-center transition-colors">
-                  {type === "brand" ? (
-                    <svg className="w-5 h-5 text-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L9.568 3z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 6h.008v.008H6V6z" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5 text-muted group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0" />
+          <div className="flex flex-col gap-3">
+            <p className="text-xs text-muted">Select one or both.</p>
+            <div className="flex gap-2">
+              {([
+                { label: "Brand", active: isBrand, toggle: () => setIsBrand(v => !v) },
+                { label: "Service Provider", active: isServiceProvider, toggle: () => setIsServiceProvider(v => !v) },
+              ]).map(({ label, active, toggle }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={toggle}
+                  className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
+                    active
+                      ? "border-accent bg-accent text-white"
+                      : "border-border text-muted hover:border-accent hover:text-accent"
+                  }`}
+                >
+                  {active && (
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                     </svg>
                   )}
-                </div>
-                <div>
-                  <p className="font-semibold text-sm group-hover:text-accent transition-colors">
-                    {type === "brand" ? "Brand" : "Service Provider"}
-                  </p>
-                  <p className="text-xs text-muted mt-0.5">
-                    {type === "brand" ? "Product or consumer brand" : "Agency, platform, or tool"}
-                  </p>
-                </div>
-              </button>
-            ))}
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setStep("domain")}
-            className="text-sm text-muted hover:text-foreground transition-colors text-center"
-          >
-            ← Back
-          </button>
+          <div className="flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={() => setStep("form")}
+              disabled={!isBrand && !isServiceProvider}
+              className="w-full py-2.5 rounded-lg bg-accent text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continue
+            </button>
+            <button
+              type="button"
+              onClick={() => setStep("domain")}
+              className="text-sm text-muted hover:text-foreground transition-colors text-center"
+            >
+              ← Back
+            </button>
+          </div>
         </div>
       )}
 
       {/* Step 3: Form */}
-      {step === "form" && companyType && (
+      {step === "form" && (
         <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-5">
           <div>
             <h2 className="font-semibold mb-0.5">
-              {companyType === "brand" ? "Brand" : "Service Provider"} details
+              {isBrand && isServiceProvider ? "Company" : isBrand ? "Brand" : "Service Provider"} details
             </h2>
             <p className="text-muted text-xs font-mono">{domain}</p>
           </div>
@@ -361,8 +397,8 @@ export default function CreateCompanyPage() {
 
           {/* Related companies */}
           <ChipInput
-            label={companyType === "brand" ? "Service Providers (optional)" : "Customers (optional)"}
-            placeholder={companyType === "brand" ? "e.g. Salesforce" : "e.g. Nike"}
+            label="Related companies (optional)"
+            placeholder="e.g. Nike, Salesforce"
             values={relatedCompanies}
             onChange={setRelatedCompanies}
           />
@@ -471,7 +507,8 @@ export default function CreateCompanyPage() {
                 setStep("domain");
                 setDomain("");
                 setName("");
-                setCompanyType(null);
+                setIsBrand(false);
+                setIsServiceProvider(false);
                 setRelatedCompanies([]);
                 setImages([]);
                 setImagePreviews([]);

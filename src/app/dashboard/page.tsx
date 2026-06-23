@@ -21,7 +21,8 @@ export default function DashboardPage() {
   const { user, role, loading } = useAuth();
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [submissions, setSubmissions] = useState<CompanySubmission[]>([]);
+  const [submissions, setSubmissions] = useState<CompanySubmission[] | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     if (!loading && !user) router.replace("/");
@@ -51,7 +52,7 @@ export default function DashboardPage() {
     }
 
     query.then(({ data }) => setSubmissions((data as CompanySubmission[]) ?? []));
-  }, [user, role]);
+  }, [user, role, refreshKey]);
 
   if (loading || !user) return null;
 
@@ -69,7 +70,7 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-10">
         <ProfileSection user={user} profile={profile} onSave={setProfile} />
         {isAdmin ? (
-          <AdminReviewSection submissions={submissions} />
+          <AdminReviewSection submissions={submissions} onRefresh={() => setRefreshKey(k => k + 1)} />
         ) : (
           <>
             <MyCompanySection user={user} />
@@ -79,6 +80,12 @@ export default function DashboardPage() {
       </div>
     </div>
   );
+}
+
+function typeLabel(s: CompanySubmission): string {
+  if (s.is_brand && s.is_service_provider) return "Brand & Service Provider";
+  if (s.is_service_provider) return "Service Provider";
+  return "Brand";
 }
 
 const STATUS_CONFIG = {
@@ -178,7 +185,7 @@ function MyCompanySection({ user }: { user: User }) {
   );
 }
 
-function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
+function CompanySection({ submissions }: { submissions: CompanySubmission[] | null }) {
   return (
     <section>
       <div className="flex items-center justify-between mb-4">
@@ -191,9 +198,14 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
         </Link>
       </div>
 
-      {submissions.length === 0 ? (
+      {submissions === null ? (
         <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
           <p className="text-muted text-sm">Loading…</p>
+        </div>
+      ) : submissions.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm font-medium">No companies submitted yet.</p>
+          <p className="text-muted text-xs mt-2">Click &ldquo;+ Add company&rdquo; to get started.</p>
         </div>
       ) : (
         <div className="flex flex-col gap-3">
@@ -209,9 +221,7 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
                   <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-muted capitalize">
-                    {s.company_type === "service_provider" ? "Service Provider" : "Brand"}
-                  </span>
+                  <span className="text-xs text-muted">{typeLabel(s)}</span>
                   <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${cfg.className}`}>
                     {cfg.label}
                   </span>
@@ -227,14 +237,15 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] }) {
 
 type FilterStatus = "pending" | "approved" | "rejected";
 
-function AdminReviewSection({ submissions }: { submissions: CompanySubmission[] }) {
+function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySubmission[] | null; onRefresh: () => void }) {
   const [filter, setFilter] = useState<FilterStatus>("pending");
 
-  const filtered = submissions.filter(s => s.status === filter);
+  const list = submissions ?? [];
+  const filtered = list.filter(s => s.status === filter);
   const counts = {
-    pending:  submissions.filter(s => s.status === "pending").length,
-    approved: submissions.filter(s => s.status === "approved").length,
-    rejected: submissions.filter(s => s.status === "rejected").length,
+    pending:  list.filter(s => s.status === "pending").length,
+    approved: list.filter(s => s.status === "approved").length,
+    rejected: list.filter(s => s.status === "rejected").length,
   };
 
   return (
@@ -271,7 +282,7 @@ function AdminReviewSection({ submissions }: { submissions: CompanySubmission[] 
       ) : (
         <div className="flex flex-col gap-3">
           {filtered.map(s => (
-            <SubmissionCard key={s.id} submission={s} />
+            <SubmissionCard key={s.id} submission={s} onRefresh={onRefresh} />
           ))}
         </div>
       )}
