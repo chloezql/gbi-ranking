@@ -108,6 +108,13 @@ function transformRow(row: SupabaseRow): Company {
       cpc: k.cpc,
     })),
     score: 0,
+    scoreBreakdown: {
+      traffic: 0,
+      growth: 0,
+      visitDepth: 0,
+      bounceQuality: 0,
+      sessionTime: 0,
+    },
     growthRate,
     effectiveGrowthScore: 0,
   };
@@ -127,7 +134,45 @@ export async function getAllCompanies(): Promise<Company[]> {
 
 export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {
   const companies = await getAllCompanies();
-  return companies.find((c) => c.domain === domain);
+  const company = companies.find((c) => c.domain === domain);
+  if (!company) return undefined;
+
+  const { data: companyRow } = await supabase
+    .from("companies")
+    .select("id")
+    .eq("domain", domain)
+    .single();
+
+  if (!companyRow) return company;
+
+  const { data: snapshots, error } = await supabase
+    .from("snapshots")
+    .select("snapshot_date, visits, monthly_visits")
+    .eq("company_id", companyRow.id)
+    .order("snapshot_date", { ascending: true });
+
+  if (error || !snapshots?.length) return company;
+
+  const visitsByMonth = new Map<string, number>();
+  for (const snapshot of snapshots as {
+    snapshot_date: string | null;
+    visits: number | null;
+    monthly_visits: Record<string, number> | null;
+  }[]) {
+    for (const [month, visits] of Object.entries(snapshot.monthly_visits || {})) {
+      visitsByMonth.set(month, Number(visits) || 0);
+    }
+    if (snapshot.snapshot_date && snapshot.visits) {
+      visitsByMonth.set(snapshot.snapshot_date, Number(snapshot.visits));
+    }
+  }
+
+  const monthlyVisits = Array.from(visitsByMonth.entries())
+    .map(([month, visits]) => ({ month, visits }))
+    .sort((a, b) => a.month.localeCompare(b.month))
+    .slice(-6);
+
+  return monthlyVisits.length ? { ...company, monthlyVisits } : company;
 }
 
 export async function getCompaniesByIds(ids: string[]): Promise<Company[]> {
