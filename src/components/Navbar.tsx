@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
 import { useAuth } from "@/context/AuthContext";
 
 function UserMenu() {
@@ -100,6 +101,7 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
             {loading ? (
               <button
