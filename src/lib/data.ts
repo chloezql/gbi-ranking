@@ -8,6 +8,7 @@ interface SupabaseRow {
   domain: string;
   title: string | null;
   description: string | null;
+  description_cn: string | null;
   description_usable: boolean | null;
   screenshot_url: string | null;
   logo_url: string | null;
@@ -76,6 +77,7 @@ function transformRow(row: SupabaseRow): Company {
     domain: row.domain,
     title: row.title || row.domain,
     description: row.description || "",
+    descriptionCn: row.description_cn || "",
     descriptionUsable: row.description_usable === true,
     screenshotUrl: row.screenshot_url || "",
     logoUrl: row.logo_url || "",

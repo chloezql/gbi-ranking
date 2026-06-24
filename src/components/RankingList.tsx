@@ -256,7 +256,8 @@ export function RankingList({
         (c) =>
           c.domain.toLowerCase().includes(q) ||
           c.title.toLowerCase().includes(q) ||
-          c.description.toLowerCase().includes(q)
+          c.description.toLowerCase().includes(q) ||
+          c.descriptionCn.toLowerCase().includes(q)
       );
     }
 

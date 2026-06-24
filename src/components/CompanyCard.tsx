@@ -3,6 +3,7 @@ import type { Company } from "@/lib/types";
 import { formatNumber, formatGrowth, cn, countryName } from "@/lib/utils";
 import { LogoImage } from "./LogoImage";
 import { CountUp } from "./CountUp";
+import { CompanyDescription } from "./CompanyDescription";
 
 const TOP3_THEME: Record<
   1 | 2 | 3,
@@ -134,9 +135,12 @@ export function CompanyCard({
               {company.categoryName}
             </span>
           </div>
-          <p className="hidden md:block text-sm text-muted truncate mt-1.5 max-w-2xl leading-relaxed">
-            {company.description || company.title}
-          </p>
+          <CompanyDescription
+            description={company.description}
+            descriptionCn={company.descriptionCn}
+            fallback={company.title}
+            className="hidden md:block text-sm text-muted truncate mt-1.5 max-w-2xl leading-relaxed"
+          />
           {/* Mobile collapsed metrics */}
           <div className="flex sm:hidden items-center gap-3 text-sm text-muted mt-1">
             <span className="tabular-nums">{formatNumber(company.visits)}</span>

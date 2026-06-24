@@ -10,6 +10,7 @@ import {
 } from "@/lib/utils";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { ClaimButton } from "@/components/ClaimButton";
+import { CompanyDescription } from "@/components/CompanyDescription";
 import { VisitTrendChart } from "@/components/VisitTrendChart";
 import { TrafficSourceDonut } from "@/components/TrafficSourceDonut";
 
@@ -220,9 +221,11 @@ export default async function CompanyPage({
               </div>
             </div>
           </div>
-          <p className="text-sm text-muted mt-3 leading-relaxed line-clamp-3">
-            {company.description}
-          </p>
+          <CompanyDescription
+            description={company.description}
+            descriptionCn={company.descriptionCn}
+            className="text-sm text-muted mt-3 leading-relaxed line-clamp-3"
+          />
           <div className="flex items-center gap-3 flex-wrap">
             <a
               href={`https://${company.domain}`}

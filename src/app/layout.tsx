@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { AuthProvider } from "@/context/AuthContext";
+import { LanguageProvider } from "@/context/LanguageContext";
 import { AuthModal } from "@/components/AuthModal";
 
 const geistSans = Geist({
@@ -43,10 +44,12 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col pb-[env(safe-area-inset-bottom)]">
         <AuthProvider>
-          <Navbar />
-          <AuthModal />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <LanguageProvider>
+            <Navbar />
+            <AuthModal />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>
