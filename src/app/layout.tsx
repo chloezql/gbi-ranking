@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { AuthProvider } from "@/context/AuthContext";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AuthModal } from "@/components/AuthModal";
+import { getPartners } from "@/lib/data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +26,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const partners = await getPartners();
+
   return (
     <html
       lang="en"
@@ -48,7 +51,7 @@ export default function RootLayout({
             <Navbar />
             <AuthModal />
             <main className="flex-1">{children}</main>
-            <Footer />
+            <Footer partners={partners} />
           </LanguageProvider>
         </AuthProvider>
       </body>

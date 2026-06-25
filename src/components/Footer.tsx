@@ -2,18 +2,9 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import type { Partner } from "@/lib/data";
 
-const LOGO_BASE =
-  "https://ykzrabinwggxpxidencn.supabase.co/storage/v1/object/public/logos";
-
-const PARTNERS: { name: string; logoUrl: string | null }[] = [
-  { name: "白鲸出海", logoUrl: `${LOGO_BASE}/baijing.cn.jpg` },
-  { name: "D.Transformer", logoUrl: null },
-  { name: "Haimeta", logoUrl: `${LOGO_BASE}/haimeta.com.jpg` },
-  { name: "雨果跨境", logoUrl: `${LOGO_BASE}/cifnews.com.jpg` },
-];
-
-export function Footer() {
+export function Footer({ partners }: { partners: Partner[] }) {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
 
   return (
@@ -42,7 +33,7 @@ export function Footer() {
               Partners
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {PARTNERS.map((p) => (
+              {partners.map((p) => (
                 <div
                   key={p.name}
                   className="h-20 flex flex-col items-center justify-center gap-1 px-2"

@@ -253,6 +253,37 @@ export async function getUserClaims(): Promise<CompanyClaim[]> {
   return (data ?? []) as unknown as CompanyClaim[];
 }
 
+export interface Partner {
+  name: string;
+  logoUrl: string | null;
+}
+
+const PARTNER_DEFS: { id: string; name: string }[] = [
+  { id: "7a9d79be-b320-487c-ad79-462f535306d6", name: "白鲸出海" },
+  { id: "90a5d118-0e12-4e51-b4b9-18517896805b", name: "D.Transformer" },
+  { id: "4cab6ffb-8167-4b9c-a207-764cb98dc40e", name: "Haimeta" },
+  { id: "1e8c485b-3203-4c70-8fa2-45389d6fbf55", name: "雨果跨境" },
+];
+
+export async function getPartners(): Promise<Partner[]> {
+  const { data } = await supabase
+    .from("companies")
+    .select("id, logo_url")
+    .in(
+      "id",
+      PARTNER_DEFS.map((p) => p.id)
+    );
+
+  const logoById = new Map(
+    (data ?? []).map((r) => [r.id as string, r.logo_url as string | null])
+  );
+
+  return PARTNER_DEFS.map((p) => ({
+    name: p.name,
+    logoUrl: logoById.get(p.id) ?? null,
+  }));
+}
+
 export function deriveCategories(companies: Company[]): CategoryInfo[] {
   const map = new Map<string, { name: string; count: number }>();
 
