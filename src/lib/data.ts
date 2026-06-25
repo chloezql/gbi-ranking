@@ -40,18 +40,37 @@ function isMissingDescriptionUsableColumn(error: unknown): boolean {
   );
 }
 
-async function queryCompanyLatest(ids?: string[]) {
-  let query = supabase
-    .from("company_latest")
-    .select("*")
-    .or("description_usable.eq.true,description_usable.is.null")
-    .eq("show_in_ranking", true);
+const PAGE_SIZE = 1000;
 
-  if (ids?.length) {
-    query = query.in("company_id", ids);
+async function paginate<T>(
+  build: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: unknown }>
+): Promise<{ data: T[]; error: unknown }> {
+  const all: T[] = [];
+  let from = 0;
+  while (true) {
+    const result = await build(from, from + PAGE_SIZE - 1);
+    if (result.error) return { data: all, error: result.error };
+    const page = result.data ?? [];
+    all.push(...page);
+    if (page.length < PAGE_SIZE) break;
+    from += PAGE_SIZE;
   }
+  return { data: all, error: null };
+}
 
-  const result = await query;
+async function queryCompanyLatest(ids?: string[]) {
+  const buildPrimary = (from: number, to: number) => {
+    let q = supabase
+      .from("company_latest")
+      .select("*")
+      .or("description_usable.eq.true,description_usable.is.null")
+      .eq("show_in_ranking", true)
+      .range(from, to);
+    if (ids?.length) q = q.in("company_id", ids);
+    return q;
+  };
+
+  const result = await paginate<SupabaseRow>(buildPrimary);
   if (!result.error || !isMissingDescriptionUsableColumn(result.error)) {
     return result;
   }
@@ -60,11 +79,12 @@ async function queryCompanyLatest(ids?: string[]) {
     "Supabase company_latest.description_usable is missing; falling back to unfiltered company query."
   );
 
-  let fallback = supabase.from("company_latest").select("*");
-  if (ids?.length) {
-    fallback = fallback.in("company_id", ids);
-  }
-  return fallback;
+  const buildFallback = (from: number, to: number) => {
+    let q = supabase.from("company_latest").select("*").range(from, to);
+    if (ids?.length) q = q.in("company_id", ids);
+    return q;
+  };
+  return paginate<SupabaseRow>(buildFallback);
 }
 
 function transformRow(row: SupabaseRow): Company {
