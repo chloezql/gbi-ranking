@@ -151,7 +151,8 @@ export async function getAllCompanies(): Promise<Company[]> {
     return [];
   }
 
-  const companies = (data as SupabaseRow[]).map(transformRow);
+  const rows = (data as SupabaseRow[]).filter((row) => Number(row.visits) > 0);
+  const companies = rows.map(transformRow);
   return computeScores(companies).sort((a, b) => b.score - a.score);
 }
 
@@ -252,8 +253,7 @@ export async function getUserClaims(): Promise<CompanyClaim[]> {
   return (data ?? []) as unknown as CompanyClaim[];
 }
 
-export async function getCategories(): Promise<CategoryInfo[]> {
-  const companies = await getAllCompanies();
+export function deriveCategories(companies: Company[]): CategoryInfo[] {
   const map = new Map<string, { name: string; count: number }>();
 
   for (const c of companies) {

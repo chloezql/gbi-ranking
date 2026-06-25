@@ -1,11 +1,11 @@
-import { getAllCompanies, getCategories } from "@/lib/data";
+import { getAllCompanies, deriveCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const companies = await getAllCompanies();
-  const categories = await getCategories();
+  const categories = deriveCategories(companies);
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
