@@ -23,6 +23,15 @@ function getMarketShare(company: Company, code: string) {
   return company.topCountryShares.find((s) => s.countryCode === code)?.value ?? 0;
 }
 
+function getTopMarket(company: Company): string | null {
+  let top: { countryCode: string; value: number } | null = null;
+  for (const share of company.topCountryShares) {
+    if (!share.countryCode) continue;
+    if (!top || share.value > top.value) top = share;
+  }
+  return top?.countryCode ?? null;
+}
+
 function SearchToggle({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [expanded, setExpanded] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -209,14 +218,9 @@ export function RankingList({
   const targetOptions = useMemo(() => {
     const map = new Map<string, number>();
     for (const c of companies) {
-      const countries = new Set(
-        c.topCountryShares
-          .map((share) => share.countryCode)
-          .filter(Boolean)
-      );
-      for (const countryCode of countries) {
-        map.set(countryCode, (map.get(countryCode) || 0) + 1);
-      }
+      const top = getTopMarket(c);
+      if (!top) continue;
+      map.set(top, (map.get(top) || 0) + 1);
     }
     return Array.from(map.entries())
       .map(([code, count]) => ({ code, name: countryName(code) || code, count }))
@@ -242,12 +246,7 @@ export function RankingList({
     }
 
     if (targetMarket !== "all") {
-      result = result.filter(
-        (c) =>
-          c.topCountryShares.some(
-            (share) => share.countryCode === targetMarket
-          )
-      );
+      result = result.filter((c) => getTopMarket(c) === targetMarket);
     }
 
     if (search.trim()) {
