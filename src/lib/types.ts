@@ -88,7 +88,7 @@ export interface CompanySubmission {
   related_brand_names: string[];
   reviewer_notes: string | null;
   reviewed_at: string | null;
-  apify_status: "pending" | "running" | "complete" | "failed";
+  apify_status: "pending" | "running" | "complete" | "failed" | "skipped";
   apify_run_id: string | null;
   created_at: string;
   updated_at: string;

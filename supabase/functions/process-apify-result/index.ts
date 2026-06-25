@@ -201,8 +201,7 @@ async function handleSimilarWebRun(
   const valid: (RawRow & { domain: string })[] = [];
   for (const item of rawData) {
     const domain = String(item.domain ?? "").trim().replace(/^www\./, "");
-    const visits = parseInt(String(item.visits ?? "0"), 10);
-    if (!domain || visits <= 0 || !item.description) continue;
+    if (!domain) continue;
     if (seen.has(domain)) continue;
     seen.add(domain);
     valid.push({ ...item, domain });
@@ -273,8 +272,8 @@ async function handleSimilarWebRun(
       .insert({
         submission_id: submissionId,
         domain: item.domain,
-        title: item.title ?? item.domain,
-        description: item.description ?? "",
+        title: item.title || item.domain,
+        description: item.description || "",
         screenshot_url: item.screenshot ?? "",
         logo_url: existingLogoUrl,
         // country_code: set by OpenAI below

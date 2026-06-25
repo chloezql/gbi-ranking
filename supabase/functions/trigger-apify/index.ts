@@ -7,6 +7,7 @@ const APIFY_ACTOR_ID = Deno.env.get("APIFY_ACTOR_ID") ?? "tri_angle~similarweb-s
 const APIFY_LOGO_ACTOR_ID = Deno.env.get("APIFY_LOGO_ACTOR_ID") ?? "8Gic54XXaFVLfPzgj";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY")!;
 
 const WEBHOOK_URL = `${SUPABASE_URL}/functions/v1/process-apify-result`;
 
@@ -20,6 +21,52 @@ const json = (body: unknown, status = 200) =>
     status,
     headers: { "Content-Type": "application/json", ...corsHeaders },
   });
+
+async function enrichWithAI(
+  name: string,
+  categories: { id: string; slug: string; name: string }[]
+): Promise<{ title: string; description: string; description_cn: string; country_code: string; category_id: string | null }> {
+  const categoryList = categories.map(c => `${c.slug}: ${c.name}`).join("\n");
+
+  const prompt = `You are a business research assistant. For the company "${name}", provide:
+
+1. "description": A 2-3 sentence English description of what the company does, its industry, and key products/services.
+2. "description_cn": Chinese translation of the description above.
+3. "country_code": ISO 2-letter country code of the company's origin (e.g. "CN", "US", "FR").
+4. "category_slug": The best matching category slug from this list:
+${categoryList}
+
+Return JSON: { "description", "description_cn", "country_code", "category_slug" }`;
+
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${OPENAI_API_KEY}` },
+    body: JSON.stringify({
+      model: "gpt-4o",
+      temperature: 0,
+      response_format: { type: "json_object" },
+      messages: [
+        { role: "system", content: "Return only valid JSON matching the requested schema." },
+        { role: "user", content: prompt },
+      ],
+    }),
+  });
+
+  if (!res.ok) throw new Error(`OpenAI error: ${res.status}`);
+
+  const data = await res.json();
+  const result = JSON.parse(data.choices?.[0]?.message?.content ?? "{}");
+
+  const matchedCategory = categories.find(c => c.slug === result.category_slug) ?? null;
+
+  return {
+    title: name,
+    description: result.description ?? "",
+    description_cn: result.description_cn ?? "",
+    country_code: result.country_code ?? "",
+    category_id: matchedCategory?.id ?? null,
+  };
+}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -37,13 +84,40 @@ serve(async (req) => {
 
     const { data: submission, error: fetchErr } = await supabase
       .from("company_submissions")
-      .select("domain")
+      .select("domain, name")
       .eq("id", submissionId)
       .single();
 
     if (fetchErr || !submission) return json({ error: "Submission not found" }, 404);
 
-    // Webhooks must be passed as a base64-encoded query param, not in the body
+    // No dot = slug-only company, skip Apify and enrich with AI instead
+    if (!submission.domain.includes(".")) {
+      const { data: categories } = await supabase
+        .from("categories")
+        .select("id, slug, name")
+        .is("parent_id", null); // top-level categories only
+
+      const enriched = await enrichWithAI(submission.name, categories ?? []);
+
+      await supabase.from("staged_companies").insert({
+        submission_id: submissionId,
+        domain: submission.domain,
+        title: enriched.title,
+        description: enriched.description,
+        description_cn: enriched.description_cn,
+        country_code: enriched.country_code,
+        category_id: enriched.category_id,
+      });
+
+      await supabase
+        .from("company_submissions")
+        .update({ apify_status: "skipped", updated_at: new Date().toISOString() })
+        .eq("id", submissionId);
+
+      return json({ skipped: true });
+    }
+
+    // Normal domain — trigger Apify
     const webhooks = btoa(JSON.stringify([{
       eventTypes: ["ACTOR.RUN.SUCCEEDED", "ACTOR.RUN.FAILED"],
       requestUrl: WEBHOOK_URL,
@@ -54,9 +128,7 @@ serve(async (req) => {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          domains: [submission.domain],
-        }),
+        body: JSON.stringify({ domains: [submission.domain] }),
       }
     );
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import type React from "react";
+import Link from "next/link";
 import type { CompanySubmission } from "@/lib/types";
 import { supabase } from "@/lib/supabase";
 
@@ -16,6 +17,7 @@ const APIFY_CONFIG = {
   running:  { label: "Fetching data", className: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" },
   complete: { label: "Data ready",    className: "bg-success/10 text-success" },
   failed:   { label: "Fetch failed",  className: "bg-danger/10 text-danger" },
+  skipped:  { label: "No scrape",     className: "bg-border text-muted" },
 };
 
 function typeLabel(s: CompanySubmission): string {
@@ -209,7 +211,7 @@ function SubmissionDetailModal({
   }, [onClose]);
 
   useEffect(() => {
-    if (s.apify_status !== "complete") return;
+    if (s.apify_status !== "complete" && s.apify_status !== "skipped") return;
     setLoadingStaged(true);
 
     (async () => {
@@ -408,10 +410,10 @@ function SubmissionDetailModal({
               )}
             </div>
 
-            {s.apify_status === "complete" && loadingStaged && (
+            {(s.apify_status === "complete" || s.apify_status === "skipped") && loadingStaged && (
               <p className="text-xs text-muted">Loading…</p>
             )}
-            {s.apify_status === "complete" && !loadingStaged && stagedData && (
+            {(s.apify_status === "complete" || s.apify_status === "skipped") && !loadingStaged && stagedData && (
               <StagedDataView
                 stagedData={stagedData}
                 descriptionCnNode={
@@ -504,8 +506,8 @@ function SubmissionDetailModal({
                 }
               />
             )}
-            {s.apify_status === "complete" && !loadingStaged && !stagedData && (
-              <p className="text-xs text-muted">No scraped data found for this submission.</p>
+            {(s.apify_status === "complete" || s.apify_status === "skipped") && !loadingStaged && !stagedData && (
+              <p className="text-xs text-muted">No data found for this submission.</p>
             )}
             {s.apify_status === "running" && (
               <p className="text-xs text-muted">Data is being fetched — check back shortly.</p>
@@ -606,9 +608,9 @@ export function SubmissionCard({
             className="w-4 h-4 rounded accent-accent shrink-0 cursor-pointer"
           />
         )}
-        <button
+        <div
           onClick={() => setModalOpen(true)}
-          className="flex-1 text-left rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors"
+          className="flex-1 text-left rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors cursor-pointer"
         >
           <div className="min-w-0">
             <p className="font-medium text-sm truncate">{s.name}</p>
@@ -619,11 +621,20 @@ export function SubmissionCard({
             <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
               {statusCfg.label}
             </span>
+            {s.status === "approved" && (
+              <Link
+                href={`/company/${encodeURIComponent(s.domain)}`}
+                onClick={e => e.stopPropagation()}
+                className="text-xs text-accent hover:underline shrink-0"
+              >
+                View
+              </Link>
+            )}
             <svg className="w-4 h-4 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
             </svg>
           </div>
-        </button>
+        </div>
       </div>
 
       {modalOpen && (

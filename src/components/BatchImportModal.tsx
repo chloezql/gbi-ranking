@@ -10,6 +10,7 @@ type DomainStatus = "queued" | "processing" | "done" | "existing" | "failed";
 interface AnalyzedCompany {
   name: string;
   domain: string | null;
+  slug: string;
   is_brand: boolean;
   is_service_provider: boolean;
 }
@@ -78,8 +79,9 @@ export function BatchImportModal({ onClose, onDone }: { onClose: () => void; onD
   const handleImport = async () => {
     if (!user || analyzed.length === 0) return;
 
-    const valid = analyzed.filter(c => c.domain);
-    setResults(valid.map(c => ({ name: c.name, domain: c.domain!, status: "queued" })));
+    // Use domain if available, otherwise fall back to AI-generated slug
+    const valid = analyzed.map(c => ({ ...c, domain: c.domain ?? c.slug }));
+    setResults(valid.map(c => ({ name: c.name, domain: c.domain, status: "queued" })));
     setImporting(true);
     setStep("importing");
 
@@ -237,9 +239,12 @@ export function BatchImportModal({ onClose, onDone }: { onClose: () => void; onD
                         />
                       ) : (
                         <div className="flex items-center gap-1.5 flex-1 min-w-0">
-                          <p className={`text-xs font-mono truncate ${c.domain ? "text-muted" : "text-danger italic"}`}>
-                            {c.domain ?? "no domain — click to add"}
+                          <p className={`text-xs font-mono truncate ${c.domain ? "text-muted" : "text-muted italic"}`}>
+                            {c.domain ?? c.slug}
                           </p>
+                          {!c.domain && (
+                            <span className="text-[10px] px-1.5 py-0.5 rounded bg-border text-muted shrink-0">slug</span>
+                          )}
                           <button
                             type="button"
                             onClick={() => setEditingDomainIdx(i)}
@@ -345,8 +350,8 @@ export function BatchImportModal({ onClose, onDone }: { onClose: () => void; onD
                 Back
               </button>
               {(() => {
-                const valid = analyzed.filter(c => c.domain && (c.is_brand || c.is_service_provider));
-                const hasTypeError = analyzed.some(c => c.domain && !c.is_brand && !c.is_service_provider);
+                const valid = analyzed.filter(c => (c.domain || c.slug) && (c.is_brand || c.is_service_provider));
+                const hasTypeError = analyzed.some(c => !c.is_brand && !c.is_service_provider);
                 return (
                   <button
                     type="button"

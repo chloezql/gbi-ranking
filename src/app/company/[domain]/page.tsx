@@ -107,7 +107,7 @@ export default async function CompanyPage({
           Rankings
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-foreground">{company.domain}</span>
+        <span className="text-foreground">{company.domain.includes(".") ? company.domain : company.title}</span>
       </nav>
 
       {/* Hero */}
@@ -129,7 +129,7 @@ export default async function CompanyPage({
           <div className="flex items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-[26px] font-bold">{company.domain}</h1>
+                <h1 className="text-[26px] font-bold">{company.domain.includes(".") ? company.domain : company.title}</h1>
                 {company.originCountry && (
                   <img
                     src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}
@@ -140,7 +140,7 @@ export default async function CompanyPage({
                 )}
               </div>
               <p className="text-muted text-sm mt-1">
-                {company.title !== company.domain ? company.title : ""}
+                {company.domain.includes(".") && company.title !== company.domain ? company.title : ""}
               </p>
               <div className="flex flex-wrap items-center gap-2 mt-2">
                 <span className="text-xs px-2.5 py-1 rounded-full bg-accent-light text-accent font-medium">
