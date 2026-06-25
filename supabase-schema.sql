@@ -66,6 +66,7 @@ select distinct on (c.id)
   c.screenshot_url,
   c.logo_url,
   c.country_code,
+  c.description_cn,
   c.description_usable,
   cat.slug as category_slug,
   cat.name as category_name,
@@ -83,7 +84,15 @@ select distinct on (c.id)
   s.monthly_visits,
   s.top_country_shares,
   s.traffic_sources,
-  s.top_keywords
+  s.top_keywords,
+  -- show in ranking if: is a brand, OR has no type entry at all (legacy company)
+  (
+    exists (select 1 from public.brands b where b.company_id = c.id)
+    or (
+      not exists (select 1 from public.brands b where b.company_id = c.id)
+      and not exists (select 1 from public.service_providers sp where sp.company_id = c.id)
+    )
+  ) as show_in_ranking
 from public.companies c
 left join public.snapshots s on s.company_id = c.id
 left join public.categories cat on cat.id = c.category_id
@@ -145,8 +154,9 @@ create table company_submissions (
   check (is_brand or is_service_provider),
   name                  text not null,
   domain                text not null,
-  images                jsonb not null default '[]',
-  related_companies     jsonb not null default '[]',
+  images                            jsonb not null default '[]',
+  related_service_provider_names    text[] not null default '{}',
+  related_brand_names               text[] not null default '{}',
   reviewer_notes        text,
   reviewed_at           timestamptz,
   apify_status          text not null default 'pending'
@@ -308,6 +318,7 @@ create table staged_companies (
   domain         text not null,
   title          text,
   description    text,
+  description_cn text,
   screenshot_url text,
   logo_url       text,
   country_code   text,
@@ -370,8 +381,9 @@ security definer
 set search_path = public
 as $$
 declare
-  v_staged  staged_companies%rowtype;
-  v_company_id uuid;
+  v_staged      staged_companies%rowtype;
+  v_submission  company_submissions%rowtype;
+  v_company_id  uuid;
 begin
   -- Caller must be an admin
   if not exists (
@@ -379,6 +391,15 @@ begin
     where id = auth.uid() and role = 'admin'
   ) then
     raise exception 'Forbidden: admin only';
+  end if;
+
+  -- Fetch the submission (for type flags and related names)
+  select * into v_submission
+  from company_submissions
+  where id = p_submission_id;
+
+  if v_submission.id is null then
+    raise exception 'Submission % not found', p_submission_id;
   end if;
 
   -- Fetch the staged company row for this submission
@@ -392,12 +413,13 @@ begin
   end if;
 
   -- Upsert into live companies table (keyed on domain)
-  insert into companies (domain, title, description, screenshot_url, logo_url, country_code, category_id)
-  values (v_staged.domain, v_staged.title, v_staged.description,
+  insert into companies (domain, title, description, description_cn, screenshot_url, logo_url, country_code, category_id)
+  values (v_staged.domain, v_staged.title, v_staged.description, v_staged.description_cn,
           v_staged.screenshot_url, v_staged.logo_url, v_staged.country_code, v_staged.category_id)
   on conflict (domain) do update
     set title          = excluded.title,
         description    = excluded.description,
+        description_cn = excluded.description_cn,
         screenshot_url = excluded.screenshot_url,
         logo_url       = excluded.logo_url,
         country_code   = excluded.country_code,
@@ -431,6 +453,25 @@ begin
         traffic_sources    = excluded.traffic_sources,
         top_keywords       = excluded.top_keywords;
 
+  -- Populate type extension tables
+  if v_submission.is_brand then
+    insert into brands (company_id, domain, related_service_provider_names)
+    values (v_company_id, v_staged.domain, v_submission.related_service_provider_names)
+    on conflict (company_id) do update
+      set domain                         = excluded.domain,
+          related_service_provider_names = excluded.related_service_provider_names,
+          updated_at                     = now();
+  end if;
+
+  if v_submission.is_service_provider then
+    insert into service_providers (company_id, domain, related_brand_names)
+    values (v_company_id, v_staged.domain, v_submission.related_brand_names)
+    on conflict (company_id) do update
+      set domain              = excluded.domain,
+          related_brand_names = excluded.related_brand_names,
+          updated_at          = now();
+  end if;
+
   -- Mark submission approved
   update company_submissions
   set status      = 'approved',
@@ -442,7 +483,34 @@ $$;
 
 grant execute on function approve_submission(uuid) to authenticated;
 
--- 14. Admin UPDATE policy for reject flow (plain UPDATE, no RPC needed)
+-- 14. Brands and service providers extension tables
+create table brands (
+  company_id                     uuid primary key references companies(id) on delete cascade,
+  domain                         text,
+  related_service_provider_names text[] not null default '{}',
+  created_at                     timestamptz default now(),
+  updated_at                     timestamptz default now()
+);
+
+alter table brands enable row level security;
+create policy "Public read brands" on brands for select using (true);
+grant select on public.brands to authenticated;
+grant all on public.brands to service_role;
+
+create table service_providers (
+  company_id          uuid primary key references companies(id) on delete cascade,
+  domain              text,
+  related_brand_names text[] not null default '{}',
+  created_at          timestamptz default now(),
+  updated_at          timestamptz default now()
+);
+
+alter table service_providers enable row level security;
+create policy "Public read service_providers" on service_providers for select using (true);
+grant select on public.service_providers to authenticated;
+grant all on public.service_providers to service_role;
+
+-- 15. Admin UPDATE policy for reject flow (plain UPDATE, no RPC needed)
 create policy "Admins update submissions"
   on company_submissions for update
   to authenticated

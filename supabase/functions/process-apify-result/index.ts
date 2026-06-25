@@ -67,6 +67,29 @@ async function detectOriginCountry(domain: string, title: string, description: s
   }
 }
 
+async function translateToChinese(text: string): Promise<string | null> {
+  if (!OPENAI_API_KEY || !text.trim()) return null;
+  try {
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${OPENAI_API_KEY}` },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        temperature: 0.2,
+        messages: [
+          { role: "system", content: "You translate company descriptions from English into Simplified Chinese for a business directory. Return only the translation: natural, concise, professional Simplified Chinese. Keep brand names, product names and well-known acronyms in their original form. Do not add quotes, notes, or explanations." },
+          { role: "user", content: text },
+        ],
+      }),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return (data.choices?.[0]?.message?.content || "").trim() || null;
+  } catch {
+    return null;
+  }
+}
+
 function getLogoUrl(item: Record<string, unknown>): string | null {
   return (
     (item["logo_url"] as string) ??
@@ -262,14 +285,16 @@ async function handleSimilarWebRun(
 
     if (!staged) continue;
 
-    // Detect origin country (where founded/HQ'd) via OpenAI
-    const originCountry = await detectOriginCountry(
-      item.domain,
-      item.title ?? item.domain,
-      item.description ?? ""
-    );
-    if (originCountry) {
-      await supabase.from("staged_companies").update({ country_code: originCountry }).eq("id", staged.id);
+    // Detect origin country and translate description in parallel
+    const [originCountry, descriptionCn] = await Promise.all([
+      detectOriginCountry(item.domain, item.title ?? item.domain, item.description ?? ""),
+      translateToChinese(item.description ?? ""),
+    ]);
+    if (originCountry || descriptionCn) {
+      await supabase.from("staged_companies").update({
+        ...(originCountry ? { country_code: originCountry } : {}),
+        ...(descriptionCn ? { description_cn: descriptionCn } : {}),
+      }).eq("id", staged.id);
     }
 
     await supabase.from("staged_snapshots").insert({

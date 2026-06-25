@@ -44,7 +44,8 @@ async function queryCompanyLatest(ids?: string[]) {
   let query = supabase
     .from("company_latest")
     .select("*")
-    .or("description_usable.eq.true,description_usable.is.null");
+    .or("description_usable.eq.true,description_usable.is.null")
+    .eq("show_in_ranking", true);
 
   if (ids?.length) {
     query = query.in("company_id", ids);

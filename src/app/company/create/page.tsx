@@ -105,7 +105,8 @@ export default function CreateCompanyPage() {
   const [isServiceProvider, setIsServiceProvider] = useState(false);
 
   const [name, setName] = useState("");
-  const [relatedCompanies, setRelatedCompanies] = useState<string[]>([]);
+  const [relatedServiceProviders, setRelatedServiceProviders] = useState<string[]>([]);
+  const [relatedBrands, setRelatedBrands] = useState<string[]>([]);
   const [images, setImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
@@ -202,7 +203,8 @@ export default function CreateCompanyPage() {
           name: name.trim(),
           domain,
           images: uploadedUrls,
-          related_companies: relatedCompanies,
+          related_service_provider_names: isBrand ? relatedServiceProviders : [],
+          related_brand_names: isServiceProvider ? relatedBrands : [],
         })
         .select("id")
         .single();
@@ -396,12 +398,22 @@ export default function CreateCompanyPage() {
           </div>
 
           {/* Related companies */}
-          <ChipInput
-            label="Related companies (optional)"
-            placeholder="e.g. Nike, Salesforce"
-            values={relatedCompanies}
-            onChange={setRelatedCompanies}
-          />
+          {isBrand && (
+            <ChipInput
+              label="Related service providers (optional)"
+              placeholder="e.g. Salesforce, SAP"
+              values={relatedServiceProviders}
+              onChange={setRelatedServiceProviders}
+            />
+          )}
+          {isServiceProvider && (
+            <ChipInput
+              label="Related brands (optional)"
+              placeholder="e.g. Nike, Apple"
+              values={relatedBrands}
+              onChange={setRelatedBrands}
+            />
+          )}
 
           {/* Images */}
           <div className="flex flex-col gap-1.5">
@@ -509,7 +521,8 @@ export default function CreateCompanyPage() {
                 setName("");
                 setIsBrand(false);
                 setIsServiceProvider(false);
-                setRelatedCompanies([]);
+                setRelatedServiceProviders([]);
+                setRelatedBrands([]);
                 setImages([]);
                 setImagePreviews([]);
               }}

@@ -84,7 +84,8 @@ export interface CompanySubmission {
   name: string;
   domain: string;
   images: string[];
-  related_companies: string[];
+  related_service_provider_names: string[];
+  related_brand_names: string[];
   reviewer_notes: string | null;
   reviewed_at: string | null;
   apify_status: "pending" | "running" | "complete" | "failed";

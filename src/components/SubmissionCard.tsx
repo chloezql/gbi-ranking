@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import type React from "react";
 import type { CompanySubmission } from "@/lib/types";
 import { supabase } from "@/lib/supabase";
 
@@ -50,6 +51,7 @@ interface StagedSnapshot {
 interface StagedCompany {
   id: string;
   description: string | null;
+  description_cn: string | null;
   screenshot_url: string | null;
   logo_url: string | null;
 }
@@ -59,7 +61,7 @@ interface StagedData {
   snapshot: StagedSnapshot | null;
 }
 
-function StagedDataView({ stagedData }: { stagedData: StagedData }) {
+function StagedDataView({ stagedData, descriptionNode, descriptionCnNode }: { stagedData: StagedData; descriptionNode?: React.ReactNode; descriptionCnNode?: React.ReactNode }) {
   const { company, snapshot } = stagedData;
   const countries = (snapshot?.top_country_shares ?? []).slice(0, 5);
   const maxCountryShare = countries[0]?.Value ?? 1;
@@ -88,9 +90,12 @@ function StagedDataView({ stagedData }: { stagedData: StagedData }) {
           <span className="text-xs text-muted">Logo</span>
         </div>
       )}
-      {company.description && (
+      {descriptionNode ?? (company.description && (
         <p className="text-xs text-muted leading-relaxed">{company.description}</p>
-      )}
+      ))}
+      {descriptionCnNode ?? (company.description_cn && (
+        <p className="text-xs text-muted leading-relaxed">{company.description_cn}</p>
+      ))}
       {snapshot && (
         <>
           <div className="grid grid-cols-2 gap-2">
@@ -189,6 +194,14 @@ function SubmissionDetailModal({
   const [rejectNotes, setRejectNotes] = useState("");
   const [actionError, setActionError] = useState<string | null>(null);
 
+  const [editingDesc, setEditingDesc] = useState(false);
+  const [descInput, setDescInput] = useState("");
+  const [savingDesc, setSavingDesc] = useState(false);
+
+  const [editingDescCn, setEditingDescCn] = useState(false);
+  const [descCnInput, setDescCnInput] = useState("");
+  const [savingDescCn, setSavingDescCn] = useState(false);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", onKey);
@@ -202,7 +215,7 @@ function SubmissionDetailModal({
     (async () => {
       const { data: company } = await supabase
         .from("staged_companies")
-        .select("id, description, screenshot_url, logo_url")
+        .select("id, description, description_cn, screenshot_url, logo_url")
         .eq("submission_id", s.id)
         .maybeSingle();
 
@@ -217,6 +230,8 @@ function SubmissionDetailModal({
         .maybeSingle();
 
       setStagedData({ company, snapshot: snapshot ?? null });
+      setDescInput(company.description ?? "");
+      setDescCnInput(company.description_cn ?? "");
     })().finally(() => setLoadingStaged(false));
   }, [s.id, s.apify_status]);
 
@@ -252,6 +267,38 @@ function SubmissionDetailModal({
       onRefresh?.();
       onClose();
     }
+  };
+
+  const handleSaveDesc = async () => {
+    if (!stagedData) return;
+    setSavingDesc(true);
+    const { error } = await supabase
+      .from("staged_companies")
+      .update({ description: descInput })
+      .eq("id", stagedData.company.id);
+    if (error) {
+      alert(`Failed to save: ${error.message}`);
+    } else {
+      setStagedData(prev => prev ? { ...prev, company: { ...prev.company, description: descInput } } : null);
+      setEditingDesc(false);
+    }
+    setSavingDesc(false);
+  };
+
+  const handleSaveDescCn = async () => {
+    if (!stagedData) return;
+    setSavingDescCn(true);
+    const { error } = await supabase
+      .from("staged_companies")
+      .update({ description_cn: descCnInput })
+      .eq("id", stagedData.company.id);
+    if (error) {
+      alert(`Failed to save: ${error.message}`);
+    } else {
+      setStagedData(prev => prev ? { ...prev, company: { ...prev.company, description_cn: descCnInput } } : null);
+      setEditingDescCn(false);
+    }
+    setSavingDescCn(false);
   };
 
   const canAction = s.status === "pending";
@@ -300,11 +347,23 @@ function SubmissionDetailModal({
               {apifyCfg.label}
             </span>
 
-            {s.related_companies.length > 0 && (
+            {s.is_brand && s.related_service_provider_names.length > 0 && (
               <>
-                <span className="text-xs text-muted self-start pt-0.5">Related</span>
+                <span className="text-xs text-muted self-start pt-0.5">Service providers they work with</span>
                 <div className="flex flex-wrap gap-1.5">
-                  {s.related_companies.map((name, i) => (
+                  {s.related_service_provider_names.map((name, i) => (
+                    <span key={i} className="text-xs px-2.5 py-0.5 rounded-full bg-accent-light text-accent">
+                      {name}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+            {s.is_service_provider && s.related_brand_names.length > 0 && (
+              <>
+                <span className="text-xs text-muted self-start pt-0.5">Brands they serve</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {s.related_brand_names.map((name, i) => (
                     <span key={i} className="text-xs px-2.5 py-0.5 rounded-full bg-accent-light text-accent">
                       {name}
                     </span>
@@ -353,7 +412,97 @@ function SubmissionDetailModal({
               <p className="text-xs text-muted">Loading…</p>
             )}
             {s.apify_status === "complete" && !loadingStaged && stagedData && (
-              <StagedDataView stagedData={stagedData} />
+              <StagedDataView
+                stagedData={stagedData}
+                descriptionCnNode={
+                  editingDescCn ? (
+                    <div className="flex flex-col gap-2">
+                      <p className="text-[10px] text-muted font-medium">Chinese description</p>
+                      <textarea
+                        value={descCnInput}
+                        onChange={e => setDescCnInput(e.target.value)}
+                        rows={4}
+                        className="w-full px-3 py-2 rounded-lg border border-border bg-background text-foreground text-xs placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors resize-none"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={handleSaveDescCn}
+                          disabled={savingDescCn}
+                          className="px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity"
+                        >
+                          {savingDescCn ? "Saving…" : "Save"}
+                        </button>
+                        <button
+                          onClick={() => { setEditingDescCn(false); setDescCnInput(stagedData.company.description_cn ?? ""); }}
+                          className="px-3 py-1.5 rounded-lg border border-border text-xs text-muted hover:text-foreground hover:bg-border/40 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-start gap-2">
+                      <div className="flex-1">
+                        <p className="text-[10px] text-muted font-medium mb-0.5">Chinese description</p>
+                        <p className="text-xs text-muted leading-relaxed">{stagedData.company.description_cn || <span className="italic">Not translated yet.</span>}</p>
+                      </div>
+                      {canAction && (
+                        <button
+                          onClick={() => { setDescCnInput(stagedData.company.description_cn ?? ""); setEditingDescCn(true); }}
+                          className="text-muted hover:text-foreground transition-colors shrink-0 mt-0.5"
+                          title="Edit Chinese description"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  )
+                }
+                descriptionNode={
+                  editingDesc ? (
+                    <div className="flex flex-col gap-2">
+                      <textarea
+                        value={descInput}
+                        onChange={e => setDescInput(e.target.value)}
+                        rows={4}
+                        className="w-full px-3 py-2 rounded-lg border border-border bg-background text-foreground text-xs placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors resize-none"
+                      />
+                      <div className="flex gap-2">
+                        <button
+                          onClick={handleSaveDesc}
+                          disabled={savingDesc}
+                          className="px-3 py-1.5 rounded-lg bg-accent text-white text-xs font-semibold hover:opacity-90 disabled:opacity-50 transition-opacity"
+                        >
+                          {savingDesc ? "Saving…" : "Save"}
+                        </button>
+                        <button
+                          onClick={() => { setEditingDesc(false); setDescInput(stagedData.company.description ?? ""); }}
+                          className="px-3 py-1.5 rounded-lg border border-border text-xs text-muted hover:text-foreground hover:bg-border/40 transition-colors"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-start gap-2">
+                      <p className="text-xs text-muted leading-relaxed flex-1">{stagedData.company.description || <span className="italic">No description.</span>}</p>
+                      {canAction && (
+                        <button
+                          onClick={() => { setDescInput(stagedData.company.description ?? ""); setEditingDesc(true); }}
+                          className="text-muted hover:text-foreground transition-colors shrink-0 mt-0.5"
+                          title="Edit description"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931z" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                  )
+                }
+              />
             )}
             {s.apify_status === "complete" && !loadingStaged && !stagedData && (
               <p className="text-xs text-muted">No scraped data found for this submission.</p>
@@ -435,33 +584,47 @@ function SubmissionDetailModal({
 export function SubmissionCard({
   submission: s,
   onRefresh,
+  selected,
+  onSelect,
 }: {
   submission: CompanySubmission;
   onRefresh?: () => void;
+  selected?: boolean;
+  onSelect?: (id: string, checked: boolean) => void;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const statusCfg = STATUS_CONFIG[s.status];
 
   return (
     <>
-      <button
-        onClick={() => setModalOpen(true)}
-        className="w-full text-left rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors"
-      >
-        <div className="min-w-0">
-          <p className="font-medium text-sm truncate">{s.name}</p>
-          <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="text-xs text-muted">{typeLabel(s)}</span>
-          <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
-            {statusCfg.label}
-          </span>
-          <svg className="w-4 h-4 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-          </svg>
-        </div>
-      </button>
+      <div className="flex items-center gap-2 w-full min-w-0">
+        {onSelect && (
+          <input
+            type="checkbox"
+            checked={selected ?? false}
+            onChange={e => { e.stopPropagation(); onSelect(s.id, e.target.checked); }}
+            className="w-4 h-4 rounded accent-accent shrink-0 cursor-pointer"
+          />
+        )}
+        <button
+          onClick={() => setModalOpen(true)}
+          className="flex-1 text-left rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors"
+        >
+          <div className="min-w-0">
+            <p className="font-medium text-sm truncate">{s.name}</p>
+            <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-xs text-muted">{typeLabel(s)}</span>
+            <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
+              {statusCfg.label}
+            </span>
+            <svg className="w-4 h-4 text-muted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </div>
+        </button>
+      </div>
 
       {modalOpen && (
         <SubmissionDetailModal

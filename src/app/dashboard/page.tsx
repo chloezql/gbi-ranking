@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import type { CompanySubmission, CompanyClaim } from "@/lib/types";
 import { SubmissionCard } from "@/components/SubmissionCard";
+import { BatchImportModal } from "@/components/BatchImportModal";
 import { getUserClaims } from "@/lib/data";
 
 interface UserProfile {
@@ -225,6 +226,14 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] | nu
                   <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${cfg.className}`}>
                     {cfg.label}
                   </span>
+                  {s.status === "approved" && (
+                    <Link
+                      href={`/company/${encodeURIComponent(s.domain)}`}
+                      className="text-xs text-accent hover:underline shrink-0"
+                    >
+                      View
+                    </Link>
+                  )}
                 </div>
               </div>
             );
@@ -239,24 +248,70 @@ type FilterStatus = "pending" | "approved" | "rejected";
 
 function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySubmission[] | null; onRefresh: () => void }) {
   const [filter, setFilter] = useState<FilterStatus>("pending");
+  const [batchOpen, setBatchOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [approving, setApproving] = useState(false);
 
   const list = submissions ?? [];
   const filtered = list.filter(s => s.status === filter);
+  const pendingList = list.filter(s => s.status === "pending");
   const counts = {
-    pending:  list.filter(s => s.status === "pending").length,
+    pending:  pendingList.length,
     approved: list.filter(s => s.status === "approved").length,
     rejected: list.filter(s => s.status === "rejected").length,
   };
 
+  const allSelected = filtered.length > 0 && filtered.every(s => selectedIds.has(s.id));
+
+  const toggleSelect = (id: string, checked: boolean) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      checked ? next.add(id) : next.delete(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(filtered.map(s => s.id)));
+    }
+  };
+
+  // Clear selection when switching tabs
+  const handleFilterChange = (f: FilterStatus) => {
+    setFilter(f);
+    setSelectedIds(new Set());
+  };
+
+  const handleBatchApprove = async () => {
+    if (selectedIds.size === 0 || approving) return;
+    setApproving(true);
+    for (const id of selectedIds) {
+      await supabase.rpc("approve_submission", { p_submission_id: id });
+    }
+    setApproving(false);
+    setSelectedIds(new Set());
+    onRefresh();
+  };
+
   return (
     <section>
+      {batchOpen && (
+        <BatchImportModal
+          onClose={() => setBatchOpen(false)}
+          onDone={() => { setBatchOpen(false); onRefresh(); }}
+        />
+      )}
       <h2 className="text-lg font-semibold mb-4">Company Submissions</h2>
 
-      <div className="flex gap-1 mb-4 p-1 bg-border/30 rounded-xl w-fit">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-1 p-1 bg-border/30 rounded-xl">
         {(["pending", "approved", "rejected"] as const).map(tab => (
           <button
             key={tab}
-            onClick={() => setFilter(tab)}
+            onClick={() => handleFilterChange(tab)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
               filter === tab
                 ? "bg-card text-foreground shadow-sm"
@@ -273,6 +328,13 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
             )}
           </button>
         ))}
+        </div>
+        <button
+          onClick={() => setBatchOpen(true)}
+          className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
+        >
+          + Batch Import
+        </button>
       </div>
 
       {filtered.length === 0 ? (
@@ -280,11 +342,39 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
           <p className="text-muted text-sm">No {filter} submissions.</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
-          {filtered.map(s => (
-            <SubmissionCard key={s.id} submission={s} onRefresh={onRefresh} />
-          ))}
-        </div>
+        <>
+          {filter === "pending" && (
+            <div className="flex items-center justify-between mb-2">
+              <label className="flex items-center gap-2 text-xs text-muted cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={toggleSelectAll}
+                  className="w-4 h-4 rounded accent-accent cursor-pointer"
+                />
+                {allSelected ? "Deselect all" : "Select all"}
+              </label>
+              <button
+                onClick={handleBatchApprove}
+                disabled={approving || selectedIds.size === 0}
+                className={`text-xs font-semibold px-3 py-1.5 rounded-lg bg-success text-white hover:opacity-90 transition-opacity disabled:opacity-50 ${selectedIds.size === 0 ? "invisible" : ""}`}
+              >
+                {approving ? "Approving…" : `Approve ${selectedIds.size} selected`}
+              </button>
+            </div>
+          )}
+          <div className="flex flex-col gap-3">
+            {filtered.map(s => (
+              <SubmissionCard
+                key={s.id}
+                submission={s}
+                onRefresh={onRefresh}
+                selected={selectedIds.has(s.id)}
+                onSelect={filter === "pending" ? toggleSelect : undefined}
+              />
+            ))}
+          </div>
+        </>
       )}
     </section>
   );
