@@ -1,8 +1,8 @@
-import { getAllCompanies, getCategories } from "@/lib/data";
+import { getAllCompanies, deriveCategories } from "@/lib/data";
 import type { Company } from "@/lib/types";
 import { TVRankingCarousel } from "@/components/TVRankingCarousel";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 interface TVSlide {
   id: string;
@@ -13,10 +13,8 @@ interface TVSlide {
 }
 
 export default async function TVPage() {
-  const [companies, categories] = await Promise.all([
-    getAllCompanies(),
-    getCategories(),
-  ]);
+  const companies = await getAllCompanies();
+  const categories = deriveCategories(companies);
 
   const categorySlides: TVSlide[] = categories
     .filter((category) => category.slug !== "other" && category.count >= 10)

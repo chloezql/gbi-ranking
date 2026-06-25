@@ -27,15 +27,20 @@ function getMarketShare(company: Company, code: string) {
   return company.topCountryShares.find((s) => s.countryCode === code)?.value ?? 0;
 }
 
-const TOP_MARKET_RANK = 2;
-
-function getTopMarkets(company: Company, n = TOP_MARKET_RANK): string[] {
-  return [...company.topCountryShares]
-    .filter((s) => s.countryCode)
-    .sort((a, b) => b.value - a.value)
-    .slice(0, n)
-    .map((s) => s.countryCode);
+function getPrimaryMarket(company: Company): string | null {
+  let topCode: string | null = null;
+  let topValue = -Infinity;
+  for (const s of company.topCountryShares) {
+    if (s.countryCode && s.value > topValue) {
+      topCode = s.countryCode;
+      topValue = s.value;
+    }
+  }
+  return topCode;
 }
+
+const MARKET_VISITS_THRESHOLD = 3000;
+const ALL_MARKETS_VISITS_THRESHOLD = 500;
 
 function SearchToggle({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const [expanded, setExpanded] = useState(false);
@@ -223,8 +228,11 @@ export function RankingList({
   const targetOptions = useMemo(() => {
     const map = new Map<string, number>();
     for (const c of companies) {
-      for (const code of getTopMarkets(c)) {
-        map.set(code, (map.get(code) || 0) + 1);
+      for (const share of c.topCountryShares) {
+        if (!share.countryCode) continue;
+        if (c.visits * share.value >= MARKET_VISITS_THRESHOLD) {
+          map.set(share.countryCode, (map.get(share.countryCode) || 0) + 1);
+        }
       }
     }
     return Array.from(map.entries())
@@ -252,8 +260,12 @@ export function RankingList({
       result = result.filter((c) => c.originCountry === originCountry);
     }
 
-    if (targetMarket !== "all") {
-      result = result.filter((c) => getTopMarkets(c).includes(targetMarket));
+    if (targetMarket === "all") {
+      result = result.filter((c) => c.visits >= ALL_MARKETS_VISITS_THRESHOLD);
+    } else {
+      result = result.filter(
+        (c) => c.visits * getMarketShare(c, targetMarket) >= MARKET_VISITS_THRESHOLD
+      );
     }
 
     if (search.trim()) {
@@ -281,12 +293,18 @@ export function RankingList({
           const wB = b.visits * getMarketShare(b, targetMarket);
           return wB - wA;
         }
-        case "engagement":
+        case "engagement": {
+          if (targetMarket !== "all") {
+            const aPrimary = getPrimaryMarket(a) === targetMarket ? 1 : 0;
+            const bPrimary = getPrimaryMarket(b) === targetMarket ? 1 : 0;
+            if (aPrimary !== bPrimary) return bPrimary - aPrimary;
+          }
           return (
             b.scoreBreakdown.bounceQuality +
             b.scoreBreakdown.sessionTime -
             (a.scoreBreakdown.bounceQuality + a.scoreBreakdown.sessionTime)
           );
+        }
       }
     });
 

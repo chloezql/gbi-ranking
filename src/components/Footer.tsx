@@ -3,6 +3,16 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
+const LOGO_BASE =
+  "https://ykzrabinwggxpxidencn.supabase.co/storage/v1/object/public/logos";
+
+const PARTNERS: { name: string; logoUrl: string | null }[] = [
+  { name: "白鲸出海", logoUrl: `${LOGO_BASE}/baijing.cn.jpg` },
+  { name: "D.Transformer", logoUrl: null },
+  { name: "Haimeta", logoUrl: `${LOGO_BASE}/haimeta.com.jpg` },
+  { name: "雨果跨境", logoUrl: `${LOGO_BASE}/cifnews.com.jpg` },
+];
+
 export function Footer() {
   const [showDisclaimer, setShowDisclaimer] = useState(false);
 
@@ -31,13 +41,22 @@ export function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-white/90 mb-4">
               Partners
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {PARTNERS.map((p) => (
                 <div
-                  key={i}
-                  className="h-12 rounded-md bg-white/5 border border-white/10 flex items-center justify-center text-xs text-white/40"
+                  key={p.name}
+                  className="h-20 flex flex-col items-center justify-center gap-1 px-2"
                 >
-                  Partner {i}
+                  {p.logoUrl ? (
+                    <img
+                      src={p.logoUrl}
+                      alt={p.name}
+                      className="h-8 w-auto max-w-full object-contain"
+                    />
+                  ) : null}
+                  <span className="text-[11px] text-white/70 text-center leading-tight line-clamp-1">
+                    {p.name}
+                  </span>
                 </div>
               ))}
             </div>
