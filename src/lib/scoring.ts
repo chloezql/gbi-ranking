@@ -1,5 +1,76 @@
 import type { Company } from "./types";
 
+// Per-domain post-score adjustments. Values are added to the rescaled score
+// after the low-traffic cap and clamped to the global ceiling.
+const FEATURED_BOOST: Record<string, number> = {
+  // Newly imported batch
+  "midea.com": 10,
+  "longi.com": 10,
+  "xcmg.com": 10,
+  "jetour.com.cn": 10,
+  "byd.com": 14,
+  "flowerknows.co": 14,
+  "vivo.com": 14,
+  "growatt.com": 14,
+  "blokees.com": 14,
+  "redmagic.gg": 14,
+  "catl.com": 14,
+  "haier.com": 14,
+  "solisinverters.com": 14,
+  "mgmotor.eu": 14,
+  "dyness.com": 14,
+  "deyeinverter.com": 14,
+  "sungrowpower.com": 14,
+  "sigenergy.com": 14,
+  "global.geely.com": 14,
+  "gacmotor.com": 14,
+  "sanyglobal.com": 20,
+  "jinkosolar.com": 20,
+  "tecno-mobile.com": 20,
+  "cheryinternational.com": 20,
+  "lcsign.com": 20,
+  "globalchangan.com": 20,
+  "gwm-global.com": 20,
+
+  // Existing brands also featured in the OneSight rankings
+  "sheglam.com": 10,
+  "shein.com": 10,
+  "popmart.com": 10,
+  "temu.com": 10,
+  "miniso.cn": 10,
+  "yesstyle.com": 10,
+  "luvmehair.com": 10,
+  "chagee.com": 10,
+  "dji.com": 10,
+  "xiaomi.com": 10,
+  "oppo.com": 10,
+  "lenovo.com": 10,
+  "honor.com": 10,
+  "insta360.com": 10,
+  "realme.com": 10,
+  "xpeng.com": 10,
+  "tcl.com": 10,
+  "hisense.com": 10,
+  "roborock.com": 10,
+  "dreame.tech": 10,
+  "ecovacs.com": 10,
+  // NOTE: gree.jp is a Japanese mobile games company, NOT 格力 (Chinese AC).
+  // Removed from boost — 格力 doesn't have a confirmed entry in the DB.
+  "mammotion.com": 10,
+  "eufy.com": 10,
+  "creality.com": 10,
+  "anker.com": 10,
+  "flashforge.com": 10,
+  "hikvision.com": 10,
+  "xtool.com": 10,
+  "bluettipower.com": 10,
+  "ecoflow.com": 10,
+};
+
+function getFeaturedBoost(domain: string): number {
+  return FEATURED_BOOST[domain] ?? 0;
+}
+
 function minMaxNormalize(values: number[]): number[] {
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -89,12 +160,13 @@ export function computeScores(companies: Company[]): Company[] {
   const effectiveGrowthScores = computeEffectiveGrowthScores(companies);
 
   return companies.map((company, i) => {
-    const score = applyTrafficCap(
+    const baseScore = applyTrafficCap(
       maxRaw === minRaw
         ? 50
         : Math.round(FLOOR + ((rawScores[i] - minRaw) / (maxRaw - minRaw)) * (CEIL - FLOOR)),
       company.visits
     );
+    const score = Math.min(CEIL, baseScore + getFeaturedBoost(company.domain));
     const weightedSignals = [
       normVisits[i] * 0.6,
       normGrowth[i] * 0.15,

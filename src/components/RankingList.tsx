@@ -18,18 +18,23 @@ const MODES: { id: RankingMode; label: string }[] = [
 const STORAGE_MODE = "gbi-featured-mode";
 const TOP_PREVIEW = 10;
 
+const NEW_RETAIL_SLUG = "_new_retail";
+const NEW_RETAIL_MEMBERS = ["e-commerce_and_shopping", "lifestyle"];
+const NEW_RETAIL_MEMBER_SET = new Set(NEW_RETAIL_MEMBERS);
+
 function getMarketShare(company: Company, code: string) {
   if (code === "all") return 1;
   return company.topCountryShares.find((s) => s.countryCode === code)?.value ?? 0;
 }
 
-function getTopMarket(company: Company): string | null {
-  let top: { countryCode: string; value: number } | null = null;
-  for (const share of company.topCountryShares) {
-    if (!share.countryCode) continue;
-    if (!top || share.value > top.value) top = share;
-  }
-  return top?.countryCode ?? null;
+const TOP_MARKET_RANK = 2;
+
+function getTopMarkets(company: Company, n = TOP_MARKET_RANK): string[] {
+  return [...company.topCountryShares]
+    .filter((s) => s.countryCode)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, n)
+    .map((s) => s.countryCode);
 }
 
 function SearchToggle({ value, onChange }: { value: string; onChange: (v: string) => void }) {
@@ -218,9 +223,9 @@ export function RankingList({
   const targetOptions = useMemo(() => {
     const map = new Map<string, number>();
     for (const c of companies) {
-      const top = getTopMarket(c);
-      if (!top) continue;
-      map.set(top, (map.get(top) || 0) + 1);
+      for (const code of getTopMarkets(c)) {
+        map.set(code, (map.get(code) || 0) + 1);
+      }
     }
     return Array.from(map.entries())
       .map(([code, count]) => ({ code, name: countryName(code) || code, count }))
@@ -237,6 +242,8 @@ export function RankingList({
 
     if (activeCategory === "_others") {
       result = result.filter((c) => otherSlugs.has(c.parentCategorySlug));
+    } else if (activeCategory === NEW_RETAIL_SLUG) {
+      result = result.filter((c) => NEW_RETAIL_MEMBER_SET.has(c.parentCategorySlug));
     } else if (activeCategory !== "all") {
       result = result.filter((c) => c.parentCategorySlug === activeCategory);
     }
@@ -246,7 +253,7 @@ export function RankingList({
     }
 
     if (targetMarket !== "all") {
-      result = result.filter((c) => getTopMarket(c) === targetMarket);
+      result = result.filter((c) => getTopMarkets(c).includes(targetMarket));
     }
 
     if (search.trim()) {
@@ -296,9 +303,16 @@ export function RankingList({
 
   const categoryOptions = useMemo(() => {
     const isOther = (c: CategoryInfo) => c.count < 10 || c.slug === "other";
-    const main = categories.filter((c) => !isOther(c));
+    const main = categories.filter((c) => !isOther(c) && !NEW_RETAIL_MEMBER_SET.has(c.slug));
+    const newRetailCount = categories
+      .filter((c) => NEW_RETAIL_MEMBER_SET.has(c.slug))
+      .reduce((sum, c) => sum + c.count, 0);
     const othersCount = categories.filter(isOther).reduce((sum, c) => sum + c.count, 0);
-    const result = [...main];
+    const result: CategoryInfo[] = [];
+    if (newRetailCount > 0) {
+      result.push({ slug: NEW_RETAIL_SLUG, name: "New Retail", count: newRetailCount });
+    }
+    result.push(...main);
     if (othersCount > 0) {
       result.push({ slug: "_others", name: "Others", count: othersCount });
     }
