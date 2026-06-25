@@ -64,6 +64,7 @@ async function queryCompanyLatest(ids?: string[]) {
       .from("company_latest")
       .select("*")
       .or("description_usable.eq.true,description_usable.is.null")
+      .eq("show_in_ranking", true)
       .range(from, to);
     if (ids?.length) q = q.in("company_id", ids);
     return q;
@@ -155,8 +156,20 @@ export async function getAllCompanies(): Promise<Company[]> {
 }
 
 export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {
+  // Try ranked companies first — they have computed scores
   const companies = await getAllCompanies();
-  const company = companies.find((c) => c.domain === domain);
+  let company = companies.find((c) => c.domain === domain);
+
+  // Not in ranking (e.g. service provider) — query directly without show_in_ranking filter
+  if (!company) {
+    const { data: row } = await supabase
+      .from("company_latest")
+      .select("*")
+      .eq("domain", domain)
+      .maybeSingle();
+    if (row) company = transformRow(row);
+  }
+
   if (!company) return undefined;
 
   const { data: companyRow } = await supabase

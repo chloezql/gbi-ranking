@@ -6,19 +6,24 @@ import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
+import type { CompanySubmission, CompanyClaim } from "@/lib/types";
+import { SubmissionCard } from "@/components/SubmissionCard";
+import { BatchImportModal } from "@/components/BatchImportModal";
 import { getUserClaims } from "@/lib/data";
-import type { CompanyClaim } from "@/lib/types";
 
 interface UserProfile {
   display_name: string | null;
   avatar_url: string | null;
   bio: string | null;
+  role: "user" | "admin";
 }
 
 export default function DashboardPage() {
-  const { user, loading } = useAuth();
+  const { user, role, loading } = useAuth();
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [submissions, setSubmissions] = useState<CompanySubmission[] | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     if (!loading && !user) router.replace("/");
@@ -29,13 +34,30 @@ export default function DashboardPage() {
 
     supabase
       .from("user_profiles")
-      .select("display_name, avatar_url, bio")
+      .select("display_name, avatar_url, bio, role")
       .eq("id", user.id)
       .single()
       .then(({ data }) => setProfile(data));
   }, [user]);
 
+  useEffect(() => {
+    if (!user || role === null) return;
+
+    const query = supabase
+      .from("company_submissions")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (role !== "admin") {
+      query.eq("submitted_by", user.id);
+    }
+
+    query.then(({ data }) => setSubmissions((data as CompanySubmission[]) ?? []));
+  }, [user, role, refreshKey]);
+
   if (loading || !user) return null;
+
+  const isAdmin = role === "admin";
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -48,11 +70,30 @@ export default function DashboardPage() {
       </nav>
       <div className="flex flex-col gap-10">
         <ProfileSection user={user} profile={profile} onSave={setProfile} />
-        <MyCompanySection user={user} />
+        {isAdmin ? (
+          <AdminReviewSection submissions={submissions} onRefresh={() => setRefreshKey(k => k + 1)} />
+        ) : (
+          <>
+            <MyCompanySection user={user} />
+            <CompanySection submissions={submissions} />
+          </>
+        )}
       </div>
     </div>
   );
 }
+
+function typeLabel(s: CompanySubmission): string {
+  if (s.is_brand && s.is_service_provider) return "Brand & Service Provider";
+  if (s.is_service_provider) return "Service Provider";
+  return "Brand";
+}
+
+const STATUS_CONFIG = {
+  pending:  { label: "Pending review", className: "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400" },
+  approved: { label: "Approved",       className: "bg-success/10 text-success" },
+  rejected: { label: "Rejected",       className: "bg-danger/10 text-danger" },
+};
 
 const STATUS_LABEL: Record<string, { label: string; className: string }> = {
   approved: {
@@ -86,14 +127,14 @@ function MyCompanySection({ user }: { user: User }) {
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-4">My Company</h2>
+      <h2 className="text-lg font-semibold mb-4">Claimed Companies</h2>
       {loading ? (
         <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
           <p className="text-muted text-sm">Loading…</p>
         </div>
       ) : claims.length === 0 ? (
         <div className="rounded-xl border border-border bg-card px-10 py-12 text-center">
-          <p className="text-muted text-sm font-medium">No companies yet.</p>
+          <p className="text-muted text-sm font-medium">No claimed companies yet.</p>
           <p className="text-muted text-xs mt-2 leading-relaxed">
             Visit a company page and click &ldquo;Claim this company&rdquo; to get started.
           </p>
@@ -140,6 +181,200 @@ function MyCompanySection({ user }: { user: User }) {
             );
           })}
         </div>
+      )}
+    </section>
+  );
+}
+
+function CompanySection({ submissions }: { submissions: CompanySubmission[] | null }) {
+  return (
+    <section>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold">Created Companies</h2>
+        <Link
+          href="/company/create"
+          className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
+        >
+          + Add company
+        </Link>
+      </div>
+
+      {submissions === null ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm">Loading…</p>
+        </div>
+      ) : submissions.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm font-medium">No companies submitted yet.</p>
+          <p className="text-muted text-xs mt-2">Click &ldquo;+ Add company&rdquo; to get started.</p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {submissions.map(s => {
+            const cfg = STATUS_CONFIG[s.status];
+            return (
+              <div
+                key={s.id}
+                className="rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4"
+              >
+                <div className="min-w-0">
+                  <p className="font-medium text-sm truncate">{s.name}</p>
+                  <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-xs text-muted">{typeLabel(s)}</span>
+                  <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${cfg.className}`}>
+                    {cfg.label}
+                  </span>
+                  {s.status === "approved" && (
+                    <Link
+                      href={`/company/${encodeURIComponent(s.domain)}`}
+                      className="text-xs text-accent hover:underline shrink-0"
+                    >
+                      View
+                    </Link>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </section>
+  );
+}
+
+type FilterStatus = "pending" | "approved" | "rejected";
+
+function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySubmission[] | null; onRefresh: () => void }) {
+  const [filter, setFilter] = useState<FilterStatus>("pending");
+  const [batchOpen, setBatchOpen] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  const [approving, setApproving] = useState(false);
+
+  const list = submissions ?? [];
+  const filtered = list.filter(s => s.status === filter);
+  const pendingList = list.filter(s => s.status === "pending");
+  const counts = {
+    pending:  pendingList.length,
+    approved: list.filter(s => s.status === "approved").length,
+    rejected: list.filter(s => s.status === "rejected").length,
+  };
+
+  const allSelected = filtered.length > 0 && filtered.every(s => selectedIds.has(s.id));
+
+  const toggleSelect = (id: string, checked: boolean) => {
+    setSelectedIds(prev => {
+      const next = new Set(prev);
+      checked ? next.add(id) : next.delete(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (allSelected) {
+      setSelectedIds(new Set());
+    } else {
+      setSelectedIds(new Set(filtered.map(s => s.id)));
+    }
+  };
+
+  // Clear selection when switching tabs
+  const handleFilterChange = (f: FilterStatus) => {
+    setFilter(f);
+    setSelectedIds(new Set());
+  };
+
+  const handleBatchApprove = async () => {
+    if (selectedIds.size === 0 || approving) return;
+    setApproving(true);
+    for (const id of selectedIds) {
+      await supabase.rpc("approve_submission", { p_submission_id: id });
+    }
+    setApproving(false);
+    setSelectedIds(new Set());
+    onRefresh();
+  };
+
+  return (
+    <section>
+      {batchOpen && (
+        <BatchImportModal
+          onClose={() => setBatchOpen(false)}
+          onDone={() => { setBatchOpen(false); onRefresh(); }}
+        />
+      )}
+      <h2 className="text-lg font-semibold mb-4">Company Submissions</h2>
+
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex gap-1 p-1 bg-border/30 rounded-xl">
+        {(["pending", "approved", "rejected"] as const).map(tab => (
+          <button
+            key={tab}
+            onClick={() => handleFilterChange(tab)}
+            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
+              filter === tab
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted hover:text-foreground"
+            }`}
+          >
+            {tab}
+            {counts[tab] > 0 && (
+              <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
+                filter === tab ? "bg-accent text-white" : "bg-border text-muted"
+              }`}>
+                {counts[tab]}
+              </span>
+            )}
+          </button>
+        ))}
+        </div>
+        <button
+          onClick={() => setBatchOpen(true)}
+          className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity"
+        >
+          + Batch Import
+        </button>
+      </div>
+
+      {filtered.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-10 text-center">
+          <p className="text-muted text-sm">No {filter} submissions.</p>
+        </div>
+      ) : (
+        <>
+          {filter === "pending" && (
+            <div className="flex items-center justify-between mb-2">
+              <label className="flex items-center gap-2 text-xs text-muted cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={toggleSelectAll}
+                  className="w-4 h-4 rounded accent-accent cursor-pointer"
+                />
+                {allSelected ? "Deselect all" : "Select all"}
+              </label>
+              <button
+                onClick={handleBatchApprove}
+                disabled={approving || selectedIds.size === 0}
+                className={`text-xs font-semibold px-3 py-1.5 rounded-lg bg-success text-white hover:opacity-90 transition-opacity disabled:opacity-50 ${selectedIds.size === 0 ? "invisible" : ""}`}
+              >
+                {approving ? "Approving…" : `Approve ${selectedIds.size} selected`}
+              </button>
+            </div>
+          )}
+          <div className="flex flex-col gap-3">
+            {filtered.map(s => (
+              <SubmissionCard
+                key={s.id}
+                submission={s}
+                onRefresh={onRefresh}
+                selected={selectedIds.has(s.id)}
+                onSelect={filter === "pending" ? toggleSelect : undefined}
+              />
+            ))}
+          </div>
+        </>
       )}
     </section>
   );
@@ -196,7 +431,7 @@ function ProfileSection({
     };
     const { error } = await supabase.from("user_profiles").upsert(row);
     if (!error) {
-      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio });
+      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio, role: profile?.role ?? "user" });
     }
     return !error;
   };

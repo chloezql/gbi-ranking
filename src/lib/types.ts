@@ -73,6 +73,27 @@ export interface CompanyClaim {
   companies: { domain: string; title: string | null; logo_url: string | null } | null;
 }
 
+export type SubmissionStatus = "pending" | "approved" | "rejected";
+
+export interface CompanySubmission {
+  id: string;
+  submitted_by: string;
+  status: SubmissionStatus;
+  is_brand: boolean;
+  is_service_provider: boolean;
+  name: string;
+  domain: string;
+  images: string[];
+  related_service_provider_names: string[];
+  related_brand_names: string[];
+  reviewer_notes: string | null;
+  reviewed_at: string | null;
+  apify_status: "pending" | "running" | "complete" | "failed" | "skipped";
+  apify_run_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface CategoryInfo {
   slug: string;
   name: string;

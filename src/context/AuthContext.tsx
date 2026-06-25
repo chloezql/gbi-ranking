@@ -7,6 +7,7 @@ import { supabase } from "@/lib/supabase";
 interface AuthContextValue {
   user: User | null;
   session: Session | null;
+  role: "user" | "admin" | null;
   loading: boolean;
   modalOpen: boolean;
   openModal: () => void;
@@ -19,23 +20,36 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [role, setRole] = useState<"user" | "admin" | null>(null);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+
+  const fetchRole = useCallback(async (userId: string) => {
+    const { data } = await supabase
+      .from("user_profiles")
+      .select("role")
+      .eq("id", userId)
+      .single();
+    setRole((data?.role as "user" | "admin") ?? "user");
+  }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
+      if (session?.user) fetchRole(session.user.id);
       setLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
+      if (session?.user) fetchRole(session.user.id);
+      else setRole(null);
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [fetchRole]);
 
   const openModal = useCallback(() => setModalOpen(true), []);
   const closeModal = useCallback(() => setModalOpen(false), []);
@@ -45,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, modalOpen, openModal, closeModal, signOut }}>
+    <AuthContext.Provider value={{ user, session, role, loading, modalOpen, openModal, closeModal, signOut }}>
       {children}
     </AuthContext.Provider>
   );
