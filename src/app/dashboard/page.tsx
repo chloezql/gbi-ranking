@@ -799,7 +799,12 @@ function ProfileSection({
 
   return (
     <section>
-      <h2 className="text-lg font-semibold mb-4">Profile</h2>
+      <div className="flex items-center gap-2 mb-4">
+        <h2 className="text-lg font-semibold">Profile</h2>
+        {profile?.is_partner && (
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full border border-accent/40 text-accent bg-accent/8">Partner</span>
+        )}
+      </div>
 
       <div className="bg-card border border-border rounded-2xl p-6">
         <div className="flex items-start gap-6">
