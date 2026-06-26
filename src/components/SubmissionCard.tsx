@@ -610,16 +610,17 @@ export function SubmissionCard({
         )}
         <div
           onClick={() => setModalOpen(true)}
-          className="flex-1 text-left rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors cursor-pointer"
+          className="flex-1 text-left rounded-xl border border-border bg-card px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between gap-2 sm:gap-4 hover:border-accent/50 hover:bg-accent-light/30 transition-colors cursor-pointer min-w-0"
         >
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="font-medium text-sm truncate">{s.name}</p>
             <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <span className="text-xs text-muted">{typeLabel(s)}</span>
-            <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${statusCfg.className}`}>
-              {statusCfg.label}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <span className="hidden sm:inline text-xs text-muted">{typeLabel(s)}</span>
+            <span className={`text-xs font-medium px-2 py-0.5 rounded-full whitespace-nowrap ${statusCfg.className}`}>
+              <span className="hidden sm:inline">{statusCfg.label}</span>
+              <span className="sm:hidden">{s.status === "pending" ? "Pending" : s.status === "approved" ? "OK" : "No"}</span>
             </span>
             {s.status === "approved" && (
               <Link

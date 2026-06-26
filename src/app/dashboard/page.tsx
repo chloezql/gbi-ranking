@@ -16,7 +16,9 @@ interface UserProfile {
   avatar_url: string | null;
   bio: string | null;
   role: "user" | "admin";
+  is_partner: boolean;
 }
+
 
 export default function DashboardPage() {
   const { user, role, loading } = useAuth();
@@ -34,7 +36,7 @@ export default function DashboardPage() {
 
     supabase
       .from("user_profiles")
-      .select("display_name, avatar_url, bio, role")
+      .select("display_name, avatar_url, bio, role, is_partner")
       .eq("id", user.id)
       .single()
       .then(({ data }) => setProfile(data));
@@ -71,7 +73,10 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-10">
         <ProfileSection user={user} profile={profile} onSave={setProfile} />
         {isAdmin ? (
-          <AdminReviewSection submissions={submissions} onRefresh={() => setRefreshKey(k => k + 1)} />
+          <>
+            <GrantPartnerSection />
+            <AdminReviewSection submissions={submissions} onRefresh={() => setRefreshKey(k => k + 1)} />
+          </>
         ) : (
           <>
             <MyCompanySection user={user} />
@@ -246,22 +251,26 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] | nu
 
 type FilterStatus = "pending" | "approved" | "rejected";
 
+const PAGE_SIZE = 10;
+
 function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySubmission[] | null; onRefresh: () => void }) {
   const [filter, setFilter] = useState<FilterStatus>("pending");
   const [batchOpen, setBatchOpen] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [approving, setApproving] = useState(false);
+  const [page, setPage] = useState(1);
 
   const list = submissions ?? [];
   const filtered = list.filter(s => s.status === filter);
-  const pendingList = list.filter(s => s.status === "pending");
   const counts = {
-    pending:  pendingList.length,
+    pending:  list.filter(s => s.status === "pending").length,
     approved: list.filter(s => s.status === "approved").length,
     rejected: list.filter(s => s.status === "rejected").length,
   };
 
-  const allSelected = filtered.length > 0 && filtered.every(s => selectedIds.has(s.id));
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const allPageSelected = paginated.length > 0 && paginated.every(s => selectedIds.has(s.id));
 
   const toggleSelect = (id: string, checked: boolean) => {
     setSelectedIds(prev => {
@@ -272,17 +281,25 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
   };
 
   const toggleSelectAll = () => {
-    if (allSelected) {
-      setSelectedIds(new Set());
+    if (allPageSelected) {
+      setSelectedIds(prev => {
+        const next = new Set(prev);
+        paginated.forEach(s => next.delete(s.id));
+        return next;
+      });
     } else {
-      setSelectedIds(new Set(filtered.map(s => s.id)));
+      setSelectedIds(prev => {
+        const next = new Set(prev);
+        paginated.forEach(s => next.add(s.id));
+        return next;
+      });
     }
   };
 
-  // Clear selection when switching tabs
   const handleFilterChange = (f: FilterStatus) => {
     setFilter(f);
     setSelectedIds(new Set());
+    setPage(1);
   };
 
   const handleBatchApprove = async () => {
@@ -306,28 +323,26 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
       )}
       <h2 className="text-lg font-semibold mb-4">Company Submissions</h2>
 
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
         <div className="flex gap-1 p-1 bg-border/30 rounded-xl">
-        {(["pending", "approved", "rejected"] as const).map(tab => (
-          <button
-            key={tab}
-            onClick={() => handleFilterChange(tab)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
-              filter === tab
-                ? "bg-card text-foreground shadow-sm"
-                : "text-muted hover:text-foreground"
-            }`}
-          >
-            {tab}
-            {counts[tab] > 0 && (
-              <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
-                filter === tab ? "bg-accent text-white" : "bg-border text-muted"
-              }`}>
-                {counts[tab]}
-              </span>
-            )}
-          </button>
-        ))}
+          {(["pending", "approved", "rejected"] as const).map(tab => (
+            <button
+              key={tab}
+              onClick={() => handleFilterChange(tab)}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors capitalize ${
+                filter === tab ? "bg-card text-foreground shadow-sm" : "text-muted hover:text-foreground"
+              }`}
+            >
+              {tab}
+              {counts[tab] > 0 && (
+                <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
+                  filter === tab ? "bg-accent text-white" : "bg-border text-muted"
+                }`}>
+                  {counts[tab]}
+                </span>
+              )}
+            </button>
+          ))}
         </div>
         <button
           onClick={() => setBatchOpen(true)}
@@ -344,15 +359,15 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
       ) : (
         <>
           {filter === "pending" && (
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
               <label className="flex items-center gap-2 text-xs text-muted cursor-pointer select-none">
                 <input
                   type="checkbox"
-                  checked={allSelected}
+                  checked={allPageSelected}
                   onChange={toggleSelectAll}
                   className="w-4 h-4 rounded accent-accent cursor-pointer"
                 />
-                {allSelected ? "Deselect all" : "Select all"}
+                {allPageSelected ? "Deselect page" : "Select page"}
               </label>
               <button
                 onClick={handleBatchApprove}
@@ -363,8 +378,9 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
               </button>
             </div>
           )}
+
           <div className="flex flex-col gap-3">
-            {filtered.map(s => (
+            {paginated.map(s => (
               <SubmissionCard
                 key={s.id}
                 submission={s}
@@ -374,7 +390,262 @@ function AdminReviewSection({ submissions, onRefresh }: { submissions: CompanySu
               />
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-xs text-muted">
+                {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, filtered.length)} of {filtered.length}
+              </p>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-border text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
+                  .reduce<(number | "…")[]>((acc, p, i, arr) => {
+                    if (i > 0 && p - (arr[i - 1] as number) > 1) acc.push("…");
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((p, i) =>
+                    p === "…" ? (
+                      <span key={`ellipsis-${i}`} className="w-7 h-7 flex items-center justify-center text-xs text-muted">…</span>
+                    ) : (
+                      <button
+                        key={p}
+                        onClick={() => setPage(p as number)}
+                        className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-medium transition-colors ${
+                          page === p
+                            ? "bg-accent text-white"
+                            : "border border-border text-muted hover:text-foreground hover:bg-border/40"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    )
+                  )}
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-border text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          )}
         </>
+      )}
+    </section>
+  );
+}
+
+interface PartnerUser {
+  id: string;
+  email: string;
+  display_name: string | null;
+  is_partner: boolean;
+}
+
+function GrantPartnerSection() {
+  const [tab, setTab] = useState<"search" | "batch">("search");
+  const [searchEmail, setSearchEmail] = useState("");
+  const [searchResults, setSearchResults] = useState<PartnerUser[]>([]);
+  const [searching, setSearching] = useState(false);
+  const [selectedUsers, setSelectedUsers] = useState<PartnerUser[]>([]);
+  const [batchInput, setBatchInput] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [partners, setPartners] = useState<{ id: string; display_name: string | null }[]>([]);
+  const [feedback, setFeedback] = useState<{ ok: boolean; text: string } | null>(null);
+  const [refreshPartners, setRefreshPartners] = useState(0);
+
+  useEffect(() => {
+    supabase
+      .from("user_profiles")
+      .select("id, display_name")
+      .eq("is_partner", true)
+      .then(({ data }) => setPartners(data ?? []));
+  }, [refreshPartners]);
+
+  useEffect(() => {
+    if (!searchEmail.trim()) { setSearchResults([]); return; }
+    const t = setTimeout(async () => {
+      setSearching(true);
+      const { data } = await supabase.rpc("search_users_by_email", { p_email: searchEmail.trim() });
+      setSearchResults((data as PartnerUser[]) ?? []);
+      setSearching(false);
+    }, 400);
+    return () => clearTimeout(t);
+  }, [searchEmail]);
+
+  const selectUser = (u: PartnerUser) => {
+    if (selectedUsers.some(s => s.id === u.id)) return;
+    setSelectedUsers(prev => [...prev, u]);
+    setSearchEmail("");
+    setSearchResults([]);
+  };
+
+  const removeSelected = (id: string) => setSelectedUsers(prev => prev.filter(u => u.id !== id));
+
+  const grant = async (emails: string[]) => {
+    if (!emails.length) return;
+    setSaving(true);
+    setFeedback(null);
+    const { error } = await supabase.rpc("grant_partner_role", { p_emails: emails });
+    setSaving(false);
+    if (error) {
+      setFeedback({ ok: false, text: error.message });
+    } else {
+      setFeedback({ ok: true, text: `Partner granted to ${emails.length} user(s).` });
+      setRefreshPartners(k => k + 1);
+      if (tab === "batch") setBatchInput("");
+      if (tab === "search") setSelectedUsers([]);
+    }
+  };
+
+  const batchEmails = batchInput.split("\n").map(e => e.trim()).filter(Boolean);
+
+  return (
+    <section>
+      <h2 className="text-lg font-semibold mb-4">Grant Partner</h2>
+      <div className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-5">
+
+        <div className="flex gap-1 p-1 bg-border/30 rounded-xl w-fit">
+          {(["search", "batch"] as const).map(t => (
+            <button
+              key={t}
+              onClick={() => { setTab(t); setFeedback(null); setSearchEmail(""); setSearchResults([]); }}
+              className={`px-4 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                tab === t ? "bg-card text-foreground shadow-sm" : "text-muted hover:text-foreground"
+              }`}
+            >
+              {t === "search" ? "Search User" : "Batch"}
+            </button>
+          ))}
+        </div>
+
+        {tab === "search" && (
+          <div className="flex flex-col gap-3">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by email…"
+                value={searchEmail}
+                onChange={e => setSearchEmail(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors"
+              />
+              {searching && (
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted">Searching…</span>
+              )}
+              {searchResults.length > 0 && (
+                <div className="absolute z-10 top-full mt-1 w-full bg-card border border-border rounded-xl shadow-lg overflow-hidden">
+                  {searchResults.map(u => {
+                    const alreadySelected = selectedUsers.some(s => s.id === u.id);
+                    const initial = (u.display_name ?? u.email).charAt(0).toUpperCase();
+                    const selectable = !u.is_partner && !alreadySelected;
+                    return (
+                      <button
+                        key={u.id}
+                        onClick={() => selectable && selectUser(u)}
+                        disabled={!selectable}
+                        className="w-full flex items-center gap-3 px-3 py-2 hover:bg-border/30 transition-colors disabled:cursor-default text-left"
+                      >
+                        <div className="w-7 h-7 rounded-full bg-accent/15 text-accent flex items-center justify-center text-xs font-semibold shrink-0">
+                          {initial}
+                        </div>
+                        <span className={`flex-1 text-sm truncate ${!selectable ? "text-muted" : "text-foreground"}`}>
+                          {u.email}
+                        </span>
+                        {u.is_partner
+                          ? <span className="w-2 h-2 rounded-full bg-accent shrink-0" title="Already a partner" />
+                          : alreadySelected
+                          ? <svg className="w-3.5 h-3.5 text-success shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                          : <svg className="w-3.5 h-3.5 text-accent opacity-0 group-hover:opacity-100 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
+                        }
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {selectedUsers.length > 0 && (
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap gap-2">
+                  {selectedUsers.map(u => (
+                    <span key={u.id} className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
+                      {u.display_name ?? u.email}
+                      <button onClick={() => removeSelected(u.id)} className="hover:opacity-70 transition-opacity leading-none">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </span>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-muted px-1">{selectedUsers.length} selected</p>
+                  <button
+                    onClick={() => grant(selectedUsers.map(u => u.email))}
+                    disabled={saving}
+                    className="text-xs font-semibold px-4 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+                  >
+                    {saving ? "Granting…" : "Grant All"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {tab === "batch" && (
+          <div className="flex flex-col gap-3">
+            <textarea
+              placeholder={"user1@example.com\nuser2@example.com\nuser3@example.com"}
+              value={batchInput}
+              onChange={e => setBatchInput(e.target.value)}
+              rows={6}
+              className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm text-foreground placeholder:text-muted focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent transition-colors resize-none font-mono"
+            />
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-muted">{batchEmails.length} email(s)</p>
+              <button
+                onClick={() => grant(batchEmails)}
+                disabled={saving || batchEmails.length === 0}
+                className="text-xs font-semibold px-4 py-1.5 rounded-lg bg-accent text-white hover:opacity-90 transition-opacity disabled:opacity-50"
+              >
+                {saving ? "Granting…" : "Grant All"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {feedback && (
+          <p className={`text-sm font-medium ${feedback.ok ? "text-success" : "text-danger"}`}>
+            {feedback.text}
+          </p>
+        )}
+      </div>
+
+      {partners.length > 0 && (
+        <div className="bg-card border border-border rounded-2xl p-6 mt-4">
+          <p className="text-xs font-medium text-muted mb-2">Current partners ({partners.length})</p>
+          <div className="flex flex-wrap gap-2">
+            {partners.map(p => (
+              <span key={p.id} className="text-xs px-2.5 py-1 rounded-full bg-accent/10 text-accent border border-accent/20">
+                {p.display_name ?? p.id}
+              </span>
+            ))}
+          </div>
+        </div>
       )}
     </section>
   );
@@ -431,7 +702,7 @@ function ProfileSection({
     };
     const { error } = await supabase.from("user_profiles").upsert(row);
     if (!error) {
-      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio, role: profile?.role ?? "user" });
+      onSave({ display_name: row.display_name, avatar_url: row.avatar_url, bio: row.bio, role: profile?.role ?? "user", is_partner: profile?.is_partner ?? false });
     }
     return !error;
   };
