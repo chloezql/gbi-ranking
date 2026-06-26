@@ -192,6 +192,11 @@ function MyCompanySection({ user }: { user: User }) {
 }
 
 function CompanySection({ submissions }: { submissions: CompanySubmission[] | null }) {
+  const [page, setPage] = useState(1);
+  const total = submissions?.length ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const paginated = (submissions ?? []).slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return (
     <section>
       <div className="flex items-center justify-between mb-4">
@@ -214,36 +219,88 @@ function CompanySection({ submissions }: { submissions: CompanySubmission[] | nu
           <p className="text-muted text-xs mt-2">Click &ldquo;+ Add company&rdquo; to get started.</p>
         </div>
       ) : (
-        <div className="flex flex-col gap-3">
-          {submissions.map(s => {
-            const cfg = STATUS_CONFIG[s.status];
-            return (
-              <div
-                key={s.id}
-                className="rounded-xl border border-border bg-card px-5 py-4 flex items-center justify-between gap-4"
-              >
-                <div className="min-w-0">
-                  <p className="font-medium text-sm truncate">{s.name}</p>
-                  <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
+        <>
+          <div className="flex flex-col gap-3">
+            {paginated.map(s => {
+              const cfg = STATUS_CONFIG[s.status];
+              return (
+                <div
+                  key={s.id}
+                  className="rounded-xl border border-border bg-card px-4 py-3 sm:px-5 sm:py-4 flex items-center justify-between gap-2 sm:gap-4"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium text-sm truncate">{s.name}</p>
+                    <p className="text-xs text-muted font-mono truncate">{s.domain}</p>
+                  </div>
+                  <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                    <span className="hidden sm:inline text-xs text-muted">{typeLabel(s)}</span>
+                    <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full whitespace-nowrap ${cfg.className}`}>
+                      {cfg.label}
+                    </span>
+                    {s.status === "approved" && (
+                      <Link
+                        href={`/company/${encodeURIComponent(s.domain)}`}
+                        className="text-xs text-accent hover:underline shrink-0"
+                      >
+                        View
+                      </Link>
+                    )}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-xs text-muted">{typeLabel(s)}</span>
-                  <span className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${cfg.className}`}>
-                    {cfg.label}
-                  </span>
-                  {s.status === "approved" && (
-                    <Link
-                      href={`/company/${encodeURIComponent(s.domain)}`}
-                      className="text-xs text-accent hover:underline shrink-0"
-                    >
-                      View
-                    </Link>
+              );
+            })}
+          </div>
+
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-4">
+              <p className="text-xs text-muted">
+                {(page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, total)} of {total}
+              </p>
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-border text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter(p => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
+                  .reduce<(number | "…")[]>((acc, p, i, arr) => {
+                    if (i > 0 && p - (arr[i - 1] as number) > 1) acc.push("…");
+                    acc.push(p);
+                    return acc;
+                  }, [])
+                  .map((p, i) =>
+                    p === "…" ? (
+                      <span key={`ellipsis-${i}`} className="w-7 h-7 flex items-center justify-center text-xs text-muted">…</span>
+                    ) : (
+                      <button
+                        key={p}
+                        onClick={() => setPage(p as number)}
+                        className={`w-7 h-7 flex items-center justify-center rounded-lg text-xs font-medium transition-colors ${
+                          page === p ? "bg-accent text-white" : "border border-border text-muted hover:text-foreground hover:bg-border/40"
+                        }`}
+                      >
+                        {p}
+                      </button>
+                    )
                   )}
-                </div>
+                <button
+                  onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="w-7 h-7 flex items-center justify-center rounded-lg border border-border text-muted hover:text-foreground hover:bg-border/40 transition-colors disabled:opacity-30 disabled:cursor-default"
+                >
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          )}
+        </>
       )}
     </section>
   );
