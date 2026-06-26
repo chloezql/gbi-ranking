@@ -59,22 +59,31 @@ export function CompanyCard({
   rank,
   index = 0,
   eager = false,
+  metric = "visits",
 }: {
   company: Company;
   rank: number;
   index?: number;
   eager?: boolean;
+  metric?: "visits" | "engagement";
 }) {
   const isGrowing = company.growthRate >= 0;
   const isTop3 = rank <= 3;
   const theme = isTop3 ? TOP3_THEME[rank as 1 | 2 | 3] : null;
+  const isEngagement = metric === "engagement";
+  const metricValue = isEngagement
+    ? String(company.engagementScore)
+    : formatNumber(company.visits);
 
   return (
     <Link
       href={`/company/${company.domain}`}
       style={{ animationDelay: `${index * 30}ms` }}
       className={cn(
-        "group grid items-center gap-4 grid-cols-[3.5rem_minmax(0,1fr)_4.5rem] sm:grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem] transition-all duration-200 last:border-0 animate-[slideUpFade_420ms_ease-out_both]",
+        "group grid items-center gap-4 grid-cols-[3.5rem_minmax(0,1fr)_4.5rem] transition-all duration-200 last:border-0 animate-[slideUpFade_420ms_ease-out_both]",
+        isEngagement
+          ? "sm:grid-cols-[4rem_minmax(0,1fr)_7rem_6rem]"
+          : "sm:grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem]",
         theme
           ? cn(
               "mx-2 my-2 px-4 sm:px-5 py-5 sm:py-6 rounded-xl border shadow-sm hover:shadow-lg hover:-translate-y-0.5",
@@ -143,30 +152,34 @@ export function CompanyCard({
           />
           {/* Mobile collapsed metrics */}
           <div className="flex sm:hidden items-center gap-3 text-sm text-muted mt-1">
-            <span className="tabular-nums">{formatNumber(company.visits)}</span>
-            <span
-              className={cn(
-                "tabular-nums font-medium",
-                isGrowing ? "text-success" : "text-danger"
-              )}
-            >
-              {formatGrowth(company.growthRate)}
-            </span>
+            <span className="tabular-nums">{metricValue}</span>
+            {!isEngagement && (
+              <span
+                className={cn(
+                  "tabular-nums font-medium",
+                  isGrowing ? "text-success" : "text-danger"
+                )}
+              >
+                {formatGrowth(company.growthRate)}
+              </span>
+            )}
           </div>
         </div>
       </div>
 
       <span className="hidden sm:block text-right text-lg font-medium tabular-nums">
-        {formatNumber(company.visits)}
+        {metricValue}
       </span>
-      <span
-        className={cn(
-          "hidden sm:block text-right text-lg font-medium tabular-nums",
-          isGrowing ? "text-success" : "text-danger"
-        )}
-      >
-        {formatGrowth(company.growthRate)}
-      </span>
+      {!isEngagement && (
+        <span
+          className={cn(
+            "hidden sm:block text-right text-lg font-medium tabular-nums",
+            isGrowing ? "text-success" : "text-danger"
+          )}
+        >
+          {formatGrowth(company.growthRate)}
+        </span>
+      )}
       <span
         className={cn(
           "text-right font-bold tabular-nums",

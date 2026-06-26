@@ -184,6 +184,8 @@ export function computeScores(companies: Company[]): Company[] {
       score - roundedContributions.reduce((sum, value) => sum + value, 0);
     roundedContributions[0] += roundingDifference;
 
+    const engagementScore = Math.round(normBounce[i] * 0.5 + normTime[i] * 0.5);
+
     return {
       ...company,
       score,
@@ -195,6 +197,7 @@ export function computeScores(companies: Company[]): Company[] {
         sessionTime: roundedContributions[4],
       },
       effectiveGrowthScore: effectiveGrowthScores[i],
+      engagementScore,
     };
   });
 }

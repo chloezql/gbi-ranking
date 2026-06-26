@@ -140,6 +140,7 @@ function transformRow(row: SupabaseRow): Company {
     },
     growthRate,
     effectiveGrowthScore: 0,
+    engagementScore: 0,
   };
 }
 

@@ -299,11 +299,7 @@ export function RankingList({
             const bPrimary = getPrimaryMarket(b) === targetMarket ? 1 : 0;
             if (aPrimary !== bPrimary) return bPrimary - aPrimary;
           }
-          return (
-            b.scoreBreakdown.bounceQuality +
-            b.scoreBreakdown.sessionTime -
-            (a.scoreBreakdown.bounceQuality + a.scoreBreakdown.sessionTime)
-          );
+          return b.engagementScore - a.engagementScore;
         }
       }
     });
@@ -440,21 +436,44 @@ export function RankingList({
       {/* Ranking table */}
       <div className="bg-card border border-border rounded-xl">
         {/* Table header (sticky) */}
-        <div className="hidden sm:grid sticky top-12 z-20 grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem] gap-4 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-muted border-b border-border rounded-t-xl bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/75">
+        <div
+          className={cn(
+            "hidden sm:grid sticky top-12 z-20 gap-4 px-6 py-4 text-xs font-semibold uppercase tracking-wider text-muted border-b border-border rounded-t-xl bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/75",
+            mode === "engagement"
+              ? "grid-cols-[4rem_minmax(0,1fr)_7rem_6rem]"
+              : "grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem]"
+          )}
+        >
           <span>#</span>
           <span>Brand</span>
-          <span
-            className="text-right cursor-help"
-            title="Total website visits in the most recent month (SimilarWeb)"
-          >
-            Visits
-          </span>
-          <span
-            className="text-right cursor-help"
-            title="3-month traffic growth rate compared to 3 months ago"
-          >
-            Growth
-          </span>
+          {mode === "engagement" ? (
+            <span className="flex items-center justify-end gap-1.5">
+              Engagement
+              <span className="relative group/info inline-flex">
+                <span className="inline-flex w-4 h-4 items-center justify-center rounded-full border border-muted/50 text-[10px] leading-none text-muted hover:text-foreground hover:border-foreground/60 cursor-help">
+                  ?
+                </span>
+                <span className="hidden group-hover/info:block absolute right-0 top-full mt-2 w-72 p-3 rounded-lg bg-card border border-border shadow-lg text-xs font-normal normal-case tracking-normal text-foreground leading-relaxed z-30">
+                  Calculated from bounce rate, average session duration, and pages per visit.
+                </span>
+              </span>
+            </span>
+          ) : (
+            <>
+              <span
+                className="text-right cursor-help"
+                title="Total website visits in the most recent month (SimilarWeb)"
+              >
+                Visits
+              </span>
+              <span
+                className="text-right cursor-help"
+                title="3-month traffic growth rate compared to 3 months ago"
+              >
+                Growth
+              </span>
+            </>
+          )}
           <span
             className="text-right cursor-help"
             title="GBI Score (0-95): composite rating across traffic scale, growth, visit depth, bounce quality and session time"
@@ -475,6 +494,7 @@ export function RankingList({
             rank={displayStartRank + i + 1}
             index={i}
             eager={i < 10}
+            metric={mode === "engagement" ? "engagement" : "visits"}
           />
         ))}
         {display.length === 0 && (
