@@ -115,6 +115,7 @@ create table user_profiles (
   avatar_url text,
   bio text,
   role text not null default 'user' check (role in ('user', 'admin')),
+  is_partner boolean not null default false,
   created_at timestamptz default now(),
   updated_at timestamptz default now()
 );
@@ -518,3 +519,28 @@ create policy "Admins update submissions"
   with check (exists (select 1 from user_profiles where id = auth.uid() and role = 'admin'));
 
 grant update on public.company_submissions to authenticated;
+
+-- 16. Partner role management (admin-only RPCs)
+create or replace function search_users_by_email(p_email text)
+returns table(id uuid, email text, display_name text, is_partner boolean)
+language plpgsql security definer as $$
+begin
+  return query
+  select u.id, u.email::text, p.display_name, coalesce(p.is_partner, false)
+  from auth.users u
+  left join user_profiles p on p.id = u.id
+  where u.email ilike '%' || p_email || '%'
+  limit 10;
+end;
+$$;
+
+create or replace function grant_partner_role(p_emails text[])
+returns void language plpgsql security definer as $$
+begin
+  update user_profiles
+  set is_partner = true
+  where id in (
+    select id from auth.users where email = any(p_emails)
+  );
+end;
+$$;
