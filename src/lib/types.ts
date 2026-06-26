@@ -64,6 +64,7 @@ export interface Company {
   };
   growthRate: number;
   effectiveGrowthScore: number;
+  engagementScore: number;
 }
 
 export interface CompanyClaim {
