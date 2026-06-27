@@ -11,7 +11,7 @@ export default async function HomePage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <a
-        href="https://gbiworld.org"
+        href="https://gbiworld.org/consultation"
         target="_blank"
         rel="noopener noreferrer"
         className="group relative block overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow mb-8"
@@ -23,7 +23,7 @@ export default async function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
         <span className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-full shadow-lg group-hover:brightness-110 transition-all">
-          Learn more
+          免费领取出海竞争力报告
           <svg
             className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
             fill="none"
