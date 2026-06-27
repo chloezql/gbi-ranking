@@ -1,5 +1,6 @@
 import { getAllCompanies, deriveCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
+import { IndustryRankings } from "@/components/IndustryRankings";
 
 export const revalidate = 3600;
 
@@ -38,6 +39,8 @@ export default async function HomePage() {
           </svg>
         </span>
       </a>
+
+      <IndustryRankings />
 
       <div id="rankings" className="mb-6 scroll-mt-16">
         <div className="flex items-center gap-3">
