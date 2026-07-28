@@ -66,6 +66,11 @@ export default async function HomePage() {
           and service providers driving global expansion across markets and
           categories.
         </p>
+        <p className="text-muted mt-2 text-sm leading-relaxed">
+          The GBI 100 is organized around four complementary ranking views —
+          composite performance, growth momentum, traffic scale, and audience
+          engagement — so users can evaluate brands from different perspectives.
+        </p>
       </div>
 
       <RankingList companies={companies} categories={categories} />
