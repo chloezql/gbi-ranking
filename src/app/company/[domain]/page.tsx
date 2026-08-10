@@ -10,6 +10,7 @@ import {
 } from "@/lib/utils";
 import { ScoreBadge } from "@/components/ScoreBadge";
 import { ClaimButton } from "@/components/ClaimButton";
+import { SignInGate } from "@/components/SignInGate";
 import { CompanyDescription } from "@/components/CompanyDescription";
 import { VisitTrendChart } from "@/components/VisitTrendChart";
 import { TrafficSourceDonut } from "@/components/TrafficSourceDonut";
@@ -269,7 +270,12 @@ export default async function CompanyPage({
 
       {/* Monthly visits trend */}
       <div className="bg-card border border-border rounded-xl px-5 py-3.5 mb-6">
-        <VisitTrendChart data={company.monthlyVisits} />
+        <SignInGate
+          title="Unlock traffic trends"
+          description="Sign in to explore monthly visits and growth momentum."
+        >
+          <VisitTrendChart data={company.monthlyVisits} />
+        </SignInGate>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -325,6 +331,10 @@ export default async function CompanyPage({
 
       {/* Top keywords */}
       {company.topKeywords.length > 0 && (
+        <SignInGate
+          title="Unlock keyword insights"
+          description="Sign in to explore high-intent search keywords and traffic signals."
+        >
         <div className="bg-card border border-border rounded-xl p-5">
           <div className="flex flex-wrap items-end justify-between gap-2 mb-4">
             <div>
@@ -388,6 +398,7 @@ export default async function CompanyPage({
             </div>
           </div>
         </div>
+        </SignInGate>
       )}
 
       {/* Data source */}

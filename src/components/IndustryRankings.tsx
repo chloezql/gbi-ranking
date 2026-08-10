@@ -145,7 +145,7 @@ export function IndustryRankings() {
                   </span>
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-border flex items-center justify-center shrink-0 p-1">
                     <img
-                      src={b.logo}
+                      src={b.logo.replace(/\.png$/, ".webp")}
                       alt={b.nameEn}
                       loading="lazy"
                       className="max-w-full max-h-full object-contain"

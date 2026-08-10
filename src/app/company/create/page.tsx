@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
 import { DuplicateCompanyModal } from "@/components/DuplicateCompanyModal";
+import { COMPANY_CATEGORIES, COMPANY_TYPES, type CompanyCategorySlug, type CompanyType } from "@/lib/company-taxonomy";
 
 type Step = "domain" | "type" | "form" | "done";
 type DuplicateReason = "listed" | "pending" | "domain_mismatch";
@@ -101,8 +102,9 @@ export default function CreateCompanyPage() {
 
   const [duplicate, setDuplicate] = useState<{ domain: string; reason: DuplicateReason } | null>(null);
 
-  const [isBrand, setIsBrand] = useState(false);
-  const [isServiceProvider, setIsServiceProvider] = useState(false);
+  const [companyType, setCompanyType] = useState<CompanyType | null>(null);
+  const [primaryCategory, setPrimaryCategory] = useState<CompanyCategorySlug | null>(null);
+  const [additionalCategories, setAdditionalCategories] = useState<CompanyCategorySlug[]>([]);
 
   const [name, setName] = useState("");
   const [relatedServiceProviders, setRelatedServiceProviders] = useState<string[]>([]);
@@ -176,7 +178,7 @@ export default function CreateCompanyPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || (!isBrand && !isServiceProvider)) return;
+    if (!user || !companyType || !primaryCategory) return;
     setSubmitError(null);
     setSubmitting(true);
 
@@ -198,13 +200,16 @@ export default function CreateCompanyPage() {
         .from("company_submissions")
         .insert({
           submitted_by: user.id,
-          is_brand: isBrand,
-          is_service_provider: isServiceProvider,
+          is_brand: companyType === "brand",
+          is_service_provider: companyType === "service_provider",
+          company_type: companyType,
+          primary_category_slug: primaryCategory,
+          category_slugs: [primaryCategory, ...additionalCategories],
           name: name.trim(),
           domain,
           images: uploadedUrls,
-          related_service_provider_names: isBrand ? relatedServiceProviders : [],
-          related_brand_names: isServiceProvider ? relatedBrands : [],
+          related_service_provider_names: companyType === "brand" ? relatedServiceProviders : [],
+          related_brand_names: companyType === "service_provider" ? relatedBrands : [],
         })
         .select("id")
         .single();
@@ -324,30 +329,61 @@ export default function CreateCompanyPage() {
           </div>
 
           <div className="flex flex-col gap-3">
-            <p className="text-xs text-muted">Select one or both.</p>
-            <div className="flex gap-2">
-              {([
-                { label: "Brand", active: isBrand, toggle: () => setIsBrand(v => !v) },
-                { label: "Service Provider", active: isServiceProvider, toggle: () => setIsServiceProvider(v => !v) },
-              ]).map(({ label, active, toggle }) => (
+            <p className="text-xs text-muted">Select one type.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {COMPANY_TYPES.map(({ value, label, description }) => (
                 <button
-                  key={label}
+                  key={value}
                   type="button"
-                  onClick={toggle}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
-                    active
-                      ? "border-accent bg-accent text-white"
-                      : "border-border text-muted hover:border-accent hover:text-accent"
+                  onClick={() => setCompanyType(value)}
+                  className={`rounded-lg border p-3 text-left transition-colors ${
+                    companyType === value
+                      ? "border-accent bg-accent-light text-foreground"
+                      : "border-border text-muted hover:border-accent hover:text-foreground"
                   }`}
                 >
-                  {active && (
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                  )}
-                  {label}
+                  <span className="block text-sm font-semibold">{label}</span>
+                  <span className="block text-xs mt-1 leading-relaxed">{description}</span>
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-sm font-medium" htmlFor="primary-category">Primary category</label>
+            <select
+              id="primary-category"
+              value={primaryCategory ?? ""}
+              onChange={e => {
+                const next = e.target.value as CompanyCategorySlug;
+                setPrimaryCategory(next || null);
+                setAdditionalCategories(categories => categories.filter(category => category !== next));
+              }}
+              className="w-full px-3 py-2 rounded-lg border border-border bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent"
+            >
+              <option value="">Select a category</option>
+              {COMPANY_CATEGORIES.map(category => (
+                <option key={category.slug} value={category.slug}>{category.name}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <p className="text-sm font-medium">Additional categories <span className="font-normal text-muted">(optional)</span></p>
+            <div className="flex flex-wrap gap-2">
+              {COMPANY_CATEGORIES.filter(category => category.slug !== primaryCategory).map(category => {
+                const selected = additionalCategories.includes(category.slug);
+                return (
+                  <button
+                    key={category.slug}
+                    type="button"
+                    onClick={() => setAdditionalCategories(current => selected ? current.filter(slug => slug !== category.slug) : [...current, category.slug])}
+                    className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-colors ${selected ? "border-accent bg-accent text-white" : "border-border text-muted hover:border-accent hover:text-accent"}`}
+                  >
+                    {category.name}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -355,7 +391,7 @@ export default function CreateCompanyPage() {
             <button
               type="button"
               onClick={() => setStep("form")}
-              disabled={!isBrand && !isServiceProvider}
+              disabled={!companyType || !primaryCategory}
               className="w-full py-2.5 rounded-lg bg-accent text-white text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Continue
@@ -376,7 +412,7 @@ export default function CreateCompanyPage() {
         <form onSubmit={handleSubmit} className="bg-card border border-border rounded-2xl p-6 flex flex-col gap-5">
           <div>
             <h2 className="font-semibold mb-0.5">
-              {isBrand && isServiceProvider ? "Company" : isBrand ? "Brand" : "Service Provider"} details
+              {companyType === "brand" ? "Brand" : "Service Provider"} details
             </h2>
             <p className="text-muted text-xs font-mono">{domain}</p>
           </div>
@@ -398,7 +434,7 @@ export default function CreateCompanyPage() {
           </div>
 
           {/* Related companies */}
-          {isBrand && (
+          {companyType === "brand" && (
             <ChipInput
               label="Related service providers (optional)"
               placeholder="e.g. Salesforce, SAP"
@@ -406,7 +442,7 @@ export default function CreateCompanyPage() {
               onChange={setRelatedServiceProviders}
             />
           )}
-          {isServiceProvider && (
+          {companyType === "service_provider" && (
             <ChipInput
               label="Related brands (optional)"
               placeholder="e.g. Nike, Apple"
@@ -519,8 +555,9 @@ export default function CreateCompanyPage() {
                 setStep("domain");
                 setDomain("");
                 setName("");
-                setIsBrand(false);
-                setIsServiceProvider(false);
+                setCompanyType(null);
+                setPrimaryCategory(null);
+                setAdditionalCategories([]);
                 setRelatedServiceProviders([]);
                 setRelatedBrands([]);
                 setImages([]);
