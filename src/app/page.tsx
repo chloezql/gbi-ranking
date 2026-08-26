@@ -1,11 +1,11 @@
-import { getAllCompanies, deriveCategories } from "@/lib/data";
+import { getRankingCompanies, deriveCategories } from "@/lib/data";
 import { RankingList } from "@/components/RankingList";
 import { IndustryRankings } from "@/components/IndustryRankings";
 
 export const revalidate = 3600;
 
 export default async function HomePage() {
-  const companies = await getAllCompanies();
+  const companies = await getRankingCompanies();
   const categories = deriveCategories(companies);
 
   return (
@@ -16,11 +16,15 @@ export default async function HomePage() {
         rel="noopener noreferrer"
         className="group relative block overflow-hidden rounded-2xl border border-border shadow-sm hover:shadow-lg transition-shadow mb-8"
       >
-        <img
-          src="/banner.png"
-          alt="Global Brand Innovation Forum"
-          className="w-full h-[160px] sm:h-[220px] lg:h-[280px] object-cover"
-        />
+        <picture>
+          <source media="(max-width: 640px)" srcSet="/banner-mobile.webp" />
+          <img
+            src="/banner.webp"
+            alt="Global Brand Innovation Forum"
+            fetchPriority="high"
+            className="w-full h-[160px] sm:h-[220px] lg:h-[280px] object-cover"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent pointer-events-none" />
         <span className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-semibold rounded-full shadow-lg group-hover:brightness-110 transition-all">
           免费领取出海竞争力报告
@@ -65,6 +69,11 @@ export default async function HomePage() {
           Infrastructure), designed to identify and showcase the leading brands
           and service providers driving global expansion across markets and
           categories.
+        </p>
+        <p className="text-muted mt-2 text-sm leading-relaxed">
+          The GBI 100 is organized around four complementary ranking views —
+          composite performance, growth momentum, traffic scale, and audience
+          engagement — so users can evaluate brands from different perspectives.
         </p>
       </div>
 

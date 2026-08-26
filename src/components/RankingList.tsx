@@ -5,14 +5,95 @@ import type { Company, CategoryInfo } from "@/lib/types";
 import { CompanyCard } from "./CompanyCard";
 import { cn, countryName } from "@/lib/utils";
 import { Dropdown } from "./Dropdown";
+import { useLanguage } from "@/context/LanguageContext";
 
 type RankingMode = "market" | "growing" | "visited" | "engagement";
 
-const MODES: { id: RankingMode; label: string }[] = [
-  { id: "market", label: "Best in Market" },
-  { id: "growing", label: "Fastest Growing" },
-  { id: "visited", label: "Most Visited" },
-  { id: "engagement", label: "Top Engagement" },
+type ModeTooltip = {
+  title: string;
+  description: string;
+  metric: string;
+};
+
+type ModeDefinition = {
+  id: RankingMode;
+  label: string;
+  tooltip: {
+    en: ModeTooltip;
+    zh: ModeTooltip;
+  };
+};
+
+const MODES: ModeDefinition[] = [
+  {
+    id: "market",
+    label: "Best in Market",
+    tooltip: {
+      en: {
+        title: "Composite Performance Leader",
+        description:
+          "Ranked by a composite GBI score evaluating traffic, growth, market share, pages per visit, and average session duration.",
+        metric: "Key Metrics: Traffic · Growth · Market Share · Visit Depth · Session Duration",
+      },
+      zh: {
+        title: "综合表现领跑者",
+        description:
+          "使用流量、增长、市场份额、每次访问页数及停留时间的综合分，根据市场份额综合评估头部品牌。",
+        metric: "核心指标：流量 · 增长 · 市场份额 · 人均翻页 · 停留时间",
+      },
+    },
+  },
+  {
+    id: "growing",
+    label: "Fastest Growing",
+    tooltip: {
+      en: {
+        title: "High-Growth Momentum",
+        description:
+          "Ranked by the highest month-over-month traffic growth rate, highlighting rapidly expanding brands in the market.",
+        metric: "Key Metrics: MoM Growth · Starting Traffic Scale",
+      },
+      zh: {
+        title: "高增长动能",
+        description: "结合月度流量环比增长率和起始流量规模的综合增长分排序，锁定爆发品牌。",
+        metric: "核心指标：月度环比增长率 · 起始流量规模",
+      },
+    },
+  },
+  {
+    id: "visited",
+    label: "Most Visited",
+    tooltip: {
+      en: {
+        title: "Absolute Traffic Scale",
+        description:
+          "Ranked by total monthly web traffic volume and unique visitors, showcasing the largest brand reach.",
+        metric: "Key Metrics: Monthly Visits · Unique Visitors · Market Optimization",
+      },
+      zh: {
+        title: "绝对流量规模",
+        description: "按月度总访问量及独立访客数排序，并根据不同市场优化分数，展现最大流量规模。",
+        metric: "核心指标：月度总访问量 · 独立访客数 · 市场优化",
+      },
+    },
+  },
+  {
+    id: "engagement",
+    label: "Top Engagement",
+    tooltip: {
+      en: {
+        title: "Audience Engagement Quality",
+        description:
+          "Ranked by behavioral quality metrics including average session duration, pages per visit, and bounce rate.",
+        metric: "Key Metrics: Session Duration · Pages per Visit · Bounce Rate",
+      },
+      zh: {
+        title: "用户互动质量",
+        description: "基于用户平均停留时长、人均翻页数及跳出率综合评定，评估品牌网站吸引力。",
+        metric: "核心指标：平均停留时长 · 人均翻页数 · 跳出率",
+      },
+    },
+  },
 ];
 
 const STORAGE_MODE = "gbi-featured-mode";
@@ -187,6 +268,7 @@ export function RankingList({
   companies: Company[];
   categories: CategoryInfo[];
 }) {
+  const { lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [originCountry, setOriginCountry] = useState<string>("all");
   const [targetMarket, setTargetMarket] = useState<string>("US");
@@ -235,9 +317,17 @@ export function RankingList({
         }
       }
     }
-    return Array.from(map.entries())
+    const options = Array.from(map.entries())
       .map(([code, count]) => ({ code, name: countryName(code) || code, count }))
       .sort((a, b) => b.count - a.count);
+
+    const chinaIndex = options.findIndex((option) => option.code === "CN");
+    if (chinaIndex >= 0) {
+      const [chinaMainland] = options.splice(chinaIndex, 1);
+      options.splice(Math.min(chinaIndex + 5, options.length), 0, chinaMainland);
+    }
+
+    return options;
   }, [companies]);
 
   const otherSlugs = useMemo(() => {
@@ -349,20 +439,43 @@ export function RankingList({
 
   const modeTabs = (
     <div className="inline-flex bg-card border border-border rounded-xl p-1 gap-1">
-      {MODES.map((m) => (
-        <button
-          key={m.id}
-          onClick={() => setModePersist(m.id)}
-          className={cn(
-            "px-3.5 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
-            mode === m.id
-              ? "bg-accent text-white shadow-sm"
-              : "text-muted hover:text-foreground hover:bg-background/40"
-          )}
-        >
-          {m.label}
-        </button>
-      ))}
+      {MODES.map((m, index) => {
+        const tooltip = m.tooltip[lang === "zh" ? "zh" : "en"];
+        const tooltipPosition =
+          index === 0 ? "left-0" : index === MODES.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2";
+
+        return (
+          <div key={m.id} className="relative group/mode">
+            <button
+              onClick={() => setModePersist(m.id)}
+              aria-describedby={`ranking-mode-${m.id}`}
+              className={cn(
+                "px-3.5 py-1.5 rounded-lg text-sm font-medium whitespace-nowrap transition-colors",
+                mode === m.id
+                  ? "bg-accent text-white shadow-sm"
+                  : "text-muted hover:text-foreground hover:bg-background/40"
+              )}
+            >
+              {m.label}
+            </button>
+            <div
+              id={`ranking-mode-${m.id}`}
+              role="tooltip"
+              className={cn(
+                "pointer-events-none invisible absolute top-full z-40 mt-3 w-80 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-card p-4 text-left text-foreground opacity-0 shadow-xl translate-y-1 transition-all duration-200 delay-0 group-hover/mode:visible group-hover/mode:translate-y-0 group-hover/mode:opacity-100 group-hover/mode:delay-300",
+                tooltipPosition
+              )}
+            >
+              <p className="text-xs font-semibold text-accent">{tooltip.title}</p>
+              <div className="my-2.5 border-t border-border" />
+              <p className="text-xs leading-relaxed text-muted">{tooltip.description}</p>
+              <span className="mt-3 inline-flex rounded-full bg-accent-light px-2.5 py-1 text-[11px] font-medium text-accent">
+                {tooltip.metric}
+              </span>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 

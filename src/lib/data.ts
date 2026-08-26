@@ -13,6 +13,8 @@ interface SupabaseRow {
   screenshot_url: string | null;
   logo_url: string | null;
   country_code: string | null;
+  company_type: "brand" | "service_provider" | null;
+  category_slugs: string[] | null;
   category_slug: string | null;
   category_name: string | null;
   parent_category_slug: string | null;
@@ -41,6 +43,33 @@ function isMissingDescriptionUsableColumn(error: unknown): boolean {
 }
 
 const PAGE_SIZE = 1000;
+
+const RANKING_LIST_COLUMNS = [
+  "company_id",
+  "domain",
+  "title",
+  "description",
+  "description_cn",
+  "description_usable",
+  "screenshot_url",
+  "logo_url",
+  "country_code",
+  "category_slug",
+  "category_name",
+  "parent_category_slug",
+  "parent_category_name",
+  "snapshot_date",
+  "global_rank",
+  "traffic_country_code",
+  "country_rank",
+  "category_rank",
+  "visits",
+  "bounce_rate",
+  "pages_per_visit",
+  "time_on_site",
+  "monthly_visits",
+  "top_country_shares",
+].join(",");
 
 async function paginate<T>(
   build: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: unknown }>
@@ -87,6 +116,30 @@ async function queryCompanyLatest(ids?: string[]) {
   return paginate<SupabaseRow>(buildFallback);
 }
 
+async function queryRankingCompanyLatest() {
+  const buildPrimary = (from: number, to: number) =>
+    supabase
+      .from("company_latest")
+      .select(RANKING_LIST_COLUMNS)
+      .or("description_usable.eq.true,description_usable.is.null")
+      .eq("show_in_ranking", true)
+      .range(from, to) as unknown as PromiseLike<{ data: SupabaseRow[] | null; error: unknown }>;
+
+  const result = await paginate<SupabaseRow>(buildPrimary);
+  if (!result.error || !isMissingDescriptionUsableColumn(result.error)) {
+    return result;
+  }
+
+  const buildFallback = (from: number, to: number) =>
+    supabase
+      .from("company_latest")
+      .select(RANKING_LIST_COLUMNS)
+      .eq("show_in_ranking", true)
+      .range(from, to) as unknown as PromiseLike<{ data: SupabaseRow[] | null; error: unknown }>;
+
+  return paginate<SupabaseRow>(buildFallback);
+}
+
 function transformRow(row: SupabaseRow): Company {
   const monthlyVisits = Object.entries(row.monthly_visits || {})
     .map(([month, visits]) => ({ month, visits }))
@@ -103,6 +156,8 @@ function transformRow(row: SupabaseRow): Company {
     screenshotUrl: row.screenshot_url || "",
     logoUrl: row.logo_url || "",
     originCountry: row.country_code || "",
+    companyType: row.company_type === "service_provider" ? "service_provider" : "brand",
+    categorySlugs: row.category_slugs || [row.category_slug || "other"],
     categorySlug: row.category_slug || "other",
     categoryName: row.category_name || humanizeSlug(row.category_slug || "other"),
     parentCategorySlug: row.parent_category_slug || row.category_slug || "other",
@@ -155,6 +210,57 @@ export async function getAllCompanies(): Promise<Company[]> {
   const rows = (data as SupabaseRow[]).filter((row) => Number(row.visits) > 0);
   const companies = rows.map(transformRow);
   return computeScores(companies).sort((a, b) => b.score - a.score);
+}
+
+async function getRankingCompaniesUncached(): Promise<Company[]> {
+  const { data, error } = await queryRankingCompanyLatest();
+
+  if (error) {
+    console.error("Supabase ranking-list error:", error);
+    return [];
+  }
+
+  const companies = (data as SupabaseRow[])
+    .filter((row) => Number(row.visits) > 0)
+    .map(transformRow);
+
+  return computeScores(companies)
+    .sort((a, b) => b.score - a.score)
+    .map((company) => ({
+      ...company,
+      // These fields are only used on a company detail page and need not be sent with the ranking list.
+      monthlyVisits: [],
+      trafficSources: [],
+      topKeywords: [],
+    }));
+}
+
+let rankingCompaniesCache: { data: Company[]; expiresAt: number } | null = null;
+let rankingCompaniesInFlight: Promise<Company[]> | null = null;
+
+export async function getRankingCompanies(): Promise<Company[]> {
+  const now = Date.now();
+  if (rankingCompaniesCache && rankingCompaniesCache.expiresAt > now) {
+    return rankingCompaniesCache.data;
+  }
+
+  if (!rankingCompaniesInFlight) {
+    rankingCompaniesInFlight = getRankingCompaniesUncached()
+      .then((data) => {
+        if (data.length > 0) {
+          rankingCompaniesCache = {
+            data,
+            expiresAt: Date.now() + 60 * 60 * 1000,
+          };
+        }
+        return data;
+      })
+      .finally(() => {
+        rankingCompaniesInFlight = null;
+      });
+  }
+
+  return rankingCompaniesInFlight;
 }
 
 export async function getCompanyByDomain(domain: string): Promise<Company | undefined> {
