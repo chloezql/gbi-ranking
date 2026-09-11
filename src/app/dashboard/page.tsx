@@ -6,9 +6,10 @@ import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
 import { useAuth } from "@/context/AuthContext";
 import { supabase } from "@/lib/supabase";
-import type { CompanySubmission, CompanyClaim } from "@/lib/types";
+import type { CompanySubmission, CompanyClaim, CompanyProfileUpdate } from "@/lib/types";
 import { SubmissionCard } from "@/components/SubmissionCard";
 import { BatchImportModal } from "@/components/BatchImportModal";
+import { ProfileUpdateReviewCard } from "@/components/ProfileUpdateReviewCard";
 import { getUserClaims } from "@/lib/data";
 
 interface UserProfile {
@@ -25,6 +26,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [submissions, setSubmissions] = useState<CompanySubmission[] | null>(null);
+  const [profileUpdates, setProfileUpdates] = useState<CompanyProfileUpdate[] | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
@@ -57,6 +59,15 @@ export default function DashboardPage() {
     query.then(({ data }) => setSubmissions((data as CompanySubmission[]) ?? []));
   }, [user, role, refreshKey]);
 
+  useEffect(() => {
+    if (!user || role !== "admin") return;
+    supabase
+      .from("company_profile_updates")
+      .select("id, company_id, submitted_by, status, changes, reviewer_notes, reviewed_at, created_at, companies ( domain, title, logo_url )")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => setProfileUpdates((data as unknown as CompanyProfileUpdate[]) ?? []));
+  }, [user, role, refreshKey]);
+
   if (loading || !user) return null;
 
   const isAdmin = role === "admin";
@@ -76,6 +87,7 @@ export default function DashboardPage() {
           <>
             <GrantPartnerSection />
             <AdminReviewSection submissions={submissions} onRefresh={() => setRefreshKey(k => k + 1)} />
+            <ProfileUpdateReviewSection updates={profileUpdates} onRefresh={() => setRefreshKey(k => k + 1)} />
           </>
         ) : (
           <>
@@ -85,6 +97,27 @@ export default function DashboardPage() {
         )}
       </div>
     </div>
+  );
+}
+
+function ProfileUpdateReviewSection({ updates, onRefresh }: { updates: CompanyProfileUpdate[] | null; onRefresh: () => void }) {
+  const pending = (updates ?? []).filter((update) => update.status === "pending");
+  return (
+    <section>
+      <div className="flex items-center gap-2 mb-4">
+        <h2 className="text-lg font-semibold">Profile Updates</h2>
+        {pending.length > 0 && <span className="px-2 py-0.5 rounded-full bg-accent text-white text-xs font-semibold">{pending.length}</span>}
+      </div>
+      {updates === null ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-8 text-center text-sm text-muted">Loading...</div>
+      ) : pending.length === 0 ? (
+        <div className="rounded-xl border border-border bg-card px-6 py-8 text-center text-sm text-muted">No pending profile updates.</div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {pending.map((update) => <ProfileUpdateReviewCard key={update.id} update={update} onRefresh={onRefresh} />)}
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -182,6 +215,14 @@ function MyCompanySection({ user }: { user: User }) {
                 >
                   View
                 </Link>
+                {claim.status === "approved" && (
+                  <Link
+                    href={`/company/${encodeURIComponent(company?.domain ?? "")}/edit`}
+                    className="text-sm font-semibold text-accent hover:underline shrink-0"
+                  >
+                    Edit
+                  </Link>
+                )}
               </div>
             );
           })}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { getClaimStatus, submitClaim } from "@/lib/data";
 
@@ -62,12 +63,12 @@ export function ClaimButton({ domain }: { domain: string }) {
 
   if (status === "approved") {
     return (
-      <span className="inline-flex items-center gap-1.5 mt-3 px-4 py-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 rounded-lg text-sm font-medium border border-green-200 dark:border-green-800">
-        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-        </svg>
-        Company Claimed
-      </span>
+      <Link
+        href={`/company/${encodeURIComponent(domain)}/edit`}
+        className="inline-flex items-center gap-1.5 mt-3 px-4 py-2 border border-accent text-accent rounded-lg text-sm font-medium hover:bg-accent hover:text-white transition-colors"
+      >
+        Manage profile
+      </Link>
     );
   }
 

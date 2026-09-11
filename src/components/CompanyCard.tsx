@@ -80,7 +80,7 @@ export function CompanyCard({
       href={`/company/${company.domain}`}
       style={{ animationDelay: `${index * 30}ms` }}
       className={cn(
-        "group grid items-center gap-4 grid-cols-[3.5rem_minmax(0,1fr)_4.5rem] transition-all duration-200 last:border-0 animate-[slideUpFade_420ms_ease-out_both]",
+        "group cursor-pointer grid items-center gap-4 grid-cols-[3.5rem_minmax(0,1fr)_4.5rem] transition-all duration-200 last:border-0 animate-[slideUpFade_420ms_ease-out_both]",
         isEngagement
           ? "sm:grid-cols-[4rem_minmax(0,1fr)_7rem_6rem]"
           : "sm:grid-cols-[4rem_minmax(0,1fr)_7rem_7rem_6rem]",
@@ -124,14 +124,22 @@ export function CompanyCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3
-              className={cn(
-                "font-semibold truncate group-hover:text-accent transition-colors",
-                isTop3 ? "text-xl" : "text-lg"
-              )}
-            >
-              {company.domain}
-            </h3>
+            <div className="relative min-w-0 max-w-full">
+              <h3
+                className={cn(
+                  "cursor-pointer font-semibold truncate group-hover:text-accent transition-colors",
+                  isTop3 ? "text-xl" : "text-lg"
+                )}
+              >
+                {company.domain}
+              </h3>
+              <span
+                role="tooltip"
+                className="pointer-events-none invisible absolute left-0 top-full z-30 mt-2 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground opacity-0 shadow-lg translate-y-1 transition-all duration-200 delay-0 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-hover:delay-300"
+              >
+                Click to view full 6+ dimension insights →
+              </span>
+            </div>
             {company.originCountry && (
               <img
                 src={`https://flagcdn.com/w40/${company.originCountry.toLowerCase()}.png`}

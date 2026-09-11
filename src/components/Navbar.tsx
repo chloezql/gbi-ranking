@@ -102,6 +102,12 @@ export function Navbar() {
             >
               Rankings
             </Link>
+            <Link
+              href="/ces-2027"
+              className="px-3 py-1.5 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
+            >
+              CES 2027
+            </Link>
             <a
               href="https://gbiworld.org"
               target="_blank"

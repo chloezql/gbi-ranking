@@ -111,6 +111,11 @@ export function IndustryRankings() {
             ? "智能消费电子、汽车出行、家电与智能家居、零售电商四大行业出海品牌社媒影响力 Top 10。"
             : "Top 10 overseas brands by social influence across Smart Consumer Tech, Automotive & Mobility, Home & Living and Retail & E-Commerce."}
         </p>
+        <p className="text-muted mt-2 text-sm leading-relaxed">
+          {zh
+            ? "四个主要赛道，兼具全球需求、活跃的品牌出海表现与成熟的线上市场信号，是当前品牌全球化布局的重点方向。"
+            : "These four priority sectors combine strong global demand, active cross-border brand expansion, and mature digital market signals, making them key focus areas for brand globalization today."}
+        </p>
       </div>
 
       <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
@@ -140,7 +145,7 @@ export function IndustryRankings() {
                   </span>
                   <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden bg-white dark:bg-gray-800 border border-border flex items-center justify-center shrink-0 p-1">
                     <img
-                      src={b.logo}
+                      src={b.logo.replace(/\.png$/, ".webp")}
                       alt={b.nameEn}
                       loading="lazy"
                       className="max-w-full max-h-full object-contain"

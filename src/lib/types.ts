@@ -32,6 +32,8 @@ export interface Company {
   screenshotUrl: string;
   logoUrl: string;
   originCountry: string;
+  companyType: "brand" | "service_provider";
+  categorySlugs: string[];
 
   categorySlug: string;
   categoryName: string;
@@ -82,6 +84,9 @@ export interface CompanySubmission {
   status: SubmissionStatus;
   is_brand: boolean;
   is_service_provider: boolean;
+  company_type: "brand" | "service_provider" | null;
+  primary_category_slug: string | null;
+  category_slugs: string[];
   name: string;
   domain: string;
   images: string[];
@@ -93,6 +98,20 @@ export interface CompanySubmission {
   apify_run_id: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export type ProfileUpdateStatus = "pending" | "approved" | "rejected";
+
+export interface CompanyProfileUpdate {
+  id: string;
+  company_id: string;
+  submitted_by: string;
+  status: ProfileUpdateStatus;
+  changes: Record<string, unknown>;
+  reviewer_notes: string | null;
+  reviewed_at: string | null;
+  created_at: string;
+  companies: { domain: string; title: string | null; logo_url: string | null } | null;
 }
 
 export interface CategoryInfo {
